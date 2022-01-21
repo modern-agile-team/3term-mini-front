@@ -1,11 +1,12 @@
 import { HomePage, BoardPage } from "./pages";
+import { Routes, Route, Link } from "react-router-dom"
 
 function App() {
   return (
-    <>
-      <HomePage />
-      <BoardPage />
-    </>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/board" element={<BoardPage />} />
+    </Routes>
   );
 }
 
