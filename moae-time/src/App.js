@@ -1,5 +1,12 @@
+import { HomePage, BoardPage } from "./pages";
+
 function App() {
-  return <div> 123 </div>;
+  return (
+    <>
+      <HomePage />
+      <BoardPage />
+    </>
+  );
 }
 
 export default App;
