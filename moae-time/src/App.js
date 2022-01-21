@@ -5,8 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <Routes>
-      <Route path="/home" element={<HomePage />} />
-      <BoardPage />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/board" element={<BoardPage />} />
     </Routes>
   );
 }
