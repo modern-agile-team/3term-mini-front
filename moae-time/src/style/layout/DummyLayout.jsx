@@ -25,7 +25,7 @@ const HeaderBox = styled.div`
   align-items: center;
 `;
 
-function DummyHeader(props) {
+function DummyLayout(props) {
   const { main } = props;
   return (
     <WholeWrapper>
@@ -38,4 +38,4 @@ function DummyHeader(props) {
   );
 }
 
-export default DummyHeader;
+export default DummyLayout;
