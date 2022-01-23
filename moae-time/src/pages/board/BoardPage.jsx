@@ -1,7 +1,21 @@
-import React from "react";
+import React from 'react';
+import "../../style/boardLayout.css";
+
+function BoardHead({ children }) {
+  return (
+    <div className='boardHead'>{ children }</div>
+  )
+}
 
 function BoardPage() {
-  return <>i'm Board page</>;
+  return (
+    <>
+      <div className='boardHead'>
+        I'm Head of Board Page!<br/>
+        <BoardHead>Children TEST</BoardHead>
+      </div>
+    </>
+  );
 }
 
 export default BoardPage;
