@@ -1,22 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
-const ToptitleWRap = styled.button.attrs(({ height, width }) => ({
+const ButtonWrap = styled.button.attrs(({ height, width }) => ({
   row: height,
   col: width,
 }))`
-width: ${ (props) => props.row };
+height: ${ (props) => props.row }
+width: ${ (props) => props.col };
 `
 
-function Toptitle(props) {
+function Button(props) {
   const { height, width } = props
 
   return (
-    <ToptitleWRap 
+    <ButtonWrap 
       height={height} 
       width={width}
     />
   )
 }
 
-export default Toptitle;
+export default Button;
