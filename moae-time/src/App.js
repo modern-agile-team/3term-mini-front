@@ -8,11 +8,6 @@ function App() {
     <Routes>
       <Route path="/" element={<DummyLayout main={<HomePage />} />} />
       <Route path="/board" element={<DummyLayout main={<BoardPage />} />} />
-      {/* <Route path="/" element={<HomePage />} /> */}
-      {/* <Route 
-        path="/board" 
-        element={<BoardPage />} 
-      /> */}
     </Routes>
   );
 }
