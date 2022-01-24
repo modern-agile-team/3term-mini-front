@@ -25,6 +25,15 @@ const HeaderBox = styled.div`
   align-items: center;
 `;
 
+const DummyHotIssue = styled.div.attrs(({ height }) => ({
+  width: height,
+}))`
+  height: ${(props) => props.width};
+  width: 50px;
+  background-color: pink;
+  margin-bottom: 20px;
+`;
+
 function DummyLayout(props) {
   const { main } = props;
   return (
@@ -34,8 +43,14 @@ function DummyLayout(props) {
         <div>2</div>
       </HeaderBox>
       {main}
+      <DummyHotIssue height="240px" color="pink" />
+      <DummyHotIssue height="240px" color="teal" />
     </WholeWrapper>
   );
 }
+
+DummyHotIssue.defaultProps = {
+  height: "50px",
+};
 
 export default DummyLayout;

@@ -1,5 +1,5 @@
-import React from 'react';
-import Header from '../../style/layout/Header';
+import React from "react";
+import Header from "../../style/layout/Header";
 
 function HomePage() {
   return (
