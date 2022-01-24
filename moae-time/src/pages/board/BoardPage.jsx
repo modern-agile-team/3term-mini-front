@@ -1,19 +1,14 @@
 import React from 'react';
-import "../../style/boardLayout.css";
+import Graybox from '../../components/graybox/Graybox';
+import Toptitle from '../../components/toptitle/Toptitle';
 
-function BoardHead({ children }) {
-  return (
-    <div className='boardHead'>{ children }</div>
-  )
-}
 
 function BoardPage() {
   return (
     <>
-      <div className='boardHead'>
-        I'm Head of Board Page!<br/>
-        <BoardHead>Children TEST</BoardHead>
-      </div>
+      <Toptitle height="65px" width="1168px"/>
+      <Graybox height="65px" width="816px"/>
+      <Graybox height="601px" width="816px"/>
     </>
   );
 }
