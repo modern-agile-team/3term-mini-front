@@ -9,17 +9,15 @@ const GrayWrap = styled.div.attrs(({ height, width }) => ({
   width: ${(props) => props.col};
   background-color: #F9F9F9;
   border: 1px solid #D6D6D6;
-
-  margin-left: 172px;
 `
 
 function Graybox(props) {
-  const {width, height} = props;
+  const { children, width, height } = props;
   return (
   <GrayWrap 
     height={height} 
     width={width}
-  />);
+  >{children}</GrayWrap>);
 };
 
 export default Graybox;
