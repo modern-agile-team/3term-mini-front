@@ -1,86 +1,94 @@
-import React from 'react';
-import Graybox from '../../components/graybox/Graybox';
-import styled from 'styled-components';
+import React from "react";
+import Graybox from "../../components/graybox/Graybox";
+import styled from "styled-components";
 
 const HomeLayout = styled.div`
-  box-sizing: border-box;
-  display: grid;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 180px 0 164px;
   width: 100%;
-  height: auto;
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  /* background-color: red; */
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 70px);
-  grid-template-areas: 'item01 item02 item03 item04';
+  height: 100%;
+  border: 1px solid gray;
 `;
 
 const Side = styled.div`
-  grid-area: item01;
-  box-sizing: border-box;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 12;
-  margin: 0;
-  padding: 0;
+  margin: 32px 0 0;
+  width: 180px;
+  height: 696px;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  & :nth-child(1) {
+    margin-bottom: -1px;
+  }
+`;
+
+const MainContent = styled.div`
+  width: 972px;
+  height: 100%;
+  border: 1px solid gray;
+  position: relative;
 `;
 
 const CenterTop = styled.div`
-  grid-area: item02;
-  box-sizing: border-box;
-  grid-column-start: 3;
-  grid-column-end: 12;
-  grid-row-start: 1;
-  grid-row-end: 4;
-  margin: 0;
-  padding: 0;
-  /* background-color: red; */
+  width: 100%;
+  height: 165px;
+  border: 1px solid gray;
+  margin: 32px 0 17px;
 `;
 
-const CenterBottom = styled.div`
-  grid-area: item03;
-  box-sizing: border-box;
-  grid-column-start: 3;
-  grid-column-end: 9;
-  grid-row-start: 4;
-  grid-row-end: 12;
-  margin: 0;
-  padding: 0;
+const Col = styled.div`
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
 `;
 
-const Right = styled.div`
-  grid-area: item04;
-  box-sizing: border-box;
-  grid-column-start: 9;
-  grid-column-end: 12;
-  grid-row-start: 4;
-  grid-row-end: 7;
-  margin: 0;
-  padding: 0;
+const DummyBox = styled.div`
+  display: inline-block;
+  width: 620px;
+  height: 250px;
+  border: 1px solid gray;
+  margin-right: 18px;
+`;
+const DummyBox2 = styled.div`
+  display: inline-block;
+  line-height: 200px;
+  border: 1px solid gray;
+  width: 334px;
+  height: 200px;
+`;
+const DummyBox3 = styled.div`
+  display: inline-block;
+  width: 620px;
+  height: 291px;
+  border: 1px solid gray;
 `;
 
 function HomePage() {
   return (
     <HomeLayout>
       <Side>
-        <Graybox width="180px" height="227px" />
+        {/* <Graybox width="180px" height="227px" />
         <Graybox width="180px" height="86px" />
         <Graybox width="180px" height="120px" />
         <Graybox width="180px" height="120px" />
-        <Graybox width="180px" height="120px" />
+        <Graybox width="180px" height="120px" /> */}
       </Side>
-      <CenterTop>
-        <Graybox width="972px" height="165px" />
-      </CenterTop>
-      <CenterBottom>
-        <Graybox width="620px" height="250px" />
-        <Graybox width="620px" height="291px" />
-      </CenterBottom>
-      <Right>
-        <Graybox width="336px" height="200px" />
-      </Right>
+      <MainContent>
+        <CenterTop></CenterTop>
+        <Col>
+          <DummyBox />
+          <DummyBox2 />
+        </Col>
+        <DummyBox3 />
+      </MainContent>
+      {/* <CenterTop><Graybox width="972px" height="165px" /></CenterTop> */}
+      {/* <CenterBottom> */}
+      {/* <Graybox width="620px" height="250px" />
+         <Graybox width="620px" height="291px" /> */}
+      {/* </CenterBottom> */}
+      {/* <Right><Graybox width="336px" height="200px" /></Right> */}
     </HomeLayout>
   );
 }
