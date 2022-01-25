@@ -9,6 +9,8 @@ const SideBarWrap = styled.div.attrs(({ height, width }) => ({
   width: ${(props) => props.col};
   background-color: #F9F9F9;
   border: 1px solid #D6D6D6;
+
+  margin-top: 25px;
 `
 
 function SideBar(props) {
