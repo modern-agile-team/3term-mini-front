@@ -1,18 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const WholeWrapper = styled.div`
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
   width: 1512px;
   height: 982px;
-  background-color: #28b0b8;
+  /* background-color: #28b0b8; */
   position: relative;
 `;
 
 const HeaderBox = styled.div`
-  box-sizing: border-box;
   margin: 0;
   padding: 0 86px 0 150px;
   width: 1512px;
@@ -22,14 +20,18 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #a8b0b8;
+`;
+
+const MainBox = styled.div`
+  width: 100%;
+  height: 852px;
 `;
 
 const FooterBox = styled.div`
-  box-sizing: border-box;
   width: 1512px;
   height: 50px;
-  background-color: #f9f9f9;
-  position: absolute;
+  background-color: green;
   bottom: 0;
   display: flex;
   align-items: center;
@@ -42,16 +44,13 @@ function Layout(props) {
   const { main } = props;
   return (
     <WholeWrapper>
-      <HeaderBox>
-        <div>1</div>
-        <div>2</div>
-      </HeaderBox>
-      {main}
+      <HeaderBox></HeaderBox>
+      <MainBox>{main}</MainBox>
       <FooterBox>
-        <div>이용약관</div>
+        {/* <div>이용약관</div>
         <div>개인정보처리방침</div>
         <div>문의하기</div>
-        <div>모-애타임</div>
+        <div>모-애타임</div> */}
       </FooterBox>
     </WholeWrapper>
   );
