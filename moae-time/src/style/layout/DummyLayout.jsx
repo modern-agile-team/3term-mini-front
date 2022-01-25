@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const WholeWrapper = styled.div`
   box-sizing: border-box;
@@ -49,7 +49,7 @@ function DummyLayout(props) {
 }
 
 DummyHotIssue.defaultProps = {
-  height: "50px",
+  height: '50px',
 };
 
 export default DummyLayout;
