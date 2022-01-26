@@ -34,9 +34,6 @@ function BigModal() {
         >
           This is Modal content
           <button onClick={() => setModalState(false)}>Modal Close</button>
-          <TestDiv>123</TestDiv>
-          <TestDiv>123</TestDiv>
-          <TestDiv>123</TestDiv>
         </Modal>
     </>
   )
