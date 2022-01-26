@@ -1,0 +1,49 @@
+import React from 'react';
+import styled from 'styled-components';
+import { BoxWrap } from '../box/Box';
+
+const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+  overflow: auto;
+`;
+
+const ModalBox = styled(BoxWrap)`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  border-radius: 24px;
+  overflow: auto;
+`;
+
+const ModalContainer = styled.div`
+  width: 100%;
+  height: 700px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+function HomeModal({ visible, handleModalState }) {
+  return (
+    <ModalWrapper visible={visible} onClick={handleModalState}>
+      <ModalBox width="662px" height="670px">
+        <ModalContainer>
+          <button onClick={handleModalState}>Close</button>
+        </ModalContainer>
+      </ModalBox>
+    </ModalWrapper>
+  );
+}
+
+export { HomeModal };

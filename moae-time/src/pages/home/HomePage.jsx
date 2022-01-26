@@ -1,6 +1,7 @@
-import React from "react";
-import { Box } from "../../components/box/Box";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { HomeModal } from '../../components/modal/HomeModal';
+import { useState } from 'react';
 
 const HomeLayout = styled.div`
   display: flex;
@@ -36,6 +37,9 @@ const CenterTop = styled.div`
   height: 165px;
   border: 1px solid gray;
   margin: 32px 0 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Col = styled.div`
@@ -66,29 +70,32 @@ const DummyBox3 = styled.div`
 `;
 
 function HomePage() {
+  const [modalVisible, setModalVisible] = useState(false);
+  console.log('first', modalVisible);
+  const handleModalState = () => {
+    setModalVisible(!modalVisible);
+    console.log('handle', modalVisible);
+  };
+
   return (
     <HomeLayout>
-      <Side>
-        {/* <Box width="180px" height="227px" />
-        <Box width="180px" height="86px" />
-        <Box width="180px" height="120px" />
-        <Box width="180px" height="120px" />
-        <Box width="180px" height="120px" /> */}
-      </Side>
+      <Side></Side>
       <MainContent>
-        <CenterTop></CenterTop>
+        <CenterTop>
+          <button onClick={handleModalState}>Modal</button>
+          {
+            <HomeModal
+              visible={modalVisible}
+              handleModalState={handleModalState}
+            />
+          }
+        </CenterTop>
         <Col>
           <DummyBox />
           <DummyBox2 />
         </Col>
         <DummyBox3 />
       </MainContent>
-      {/* <CenterTop><Box width="972px" height="165px" /></CenterTop> */}
-      {/* <CenterBottom> */}
-      {/* <Box width="620px" height="250px" />
-         <Box width="620px" height="291px" /> */}
-      {/* </CenterBottom> */}
-      {/* <Right><Box width="336px" height="200px" /></Right> */}
     </HomeLayout>
   );
 }
