@@ -1,5 +1,5 @@
 import React from "react";
-import Graybox from "../../components/graybox/Graybox";
+import { Box } from "../../components/box/Box";
 import styled from "styled-components";
 
 const HomeLayout = styled.div`
@@ -69,11 +69,11 @@ function HomePage() {
   return (
     <HomeLayout>
       <Side>
-        {/* <Graybox width="180px" height="227px" />
-        <Graybox width="180px" height="86px" />
-        <Graybox width="180px" height="120px" />
-        <Graybox width="180px" height="120px" />
-        <Graybox width="180px" height="120px" /> */}
+        {/* <Box width="180px" height="227px" />
+        <Box width="180px" height="86px" />
+        <Box width="180px" height="120px" />
+        <Box width="180px" height="120px" />
+        <Box width="180px" height="120px" /> */}
       </Side>
       <MainContent>
         <CenterTop></CenterTop>
@@ -83,12 +83,12 @@ function HomePage() {
         </Col>
         <DummyBox3 />
       </MainContent>
-      {/* <CenterTop><Graybox width="972px" height="165px" /></CenterTop> */}
+      {/* <CenterTop><Box width="972px" height="165px" /></CenterTop> */}
       {/* <CenterBottom> */}
-      {/* <Graybox width="620px" height="250px" />
-         <Graybox width="620px" height="291px" /> */}
+      {/* <Box width="620px" height="250px" />
+         <Box width="620px" height="291px" /> */}
       {/* </CenterBottom> */}
-      {/* <Right><Graybox width="336px" height="200px" /></Right> */}
+      {/* <Right><Box width="336px" height="200px" /></Right> */}
     </HomeLayout>
   );
 }

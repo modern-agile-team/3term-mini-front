@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const PageNationWrap = styled.div`
-  width: 171px;
+  width: 163px;
   height: 30px;
   background-color: white;
   border: 1px solid #D6D6D6;
