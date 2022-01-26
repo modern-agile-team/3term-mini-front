@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { BoxWrap, HomeModal } from "../../components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { BoxWrap, HomeModal } from '../../components';
 
 const HomeLayout = styled.div`
   display: flex;
@@ -69,22 +69,17 @@ const DummyBox3 = styled(BoxWrap)`
   border: 1px solid gray;
 `;
 
-function HomePage() {
-  const [modalVisible, setModalVisible] = useState(false);
-  const handleModalState = () => {
-    setModalVisible(!modalVisible);
-  };
-
+function HomePage(props) {
   return (
     <HomeLayout>
       <Side />
       <MainContent>
         <CenterTop>
-          <button onClick={handleModalState}>Modal</button>
+          <button onClick={props.handleModalState}>Modal</button>
           {
             <HomeModal
-              visible={modalVisible}
-              handleModalState={handleModalState}
+              visible={props.modalVisible}
+              handleModalState={props.handleModalState}
             />
           }
         </CenterTop>

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { Box, BoxWrap } from "../";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { Box, BoxWrap } from '../';
 
-const ModalWrapper = styled(BoxWrap)`
+const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@ const ModalWrapper = styled(BoxWrap)`
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
-  display: ${(props) => (props.visible ? "block" : "none")};
+  display: ${(props) => (props.visible ? 'block' : 'none')};
   overflow: auto;
 `;
 
@@ -41,10 +41,10 @@ function HomeModal({ visible, handleModalState }) {
   };
   useEffect(() => {
     if (visible) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [visible]);
 
