@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Box, BoxWrap } from "../";
 
@@ -34,8 +34,22 @@ const ModalContainer = styled(BoxWrap)`
 `;
 
 function HomeModal({ visible, handleModalState }) {
+  const onCloseModal = (e) => {
+    if (e.target === e.currentTarget) {
+      handleModalState();
+    }
+  };
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [visible]);
+
   return (
-    <ModalWrapper visible={visible} onClick={handleModalState}>
+    <ModalWrapper visible={visible} onClick={onCloseModal}>
       <ModalBox width="662px" height="670px">
         <ModalContainer>
           <button onClick={handleModalState}>Close</button>
