@@ -1,7 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { HomeModal } from '../../components/modal/HomeModal';
-import { useState } from 'react';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { BoxWrap, HomeModal } from "../../components";
 
 const HomeLayout = styled.div`
   display: flex;
@@ -9,10 +8,10 @@ const HomeLayout = styled.div`
   padding: 0 180px 0 164px;
   width: 100%;
   height: 100%;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
 `;
 
-const Side = styled.div`
+const Side = styled(BoxWrap)`
   margin: 32px 0 0;
   width: 180px;
   height: 696px;
@@ -25,14 +24,14 @@ const Side = styled.div`
   }
 `;
 
-const MainContent = styled.div`
+const MainContent = styled(BoxWrap)`
   width: 972px;
   height: 100%;
-  border: 1px solid gray;
+  border: none;
   position: relative;
 `;
 
-const CenterTop = styled.div`
+const CenterTop = styled(BoxWrap)`
   width: 100%;
   height: 165px;
   border: 1px solid gray;
@@ -42,27 +41,28 @@ const CenterTop = styled.div`
   align-items: center;
 `;
 
-const Col = styled.div`
+const Row = styled(BoxWrap)`
   display: flex;
+  border: none;
   align-items: flex-start;
   margin-bottom: 8px;
 `;
 
-const DummyBox = styled.div`
+const DummyBox = styled(BoxWrap)`
   display: inline-block;
   width: 620px;
   height: 250px;
   border: 1px solid gray;
   margin-right: 18px;
 `;
-const DummyBox2 = styled.div`
+const DummyBox2 = styled(BoxWrap)`
   display: inline-block;
   line-height: 200px;
   border: 1px solid gray;
   width: 334px;
   height: 200px;
 `;
-const DummyBox3 = styled.div`
+const DummyBox3 = styled(BoxWrap)`
   display: inline-block;
   width: 620px;
   height: 291px;
@@ -77,7 +77,7 @@ function HomePage() {
 
   return (
     <HomeLayout>
-      <Side></Side>
+      <Side />
       <MainContent>
         <CenterTop>
           <button onClick={handleModalState}>Modal</button>
@@ -88,10 +88,10 @@ function HomePage() {
             />
           }
         </CenterTop>
-        <Col>
+        <Row>
           <DummyBox />
           <DummyBox2 />
-        </Col>
+        </Row>
         <DummyBox3 />
       </MainContent>
     </HomeLayout>

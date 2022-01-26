@@ -7,21 +7,20 @@ const SideBarWrap = styled.div.attrs(({ height, width }) => ({
 }))`
   height: ${(props) => props.row};
   width: ${(props) => props.col};
-  background-color: #F9F9F9;
-  border: 1px solid #D6D6D6;
+  background-color: #f9f9f9;
+  border: 1px solid #d6d6d6;
 
   margin-top: 25px;
-`
+`;
 
 function SideBar(props) {
-  const { height, width } = props
+  const { height, width, children } = props;
 
   return (
-    <SideBarWrap 
-      height={height} 
-      width={width}
-    />
-  )
+    <SideBarWrap height={height} width={width}>
+      {children}
+    </SideBarWrap>
+  );
 }
 
 export default SideBar;

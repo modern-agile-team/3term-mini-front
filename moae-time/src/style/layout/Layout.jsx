@@ -6,7 +6,6 @@ const WholeWrapper = styled.div`
   padding: 0;
   width: 1512px;
   height: 982px;
-  /* background-color: #28b0b8; */
   position: relative;
 `;
 
@@ -44,14 +43,9 @@ function Layout(props) {
   const { main } = props;
   return (
     <WholeWrapper>
-      <HeaderBox></HeaderBox>
+      <HeaderBox>{"need Header contents"}</HeaderBox>
       <MainBox>{main}</MainBox>
-      <FooterBox>
-        {/* <div>이용약관</div>
-        <div>개인정보처리방침</div>
-        <div>문의하기</div>
-        <div>모-애타임</div> */}
-      </FooterBox>
+      <FooterBox>{"need Footer contents"}</FooterBox>
     </WholeWrapper>
   );
 }
