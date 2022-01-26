@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const GrayWrap = styled.div.attrs(({ height, width }) => ({
+export const BoxWrap = styled.div.attrs(({ height, width }) => ({
   row: height,
   col: width,
 }))`
@@ -11,13 +11,13 @@ const GrayWrap = styled.div.attrs(({ height, width }) => ({
   border: 1px solid #D6D6D6;
 `
 
-function Graybox(props) {
+function Box(props) {
   const { children, width, height } = props;
   return (
-  <GrayWrap 
+  <BoxWrap 
     height={height} 
     width={width}
-  >{children}</GrayWrap>);
+  >{children}</BoxWrap>);
 };
 
-export default Graybox;
+export { Box };

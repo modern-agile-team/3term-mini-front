@@ -1,8 +1,9 @@
 import React from 'react';
-import Graybox from '../../components/graybox/Graybox';
+import { Box } from '../../components/box/Box';
 import styled from 'styled-components';
 import SideBar from '../../components/sidebar/SideBar';
 import PageNation from '../../components/pagenation/PageNation';
+import BigModal from '../../components/bigmodal/BigModal';
 
 const SearchWrap = styled.div`
   width: 821px;
@@ -11,8 +12,6 @@ const SearchWrap = styled.div`
   justify-content: space-between;
 `
 const CenterWrap = styled.div`
-  /* width: 816px; */
-  /* height: 791px; */
   height: 767px;
 
   margin-top: 25px;
@@ -22,21 +21,26 @@ const CenterWrap = styled.div`
   justify-content: space-between;
 `
 const WholeWrap = styled.div`
+  width: 1350px;
+
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `
+
 
 function BoardPage() {
   return (
     <WholeWrap>
       <CenterWrap>
-        <Graybox height="65px" width="820px"/>
+        <Box height="65px" width="820px"/>
         <SearchWrap>
-          <Graybox height="50px" width="100px"/>
-          <Graybox height="50px" width="656px"/>
-          <Graybox height="50px" width="50px"/>
+          <Box height="50px" width="100px"/>
+          <Box height="50px" width="656px"/>
+          <Box height="50px" width="50px"/>
         </SearchWrap>
-        <Graybox height="601px" width="820px"/>
+        <Box height="601px" width="820px">
+          <BigModal />
+        </Box>
         <PageNation />
       </CenterWrap>
       <SideBar height="240px" width="336px"/>
