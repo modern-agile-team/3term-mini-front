@@ -71,10 +71,8 @@ const DummyBox3 = styled.div`
 
 function HomePage() {
   const [modalVisible, setModalVisible] = useState(false);
-  console.log('first', modalVisible);
   const handleModalState = () => {
     setModalVisible(!modalVisible);
-    console.log('handle', modalVisible);
   };
 
   return (
