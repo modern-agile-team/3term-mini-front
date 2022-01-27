@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Box, BoxWrap } from '../';
+import { Box } from '../';
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -8,13 +8,13 @@ const ModalWrapper = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
   display: ${(props) => (props.visible ? 'block' : 'none')};
   overflow: auto;
 `;
 
-const ModalBox = styled(BoxWrap)`
+const ModalBox = styled(Box)`
   position: fixed;
   left: 50%;
   top: 50%;
@@ -24,7 +24,7 @@ const ModalBox = styled(BoxWrap)`
   overflow: auto;
 `;
 
-const ModalContainer = styled(BoxWrap)`
+const ModalContainer = styled(Box)`
   width: 100%;
   height: 700px;
   background-color: red;
@@ -33,12 +33,15 @@ const ModalContainer = styled(BoxWrap)`
   align-items: center;
 `;
 
-function HomeModal({ visible, handleModalState }) {
+function HomeModal(props) {
+  const { visible, handleModalState } = props;
+
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
-      handleModalState();
+      handleModalState(visible);
     }
   };
+
   useEffect(() => {
     if (visible) {
       document.body.style.overflow = 'hidden';
@@ -48,11 +51,19 @@ function HomeModal({ visible, handleModalState }) {
     };
   }, [visible]);
 
+  const closeBtn = () => {
+    handleModalState(visible);
+  };
+
   return (
     <ModalWrapper visible={visible} onClick={onCloseModal}>
-      <ModalBox width="662px" height="670px">
+      <ModalBox
+        width="662px"
+        height="670px"
+        // onClick={(e) => e.stopPropagation()}
+      >
         <ModalContainer>
-          <button onClick={handleModalState}>Close</button>
+          <button onClick={closeBtn}>Close</button>
         </ModalContainer>
       </ModalBox>
     </ModalWrapper>
