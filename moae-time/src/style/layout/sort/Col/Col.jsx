@@ -10,7 +10,7 @@ const Col = styled.div.attrs(({ width, height }) => ({
   width: ${(props) => (props.col ? props.col : '100%')};
   height: fit-content;
   max-height: ${(props) => props.maxRow};
-  /* background-color: blue; */
+  background-color: blue;
 `;
 
 export default Col;
