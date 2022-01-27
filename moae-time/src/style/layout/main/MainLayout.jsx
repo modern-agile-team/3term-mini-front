@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Box, HomeModal } from '../../../components';
 
 const WholeWrapper = styled.div`
   margin: 0;
@@ -39,13 +40,30 @@ const FooterBox = styled.div`
   padding: 0 400px;
 `;
 
+const LoginBtn = styled.button`
+  width: 84px;
+  height: 32px;
+`;
+
 function Layout(props) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleModalState = (modalVisible) => {
+    setModalVisible(!modalVisible);
+  };
+
   const { main } = props;
   return (
     <WholeWrapper>
-      <HeaderBox>{"need Header contents"}</HeaderBox>
+      <HeaderBox>
+        {'need Header contents'}
+        <LoginBtn onClick={() => handleModalState(modalVisible)}>
+          {'로그인'}
+        </LoginBtn>
+        <HomeModal visible={modalVisible} handleModalState={handleModalState} />
+      </HeaderBox>
       <MainBox>{main}</MainBox>
-      <FooterBox>{"need Footer contents"}</FooterBox>
+      <FooterBox>{'need Footer contents'}</FooterBox>
     </WholeWrapper>
   );
 }

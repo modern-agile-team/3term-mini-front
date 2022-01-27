@@ -1,7 +1,7 @@
-import { React, useState } from "react";
-import Modal from "react-modal";
-import styled from "styled-components";
-import { Box } from "../box/Box";
+import { React, useState } from 'react';
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import { Box } from '../';
 
 const Wrap = styled.div`
   width: 773.75px;
@@ -32,19 +32,20 @@ const Btn = styled.button.attrs(({ height, width, margin }) => ({
 
 const style = {
   overlay: {
-    backgroundColor: "rgba(97, 94, 94, 0.7)",
+    backgroundColor: 'rgba(97, 94, 94, 0.7)',
   },
   content: {
-    color: "lightsteelblue",
-    width: "907px",
-    height: "590px",
-    position: "fix",
-    margin: "72px 302px 0px 300px",
+    color: 'lightsteelblue',
+    width: '907px',
+    height: '590px',
+    position: 'fix',
+    margin: '72px 302px 0px 300px',
   },
 };
 
 function BigModal(props) {
   const [modalState, setModalState] = useState(false);
+
   return (
     <>
       <Btn onClick={() => setModalState(true)}>O</Btn>

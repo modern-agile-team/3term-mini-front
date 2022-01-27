@@ -1,24 +1,31 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-export const BoxWrap = styled.div.attrs(({ height, width, margin }) => ({
-  maxRow: height,
+const Box = styled.div.attrs(({ height, width, margin }) => ({
+  row: height,
   col: width,
   margin: margin,
 }))`
-  height: fit-content;
-  max-height: ${(props) => props.maxRow};
+  height: ${(props) => props.row};
   width: ${(props) => props.col};
   margin: ${(props) => props.margin};
   background-color: #f9f9f9;
   border: 1px solid #d6d6d6;
 `;
 
-export function Box(props) {
-  const { children, width, height, margin } = props;
-  return (
-    <BoxWrap height={height} width={width} margin={margin}>
-      {children}
-    </BoxWrap>
-  );
-}
+// const BoxComponent = ({ children, size }) => {
+//   const heigth = () => {
+//     switch (size) {
+//       case 'large':
+//         return 700;
+//       case 'medium':
+//         return 500;
+//       default:
+//         return 300;
+//     }
+//   };
+
+//   return <Box height={height()}>{children}</Box>;
+// };
+
+export default Box;

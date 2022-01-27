@@ -1,93 +1,108 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { BoxWrap, HomeModal } from '../../components';
+import { Box } from '../../components';
+import { Col, Row } from '../../style';
 
 const HomeLayout = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0 180px 0 164px;
+  padding: 32px 180px 0 164px;
   width: 100%;
-  height: 100%;
-  /* border: 1px solid gray; */
+  height: fit-content;
+  max-height: 100%;
+  overflow: hidden;
 `;
 
-const Side = styled(BoxWrap)`
-  margin: 32px 0 0;
+const Side = styled(Col)`
   width: 180px;
-  height: 696px;
-  border: 1px solid gray;
-  display: flex;
-  flex-direction: column;
+  max-height: 696px;
   justify-content: space-between;
+  * {
+    margin-bottom: 6px;
+  }
   & :nth-child(1) {
-    margin-bottom: -1px;
+    margin-bottom: 5px;
+  }
+  & :last-child {
+    margin-bottom: 0;
   }
 `;
 
-const MainContent = styled(BoxWrap)`
+const MainContent = styled.div`
   width: 972px;
-  height: 100%;
+  height: fit-content;
+  max-height: 100%;
   border: none;
+  /* background-color: gray; */
   position: relative;
 `;
 
-const CenterTop = styled(BoxWrap)`
+const CenterTop = styled(Box)`
   width: 100%;
   height: 165px;
-  border: 1px solid gray;
-  margin: 32px 0 17px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 0 17px;
 `;
 
-const Row = styled(BoxWrap)`
-  display: flex;
-  border: none;
-  align-items: flex-start;
-  margin-bottom: 8px;
-`;
-
-const DummyBox = styled(BoxWrap)`
+const DummyBox = styled(Box)`
   display: inline-block;
+  margin-right: 18px;
   width: 620px;
   height: 250px;
-  border: 1px solid gray;
-  margin-right: 18px;
 `;
-const DummyBox2 = styled(BoxWrap)`
+const DummyBox2 = styled(Box)`
   display: inline-block;
   line-height: 200px;
-  border: 1px solid gray;
   width: 334px;
   height: 200px;
 `;
-const DummyBox3 = styled(BoxWrap)`
+const DummyBox3 = styled(Box)`
   display: inline-block;
   width: 620px;
   height: 291px;
   border: 1px solid gray;
 `;
 
+const SideFirst = styled(Box)`
+  width: 100%;
+  height: 227px;
+`;
+
+const SideSecond = styled(Box)`
+  width: 100%;
+  height: 86px;
+  /* height: fit-content;
+  max-height: 86px; */
+`;
+
+const SideThird = styled(Box)`
+  border: none;
+  width: 100%;
+  height: 120px;
+  /* height: fit-content;
+max-height: 120px; */
+`;
+
 function HomePage(props) {
   return (
     <HomeLayout>
-      <Side />
+      <Side>
+        <SideFirst>profile</SideFirst>
+        <SideSecond>list btn</SideSecond>
+        <SideThird>ad1</SideThird>
+        <SideThird>ad2</SideThird>
+        <SideThird>ad3</SideThird>
+      </Side>
       <MainContent>
-        <CenterTop>
-          <button onClick={props.handleModalState}>Modal</button>
-          {
-            <HomeModal
-              visible={props.modalVisible}
-              handleModalState={props.handleModalState}
-            />
-          }
-        </CenterTop>
-        <Row>
-          <DummyBox />
+        <CenterTop></CenterTop>
+        <Row width="100%" height="100px">
+          <DummyBox>
+            <Box height="50px">22</Box>
+            <Box height="50px">22</Box>
+            <Box height="50px">22</Box>
+          </DummyBox>
           <DummyBox2 />
         </Row>
-        <DummyBox3 />
+        <DummyBox3></DummyBox3>
       </MainContent>
     </HomeLayout>
   );

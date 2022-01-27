@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Box } from "../../components";
+import React from 'react';
+import styled from 'styled-components';
+import { Box } from '../../components';
 
 const MyPageWrap = styled.div`
   width: 1168px;
@@ -63,6 +63,7 @@ function MyPagePresenter(props) {
       </LeftWrap>
       <RightWrap>
         <Box width="673px" height="720px" />
+        <Box size="large"></Box>
       </RightWrap>
     </MyPageWrap>
   );
