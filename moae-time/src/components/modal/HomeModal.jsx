@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { Box, Button } from '../';
 import { Col, Row } from '../../style';
 
@@ -121,7 +123,7 @@ function HomeModal(props) {
         </Row>
         <Row padding={'0 120px'}>
           <spzn>{'처음?'}</spzn>
-          <span>{'가입'}</span>
+          <Link to={'/board'}>{'가입'}</Link>
         </Row>
       </Col>
     );
@@ -133,6 +135,7 @@ function HomeModal(props) {
         <ModalContainer>
           {/* <button onClick={closeBtn}>Close</button> */}
           {loginModal()}
+          {/* 여기에 loginModal 처럼 만들어서 테스트 */}
         </ModalContainer>
       </ModalBox>
     </ModalWrapper>
