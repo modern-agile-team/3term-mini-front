@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Box, SideBar, PageNation, BigModal } from "../../components";
+import React from 'react';
+import styled from 'styled-components';
+import { Box, SideBar, PageNation, BigModal } from '../../components';
 
 const SearchWrap = styled.div`
   width: 821px;
@@ -33,7 +33,7 @@ function BoardPage() {
         <SearchWrap>
           <Box height="50px" width="100px" />
           <Box height="50px" width="656px" />
-          <Box height="50px" width="50px" />
+          <Box height="50px" width="small" />
         </SearchWrap>
         <Box height="601px" width="820px">
           <BigModal />

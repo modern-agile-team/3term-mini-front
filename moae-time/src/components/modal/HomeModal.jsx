@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Box } from '../';
+import { Box, Button } from '../';
+import { Col, Row } from '../../style';
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -24,10 +25,9 @@ const ModalBox = styled(Box)`
   overflow: auto;
 `;
 
-const ModalContainer = styled(Box)`
-  width: 100%;
-  height: 700px;
-  background-color: red;
+const ModalContainer = styled.div`
+  /* background-color: red; */
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,15 +55,84 @@ function HomeModal(props) {
     handleModalState(visible);
   };
 
+  const Description = styled.span`
+    width: 211px;
+    height: 24px;
+    font-size: 20px;
+    border: 1px solid gray;
+  `;
+
+  const InputInfo = styled.input`
+    width: 371px;
+    height: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    margin-bottom: 5px;
+  `;
+
+  const CheckBox = styled.input.attrs(({}) => ({
+    type: 'checkbox',
+  }))`
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+  `;
+
+  const Label = styled.label.attrs(({ to }) => ({
+    for: to,
+  }))`
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+    background-color: aqua;
+  `;
+
+  const Icon = styled.img`
+    width: 93px;
+    height: 93px;
+    background-color: #c62935;
+  `;
+
+  const TagA = styled.a`
+    width: 125px;
+    height: 20px;
+    background-color: aqua;
+  `;
+
+  const loginModal = () => {
+    return (
+      <Col padding={'0 145px'}>
+        <Row padding={'0 0 15px'} align={'flex-end'}>
+          <Icon /> <Description>description</Description>
+        </Row>
+        <InputInfo placeholder={'Id'}></InputInfo>
+        <InputInfo placeholder={'PassWord'}></InputInfo>
+        <Button height={'42px'} margin={'0 0 12px 0'}>
+          {'로그인 버튼'}
+        </Button>
+        <Row padding={'0 0 29px'}>
+          <div>
+            <CheckBox name="keeping" id="check" />
+            <Label to="check">keep info</Label>
+          </div>
+          <TagA>find...</TagA>
+        </Row>
+        <Row padding={'0 120px'}>
+          <spzn>{'처음?'}</spzn>
+          <span>{'가입'}</span>
+        </Row>
+      </Col>
+    );
+  };
+
   return (
     <ModalWrapper visible={visible} onClick={onCloseModal}>
-      <ModalBox
-        width="662px"
-        height="670px"
-        // onClick={(e) => e.stopPropagation()}
-      >
+      <ModalBox width="len7" height="len15">
         <ModalContainer>
-          <button onClick={closeBtn}>Close</button>
+          {/* <button onClick={closeBtn}>Close</button> */}
+          {loginModal()}
         </ModalContainer>
       </ModalBox>
     </ModalWrapper>

@@ -30,19 +30,6 @@ const Btn = styled.button.attrs(({ height, width, margin }) => ({
   margin: ${(props) => props.margin};
 `;
 
-const style = {
-  overlay: {
-    backgroundColor: 'rgba(97, 94, 94, 0.7)',
-  },
-  content: {
-    color: 'lightsteelblue',
-    width: '907px',
-    height: '590px',
-    position: 'fix',
-    margin: '72px 302px 0px 300px',
-  },
-};
-
 function BigModal(props) {
   const [modalState, setModalState] = useState(false);
 
