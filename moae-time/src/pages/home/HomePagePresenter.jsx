@@ -28,81 +28,43 @@ const Side = styled(Col)`
   }
 `;
 
+const SideAdBox = styled.div`
+  border: none;
+  width: 100%;
+  height: 120px;
+  background-color: aqua;
+`;
+
 const MainContent = styled.div`
   width: 972px;
   height: fit-content;
   max-height: 100%;
   border: none;
-  /* background-color: gray; */
   position: relative;
 `;
 
-const CenterTop = styled(Box)`
+const TopAd = styled(Box)`
   width: 100%;
   height: 165px;
   margin: 0 0 17px;
-`;
-
-const DummyBox = styled(Box)`
-  display: inline-block;
-  margin-right: 18px;
-  width: 620px;
-  height: 250px;
-`;
-const DummyBox2 = styled(Box)`
-  display: inline-block;
-  line-height: 200px;
-  width: 334px;
-  height: 200px;
-`;
-const DummyBox3 = styled(Box)`
-  display: inline-block;
-  width: 620px;
-  height: 291px;
-  border: 1px solid gray;
-`;
-
-const SideFirst = styled(Box)`
-  width: 100%;
-  height: 227px;
-`;
-
-const SideSecond = styled(Box)`
-  width: 100%;
-  height: 86px;
-  /* height: fit-content;
-  max-height: 86px; */
-`;
-
-const SideThird = styled(Box)`
-  border: none;
-  width: 100%;
-  height: 120px;
-  /* height: fit-content;
-max-height: 120px; */
 `;
 
 function HomePage(props) {
   return (
     <HomeLayout>
       <Side>
-        <SideFirst>profile</SideFirst>
-        <SideSecond>list btn</SideSecond>
-        <SideThird>ad1</SideThird>
-        <SideThird>ad2</SideThird>
-        <SideThird>ad3</SideThird>
+        <Box height={'len6'}>profile</Box>
+        <Box height={'len3'}>list btn</Box>
+        <SideAdBox>ad1</SideAdBox>
+        <SideAdBox>ad2</SideAdBox>
+        <SideAdBox>ad3</SideAdBox>
       </Side>
       <MainContent>
-        <CenterTop></CenterTop>
+        <TopAd></TopAd>
         <Row width="100%" height="100px">
-          <DummyBox>
-            <Box height="50px">22</Box>
-            <Box height="50px">22</Box>
-            <Box height="50px">22</Box>
-          </DummyBox>
-          <DummyBox2 />
+          <Box width={'len5'} height={'len12'} color={'gray6'} />
+          <Box width={'len3'} height={'len5'} />
         </Row>
-        <DummyBox3></DummyBox3>
       </MainContent>
     </HomeLayout>
   );
