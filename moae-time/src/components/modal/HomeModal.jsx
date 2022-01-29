@@ -31,6 +31,7 @@ const ModalContainer = styled.div`
   /* background-color: red; */
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -57,38 +58,72 @@ function HomeModal(props) {
     handleModalState(visible);
   };
 
-  const Description = styled.span`
-    width: 211px;
+  const Description = styled.span.attrs(
+    ({ width, height, fontSize, margin }) => ({
+      row: height,
+      col: width,
+      fontSize: fontSize,
+      margin: margin,
+    })
+  )`
+    /* width: 211px;
     height: 24px;
-    font-size: 20px;
+    font-size: 20px; */
+    width: ${(props) => props.col};
+    height: ${(props) => props.row};
+    font-size: ${(props) => props.fontSize};
+    margin: ${(props) => props.margin};
     border: 1px solid gray;
   `;
 
-  const InputInfo = styled.input`
-    width: 371px;
-    height: 41px;
+  const InputInfo = styled.input.attrs(({ width, height, margin }) => ({
+    row: height,
+    col: width,
+    margin: margin,
+  }))`
+    width: ${(props) => props.col};
+    height: ${(props) => props.row};
+    margin: ${(props) => props.margin};
+
     display: flex;
     justify-content: center;
     align-items: center;
     outline: none;
-    margin-bottom: 5px;
+    border-radius: 11px;
+    border: 1px solid gray;
   `;
 
-  const CheckBox = styled.input.attrs(({}) => ({
+  const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
     type: 'checkbox',
+    marginRight: marginRight,
   }))`
     width: 12px;
     height: 12px;
-    margin-right: 6px;
+    margin-right: ${(props) => props.marginRight};
   `;
 
-  const Label = styled.label.attrs(({ to }) => ({
-    for: to,
-  }))`
-    width: 12px;
-    height: 12px;
-    margin-right: 6px;
+  const SelectBox = styled.select`
+    width: 451px;
+    height: 41px;
+    border-radius: 11px;
+    border: 1px solid gray;
+  `;
+
+  const Label = styled.label.attrs(
+    ({ to, width, height, margin, display = 'inline-block' }) => ({
+      for: to,
+      row: height,
+      col: width,
+      margin: margin,
+      display: display,
+    })
+  )`
+    width: ${(props) => props.col};
+    height: ${(props) => props.row};
+    margin: ${(props) => props.margin};
+    display: ${(props) => props.display};
     background-color: aqua;
+    border: 1px solid gray;
   `;
 
   const Icon = styled.img`
@@ -122,9 +157,167 @@ function HomeModal(props) {
           <TagA>find...</TagA>
         </Row>
         <Row padding={'0 120px'}>
-          <spzn>{'처음?'}</spzn>
+          <span>{'처음?'}</span>
           <Link to={'/board'}>{'가입'}</Link>
         </Row>
+      </Col>
+    );
+  };
+
+  const joinModal1 = () => {
+    return (
+      <Col padding={'0 105px'}>
+        <Description
+          width="202px"
+          height="35px"
+          margin={'0 0 6px 0'}></Description>
+        <Description
+          width="324px"
+          height="44px"
+          margin={'0 0 48px 0'}></Description>
+        <Description
+          width="99px"
+          height="35px"
+          margin={'0 0 25px 0'}></Description>
+        <Label
+          width="47px"
+          height="18px"
+          margin={'0 0 6px 0'}
+          display="inline-block"></Label>
+        <SelectBox>
+          <option key="dummy1" value="dummy1">
+            dummy1
+          </option>
+          <option key="dummy2" value="dummy2">
+            dummy2
+          </option>
+          <option key="dummy3" value="dummy3">
+            dummy3
+          </option>
+        </SelectBox>
+        <Label
+          width="24px"
+          height="18px"
+          margin={'28px 0 6px 0'}
+          display="inline-block"></Label>
+        <InputInfo
+          placeholder={'학교 이름'}
+          width="451px"
+          height="41px"
+          margin={'0 0 25px 0'}></InputInfo>
+        <Button height={'43px'}>{'다음'}</Button>
+      </Col>
+    );
+  };
+
+  const joinModal2 = () => {
+    return (
+      <Col padding={'0 105px'}>
+        <Description
+          width="202px"
+          height="35px"
+          margin={'0 0 26px 0'}></Description>
+        <div>
+          <CheckBox name="keeping" id="check" />
+          <Label to="check" width="163px" margin={'0 0 24px 0'}>
+            keep info
+          </Label>
+        </div>
+        <div>
+          <CheckBox name="keeping" id="check" />
+          <Label to="check" width="150px" margin={'0 0 24px 0'}>
+            keep info
+          </Label>
+        </div>
+        <div>
+          <CheckBox name="keeping" id="check" />
+          <Label to="check" width="186px" margin={'0 0 24px 0'}>
+            keep info
+          </Label>
+        </div>
+        <div>
+          <CheckBox name="keeping" id="check" />
+          <Label to="check" width="165px" margin={'0 0 24px 0'}>
+            keep info
+          </Label>
+        </div>
+        <div>
+          <CheckBox name="keeping" id="check" />
+          <Label to="check" width="158px" margin={'0 0 24px 0'}>
+            keep info
+          </Label>
+        </div>
+        <div>
+          <CheckBox name="keeping" id="check" />
+          <Label to="check" width="253px" margin={'0 0 24px 0'}>
+            keep info
+          </Label>
+        </div>
+        <div>
+          <CheckBox name="keeping" id="check" />
+          <Label to="check" width="112px">
+            keep info
+          </Label>
+        </div>
+        <Description width="452px" height="38px" margin={'20px 0 36px 0'}>
+          {'dummy'}
+        </Description>
+        <Button height={'43px'} margin={'0 0 10px 0'}>
+          {'휴대폰 인증'}
+        </Button>
+        <Button height={'43px'}>{'아이핀 인증'}</Button>
+      </Col>
+    );
+  };
+
+  const joinModal3 = () => {
+    return (
+      <Col padding={'0 105px'}>
+        <Description
+          width="202px"
+          height="35px"
+          margin={'0 0 26px 0'}></Description>
+        <Label
+          width="36px"
+          height="18px"
+          margin={'0 0 6px 0'}
+          display="inline-block"></Label>
+        <InputInfo
+          placeholder={'아이디 입력'}
+          width="451px"
+          height="41px"
+          margin={'0 0 30px 0'}></InputInfo>
+        <Label
+          width="47px"
+          height="18px"
+          margin={'0 0 6px 0'}
+          display="inline-block"></Label>
+        <InputInfo
+          placeholder={'비밀번호 입력'}
+          width="451px"
+          height="41px"
+          margin={'0 0 30px 0'}></InputInfo>
+        <Label
+          width="36px"
+          height="18px"
+          margin={'0 0 6px 0'}
+          display="inline-block"></Label>
+        <InputInfo
+          placeholder={'이메일 입력'}
+          width="451px"
+          height="41px"
+          margin={'0 0 30px 0'}></InputInfo>
+        <Label
+          width="36px"
+          height="18px"
+          margin={'0 0 6px 0'}
+          display="inline-block"></Label>
+        <InputInfo
+          placeholder={'닉네임 입력'}
+          width="451px"
+          height="41px"
+          margin={'0 0 30px 0'}></InputInfo>
+        <Button height={'43px'}>{'회원가입'}</Button>
       </Col>
     );
   };
@@ -133,9 +326,12 @@ function HomeModal(props) {
     <ModalWrapper visible={visible} onClick={onCloseModal}>
       <ModalBox width="len7" height="len15">
         <ModalContainer>
-          {/* <button onClick={closeBtn}>Close</button> */}
-          {loginModal()}
+          {/* <button onClick={closeBtn}>X</button> */}
+          {/* loginModal() */}
           {/* 여기에 loginModal 처럼 만들어서 테스트 */}
+          {/* joinModal1() */}
+          {/* joinModal2() */}
+          {joinModal3()}
         </ModalContainer>
       </ModalBox>
     </ModalWrapper>
