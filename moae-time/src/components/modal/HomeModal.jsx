@@ -36,6 +36,24 @@ const ModalContainer = styled.div`
   align-items: center;
 `;
 
+const Description = styled.span.attrs(
+  ({ width, height, fontSize, margin }) => ({
+    row: height,
+    col: width,
+    fontSize: fontSize,
+    margin: margin,
+  })
+)`
+  /* width: 211px;
+  height: 24px;
+  font-size: 20px; */
+  width: ${(props) => props.col};
+  height: ${(props) => props.row};
+  font-size: ${(props) => props.fontSize};
+  margin: ${(props) => props.margin};
+  border: 1px solid gray;
+`;
+
 function HomeModal(props) {
   const { visible, handleModalState } = props;
 
@@ -58,29 +76,13 @@ function HomeModal(props) {
     handleModalState(visible);
   };
 
-  const Description = styled.span.attrs(
-    ({ width, height, fontSize, margin }) => ({
+  const InputInfo = styled.input.attrs(
+    ({ width = '100%', height, margin }) => ({
       row: height,
       col: width,
-      fontSize: fontSize,
-      margin: margin,
+      margin,
     })
   )`
-    /* width: 211px;
-    height: 24px;
-    font-size: 20px; */
-    width: ${(props) => props.col};
-    height: ${(props) => props.row};
-    font-size: ${(props) => props.fontSize};
-    margin: ${(props) => props.margin};
-    border: 1px solid gray;
-  `;
-
-  const InputInfo = styled.input.attrs(({ width, height, margin }) => ({
-    row: height,
-    col: width,
-    margin: margin,
-  }))`
     width: ${(props) => props.col};
     height: ${(props) => props.row};
     margin: ${(props) => props.margin};
@@ -158,7 +160,7 @@ function HomeModal(props) {
         </Row>
         <Row padding={'0 120px'}>
           <span>{'처음?'}</span>
-          <Link to={'/board'}>{'가입'}</Link>
+          <button to={'/board'}>{'가입'}</button>
         </Row>
       </Col>
     );
@@ -170,20 +172,24 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 6px 0'}></Description>
+          margin={'0 0 6px 0'}
+        ></Description>
         <Description
           width="324px"
           height="44px"
-          margin={'0 0 48px 0'}></Description>
+          margin={'0 0 48px 0'}
+        ></Description>
         <Description
           width="99px"
           height="35px"
-          margin={'0 0 25px 0'}></Description>
+          margin={'0 0 25px 0'}
+        ></Description>
         <Label
           width="47px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          display="inline-block"
+        ></Label>
         <SelectBox>
           <option key="dummy1" value="dummy1">
             dummy1
@@ -199,12 +205,14 @@ function HomeModal(props) {
           width="24px"
           height="18px"
           margin={'28px 0 6px 0'}
-          display="inline-block"></Label>
+          display="inline-block"
+        ></Label>
         <InputInfo
           placeholder={'학교 이름'}
           width="451px"
           height="41px"
-          margin={'0 0 25px 0'}></InputInfo>
+          margin={'0 0 25px 0'}
+        ></InputInfo>
         <Button height={'43px'}>{'다음'}</Button>
       </Col>
     );
@@ -216,7 +224,8 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 26px 0'}></Description>
+          margin={'0 0 26px 0'}
+        ></Description>
         <div>
           <CheckBox name="keeping" id="check" />
           <Label to="check" width="163px" margin={'0 0 24px 0'}>
@@ -276,65 +285,121 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 26px 0'}></Description>
+          margin={'0 0 26px 0'}
+        ></Description>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          display="inline-block"
+        ></Label>
         <InputInfo
           placeholder={'아이디 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
+          margin={'0 0 30px 0'}
+        ></InputInfo>
         <Label
           width="47px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          display="inline-block"
+        ></Label>
         <InputInfo
           placeholder={'비밀번호 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
+          margin={'0 0 30px 0'}
+        ></InputInfo>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          display="inline-block"
+        ></Label>
         <InputInfo
           placeholder={'이메일 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
+          margin={'0 0 30px 0'}
+        ></InputInfo>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          display="inline-block"
+        ></Label>
         <InputInfo
           placeholder={'닉네임 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
+          margin={'0 0 30px 0'}
+        ></InputInfo>
         <Button height={'43px'}>{'회원가입'}</Button>
       </Col>
     );
   };
 
   return (
-    <ModalWrapper visible={visible} onClick={onCloseModal}>
-      <ModalBox width="len7" height="len15">
-        <ModalContainer>
-          {/* <button onClick={closeBtn}>X</button> */}
-          {/* loginModal() */}
-          {/* 여기에 loginModal 처럼 만들어서 테스트 */}
-          {/* joinModal1() */}
-          {/* joinModal2() */}
-          {joinModal3()}
-        </ModalContainer>
-      </ModalBox>
-    </ModalWrapper>
+    <Col padding={'0 105px'}>
+      <Description
+        width="202px"
+        height="35px"
+        margin={'0 0 6px 0'}
+      ></Description>
+      <Description
+        width="324px"
+        height="44px"
+        margin={'0 0 48px 0'}
+      ></Description>
+      <Description
+        width="99px"
+        height="35px"
+        margin={'0 0 25px 0'}
+      ></Description>
+      <Label
+        width="47px"
+        height="18px"
+        margin={'0 0 6px 0'}
+        display="inline-block"
+      ></Label>
+      <SelectBox>
+        <option key="dummy1" value="dummy1">
+          dummy1
+        </option>
+        <option key="dummy2" value="dummy2">
+          dummy2
+        </option>
+        <option key="dummy3" value="dummy3">
+          dummy3
+        </option>
+      </SelectBox>
+      <Label
+        width="24px"
+        height="18px"
+        margin={'28px 0 6px 0'}
+        display="inline-block"
+      ></Label>
+      <InputInfo
+        placeholder={'학교 이름'}
+        width="451px"
+        height="41px"
+        margin={'0 0 25px 0'}
+      ></InputInfo>
+      <Button height={'43px'}>{'다음'}</Button>
+    </Col>
+    // <ModalWrapper visible={visible} onClick={onCloseModal}>
+    //   <ModalBox width="len7" height="len15">
+    //     <ModalContainer>
+    //       {/* <button onClick={closeBtn}>X</button> */}
+    //       {/* {loginModal()} */}
+    //       {/* 여기에 loginModal 처럼 만들어서 테스트 */}
+    //       {/* joinModal1() */}
+    //       {/* joinModal2() */}
+    //       {/* {joinModal3()} */}
+    //     </ModalContainer>
+    //   </ModalBox>
+    // </ModalWrapper>
   );
 }
 

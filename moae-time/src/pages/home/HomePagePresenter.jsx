@@ -41,6 +41,7 @@ const MainContent = styled.div`
   max-height: 100%;
   border: none;
   position: relative;
+  background-color: yellow;
 `;
 
 const TopAd = styled(Box)`

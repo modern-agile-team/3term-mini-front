@@ -1,47 +1,79 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Box, SideBar, PageNation, BigModal } from '../../components';
+import { Col, Row } from '../../style';
 
-const SearchWrap = styled.div`
-  width: 821px;
-  display: flex;
-  justify-content: space-between;
+const SelectBox = styled.select`
+  outline: none;
+  width: 100px;
+  padding: 15.5px 20px;
+  border: 1px solid #d6d6d6;
+  background-color: #f9f9f9;
+  color: #737373;
+  font-size: 14px;
 `;
 
-const CenterWrap = styled.div`
-  height: 767px;
+const Input = styled.input`
+  width: 80%;
+  display: inline-block;
+  outline: none;
+  background-color: none;
+  border: none;
+  background-color: #f9f9f9;
+  color: #737373;
 
-  margin-top: 25px;
-  margin-left: 172px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  font-size: 15px;
 `;
 
-const WholeWrap = styled.div`
-  width: 1350px;
-
-  display: flex;
-  justify-content: space-between;
+const Button = styled.button`
+  outline: none;
+  padding: 15px;
+  border: 1px solid #d6d6d6;
+  background-color: #f9f9f9;
+  color: #737373;
+  height: 100%;
 `;
 
 function BoardPage() {
   return (
-    <WholeWrap>
-      <CenterWrap>
-        <Box height="65px" width="820px" />
-        <SearchWrap>
-          <Box height="50px" width="100px" />
-          <Box height="50px" width="656px" />
-          <Box height="50px" width="small" />
-        </SearchWrap>
-        <Box height="601px" width="820px">
-          <BigModal />
+    <Row padding="25px 172px 0px" align="flex-start">
+      <Col width="len8">
+        <Row padding="0 0 5px">
+          <Box padding="15px">자유 게시판</Box>
+        </Row>
+        <Row padding="0 0 5px">
+          <SelectBox name="sort">
+            최신순
+            <option value="dog">최신순</option>
+            <option value="dog">오래된순</option>
+          </SelectBox>
+          <Box width="len12" padding="14px">
+            <Row>
+              <Input placeholder="검색어를 입력하세요." />
+              <span>사진</span>
+            </Row>
+          </Box>
+          <Button>사진</Button>
+        </Row>
+        <Box>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
         </Box>
         <PageNation />
-      </CenterWrap>
-      <SideBar height="240px" width="336px" />
-    </WholeWrap>
+      </Col>
+      <Box width="len3">
+        <Row padding="10px">
+          <span>HOT 게시물</span> <Link to={'/'}>더 보기</Link>
+        </Row>
+        <Col>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+        </Col>
+      </Box>
+    </Row>
   );
 }
 

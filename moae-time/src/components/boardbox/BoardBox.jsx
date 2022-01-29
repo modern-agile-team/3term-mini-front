@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MainStyle } from '../../../';
+import { MainStyle } from '../../style';
 
-const Row = styled.div.attrs(
+const BoardBox = styled.div.attrs(
   ({ width = 'default', padding = '0 0 0 0', align = 'center' }) => ({
-    width: MainStyle.checkWidth[width],
-    padding,
-    align,
+    // width,
+    // padding,
+    // align,
   })
 )`
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: ${(props) => props.align};
 
@@ -18,6 +18,8 @@ const Row = styled.div.attrs(
   height: fit-content;
 
   padding: ${(props) => props.padding};
+
+  background-color: aqua; */
 `;
 
-export default Row;
+export default BoardBox;

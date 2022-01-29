@@ -1,49 +1,49 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { Row } from '../../style';
 
-const PageNationWrap = styled.div`
-  width: 163px;
-  height: 30px;
-  background-color: white;
-  border: 1px solid #D6D6D6;
-
-  margin-left: 322.5px;
-  display: flex;
-  align-items: center;
-`
-
-const PageNationNumber = styled.div.attrs(({marginValue}) => ({
+const PageNationNumber = styled.div.attrs(({ marginValue }) => ({
   margin: marginValue,
 }))`
   width: 28px;
   height: 28px;
-  background-color: #F9F9F9;
-  border: 1px solid #D6D6D6;
+  background-color: #f9f9f9;
+  border: 1px solid #d6d6d6;
+  border-radius: 50%;
 
   margin-right: ${(props) => props.margin};
-`
+`;
 
-const PageNationArrow = styled.div.attrs(({marginValue}) => ({
-  margin: marginValue,
+const PageNationArrow = styled.i.attrs(({ direction = 'right' }) => ({
+  direction,
 }))`
-  width: 4px;
-  height: 9.25px;
-  background-color: #F9F9F9;
-  border: 1px solid #D6D6D6;
+  width: 11px;
+  height: 11px;
+  border: solid 1px #c62935;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  transform: ${(props) =>
+    props.direction === 'right' ? 'rotate(-45deg)' : 'rotate(135deg)'};
+  -webkit-transform: ${(props) =>
+    props.direction === 'right' ? 'rotate(-45deg)' : 'rotate(135deg)'};
 
-  margin-right: ${(props) => props.margin};
-`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
-function PageNation() {
+function PageNation(props) {
   return (
-    <PageNationWrap>
-      <PageNationArrow marginValue="24.5px"/>
-      <PageNationNumber marginValue="10px"/>
-      <PageNationNumber marginValue="10px"/>
-      <PageNationNumber marginValue="24.5px"/>
-      <PageNationArrow marginValue="0px"/>
-    </PageNationWrap>
-  )
+    <Row width={'len2'} padding={'25px 0 0'}>
+      <PageNationArrow direction={'left'}></PageNationArrow>
+      <Row width={'len13'}>
+        <PageNationNumber>{}</PageNationNumber>
+        <PageNationNumber></PageNationNumber>
+        <PageNationNumber></PageNationNumber>
+      </Row>
+      <PageNationArrow direction={'right'}></PageNationArrow>
+    </Row>
+  );
 }
 
 export default PageNation;

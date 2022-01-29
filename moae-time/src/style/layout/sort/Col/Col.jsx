@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MainStyle } from '../../../';
 
 const Col = styled.div.attrs(
-  ({
-    width = '100%',
-    height = 'fit-content',
-    padding = '0 0 0 0',
-    align = 'center',
-  }) => ({
-    col: width,
-    row: height,
+  ({ width = 'default', padding = '0 0 0 0', align = 'center' }) => ({
+    width: MainStyle.checkWidth[width],
+    padding,
+    align,
   })
 )`
   display: flex;
@@ -17,11 +14,12 @@ const Col = styled.div.attrs(
   justify-content: space-between;
   align-items: ${(props) => props.align};
 
-  width: ${(props) => props.col};
+  width: ${(props) => props.width};
   height: fit-content;
-  max-height: ${(props) => props.maxRow};
 
   padding: ${(props) => props.padding};
+
+  /* background-color: aqua; */
 `;
 
 export default Col;
