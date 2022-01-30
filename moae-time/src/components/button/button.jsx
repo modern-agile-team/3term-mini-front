@@ -2,22 +2,51 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ButtonWrap = styled.button.attrs(
-  ({ height = 'fit-content', width = '100%', margin = '0 0 0 0' }) => ({
-    row: height,
+  ({
+    width,
+    height,
+    bgColor = '#C62935',
+    fontSize = '18px',
+    fontColor = 'white',
+    borderRadius = '14px',
+  }) => ({
     col: width,
+    row: height,
+    bgColor,
+    fontSize,
+    fontColor,
+    borderRadius,
   })
 )`
-  height: ${(props) => props.row};
   width: ${(props) => props.col};
-  margin: ${(props) => props.margin};
-  font-size: 20px;
+  height: ${(props) => props.row};
+  background-color: ${(props) => props.bgColor};
+  font-size: ${(props) => props.fontSize};
+  color: ${(props) => props.fontColor};
+  border-radius: ${(props) => props.borderRadius};
+  border: none;
+  text-align: center;
 `;
 
 const Button = (props) => {
-  const { height, width, margin, children } = props;
+  const {
+    width,
+    height,
+    bgColor,
+    fontSize,
+    fontColor,
+    borderRadius,
+    children,
+  } = props;
 
   return (
-    <ButtonWrap height={height} width={width} margin={margin}>
+    <ButtonWrap
+      height={height}
+      width={width}
+      bgColor={bgColor}
+      fontSize={fontSize}
+      fontColor={fontColor}
+      borderRadius={borderRadius}>
       {children}
     </ButtonWrap>
   );
