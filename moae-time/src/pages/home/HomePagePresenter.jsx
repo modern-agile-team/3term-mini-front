@@ -50,7 +50,9 @@ const TopAd = styled(Box)`
   margin: 0 0 17px;
 `;
 
-function HomePage(props) {
+function HomePage({ showBoards }) {
+  // api 만들면 => state
+
   return (
     <HomeLayout>
       <Side>
@@ -63,8 +65,13 @@ function HomePage(props) {
       <MainContent>
         <TopAd></TopAd>
         <Row width="100%" height="100px">
-          <Box width={'len5'} height={'len12'} color={'gray6'} />
-          <Box width={'len3'} height={'len5'} />
+          <Box width={'len5'} height={'len12'} color={'gray6'}>
+            <div>공지 게시판</div>
+            {showBoards()}
+          </Box>
+          <Box width={'len3'} height={'len5'} padding={'10px'}>
+            HOT board
+          </Box>
         </Row>
       </MainContent>
     </HomeLayout>
