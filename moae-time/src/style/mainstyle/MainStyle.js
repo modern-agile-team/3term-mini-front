@@ -1,7 +1,8 @@
 const MainStyle = {
   checkColor: {
     red: '#c62935',
-    green: '28b0b8',
+    green: '#28b0b8',
+    white: '#fff',
     gray1: '#000000',
     gray2: '#444444',
     gray3: '#737373',

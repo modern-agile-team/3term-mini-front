@@ -38,6 +38,7 @@ const Button = (props) => {
     fontColor,
     borderRadius,
     children,
+    onClick,
   } = props;
 
   return (
@@ -47,7 +48,9 @@ const Button = (props) => {
       bgColor={bgColor}
       fontSize={fontSize}
       fontColor={fontColor}
-      borderRadius={borderRadius}>
+      borderRadius={borderRadius}
+      onClick={onClick}
+    >
       {children}
     </ButtonWrap>
   );

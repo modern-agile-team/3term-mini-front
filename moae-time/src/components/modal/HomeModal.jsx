@@ -54,8 +54,70 @@ const Description = styled.span.attrs(
   border: 1px solid gray;
 `;
 
+const InputInfo = styled.input.attrs(({ width = '100%', height, margin }) => ({
+  row: height,
+  col: width,
+  margin,
+}))`
+  width: ${(props) => props.col};
+  height: ${(props) => props.row};
+  margin: ${(props) => props.margin};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border-radius: 11px;
+  border: 1px solid gray;
+`;
+
+const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
+  type: 'checkbox',
+  marginRight: marginRight,
+}))`
+  width: 12px;
+  height: 12px;
+  margin-right: ${(props) => props.marginRight};
+`;
+
+const SelectBox = styled.select`
+  width: 451px;
+  height: 41px;
+  border-radius: 11px;
+  border: 1px solid gray;
+`;
+
+const Label = styled.label.attrs(
+  ({ to, width, height, margin, display = 'inline-block' }) => ({
+    for: to,
+    row: height,
+    col: width,
+    margin: margin,
+    display: display,
+  })
+)`
+  width: ${(props) => props.col};
+  height: ${(props) => props.row};
+  margin: ${(props) => props.margin};
+  display: ${(props) => props.display};
+  background-color: aqua;
+  border: 1px solid gray;
+`;
+
+const Icon = styled.img`
+  width: 93px;
+  height: 93px;
+  background-color: #c62935;
+`;
+
+const TagA = styled.a`
+  width: 125px;
+  height: 20px;
+  background-color: aqua;
+`;
+
 function HomeModal(props) {
-  const { visible, handleModalState } = props;
+  const { visible, handleModalState, content, next } = props;
 
   const onCloseModal = (e) => {
     if (e.target === e.currentTarget) {
@@ -75,70 +137,6 @@ function HomeModal(props) {
   const closeBtn = () => {
     handleModalState(visible);
   };
-
-  const InputInfo = styled.input.attrs(
-    ({ width = '100%', height, margin }) => ({
-      row: height,
-      col: width,
-      margin,
-    })
-  )`
-    width: ${(props) => props.col};
-    height: ${(props) => props.row};
-    margin: ${(props) => props.margin};
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    border-radius: 11px;
-    border: 1px solid gray;
-  `;
-
-  const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
-    type: 'checkbox',
-    marginRight: marginRight,
-  }))`
-    width: 12px;
-    height: 12px;
-    margin-right: ${(props) => props.marginRight};
-  `;
-
-  const SelectBox = styled.select`
-    width: 451px;
-    height: 41px;
-    border-radius: 11px;
-    border: 1px solid gray;
-  `;
-
-  const Label = styled.label.attrs(
-    ({ to, width, height, margin, display = 'inline-block' }) => ({
-      for: to,
-      row: height,
-      col: width,
-      margin: margin,
-      display: display,
-    })
-  )`
-    width: ${(props) => props.col};
-    height: ${(props) => props.row};
-    margin: ${(props) => props.margin};
-    display: ${(props) => props.display};
-    background-color: aqua;
-    border: 1px solid gray;
-  `;
-
-  const Icon = styled.img`
-    width: 93px;
-    height: 93px;
-    background-color: #c62935;
-  `;
-
-  const TagA = styled.a`
-    width: 125px;
-    height: 20px;
-    background-color: aqua;
-  `;
 
   const loginModal = () => {
     return (
@@ -213,7 +211,9 @@ function HomeModal(props) {
           height="41px"
           margin={'0 0 25px 0'}
         ></InputInfo>
-        <Button height={'43px'}>{'다음'}</Button>
+        <Button height={'43px'} onClick={next}>
+          {'다음'}
+        </Button>
       </Col>
     );
   };
@@ -340,67 +340,19 @@ function HomeModal(props) {
     );
   };
 
-  return (
-    <Col padding={'0 105px'}>
-      <Description
-        width="202px"
-        height="35px"
-        margin={'0 0 6px 0'}
-      ></Description>
-      <Description
-        width="324px"
-        height="44px"
-        margin={'0 0 48px 0'}
-      ></Description>
-      <Description
-        width="99px"
-        height="35px"
-        margin={'0 0 25px 0'}
-      ></Description>
-      <Label
-        width="47px"
-        height="18px"
-        margin={'0 0 6px 0'}
-        display="inline-block"
-      ></Label>
-      <SelectBox>
-        <option key="dummy1" value="dummy1">
-          dummy1
-        </option>
-        <option key="dummy2" value="dummy2">
-          dummy2
-        </option>
-        <option key="dummy3" value="dummy3">
-          dummy3
-        </option>
-      </SelectBox>
-      <Label
-        width="24px"
-        height="18px"
-        margin={'28px 0 6px 0'}
-        display="inline-block"
-      ></Label>
-      <InputInfo
-        placeholder={'학교 이름'}
-        width="451px"
-        height="41px"
-        margin={'0 0 25px 0'}
-      ></InputInfo>
-      <Button height={'43px'}>{'다음'}</Button>
-    </Col>
-    // <ModalWrapper visible={visible} onClick={onCloseModal}>
-    //   <ModalBox width="len7" height="len15">
-    //     <ModalContainer>
-    //       {/* <button onClick={closeBtn}>X</button> */}
-    //       {/* {loginModal()} */}
-    //       {/* 여기에 loginModal 처럼 만들어서 테스트 */}
-    //       {/* joinModal1() */}
-    //       {/* joinModal2() */}
-    //       {/* {joinModal3()} */}
-    //     </ModalContainer>
-    //   </ModalBox>
-    // </ModalWrapper>
-  );
+  const main = {
+    joinModal1: joinModal1(),
+    joinModal2: joinModal2(),
+    joinModal3: joinModal3(),
+    undefined: <div>잘못된 경로입니다</div>,
+    // switch - case => lookup table
+  };
+
+  const renderMain = () => {
+    return main[content];
+  };
+
+  return <>{renderMain()}</>;
 }
 
 export default HomeModal;

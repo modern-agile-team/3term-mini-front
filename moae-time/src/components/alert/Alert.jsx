@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 import styled from 'styled-components';
 import { Col, MainStyle } from '../../style';
 
@@ -65,7 +65,15 @@ const Close = styled.button`
 `;
 
 function Alert(props) {
-  const { children, visible, onCloseModal, width, padding, close } = props;
+  const {
+    children,
+    visible,
+    onCloseModal,
+    width,
+    padding,
+    close,
+    next,
+  } = props;
 
   const closeModal = () => {
     close();
@@ -75,7 +83,8 @@ function Alert(props) {
     <Background visible={visible} onClick={onCloseModal}>
       <ModalWrapper width={width} padding={padding}>
         <Close onClick={closeModal}>{}</Close>
-        {children}
+        {/* {children} */}
+        {cloneElement(children, { next })}
       </ModalWrapper>
     </Background>
   );
