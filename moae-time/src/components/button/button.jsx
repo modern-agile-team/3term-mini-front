@@ -26,6 +26,7 @@ const ButtonWrap = styled.button.attrs(
   border-radius: ${(props) => props.borderRadius};
   border: none;
   text-align: center;
+  cursor: pointer;
 `;
 
 const Button = (props) => {
