@@ -7,7 +7,7 @@ import { Col, Row } from '../../style';
 const SelectBox = styled.select`
   outline: none;
   width: 100px;
-  padding: 15.5px 20px;
+  padding: 14.5px 20px;
   border: 1px solid #d6d6d6;
   background-color: #f9f9f9;
   color: #737373;
@@ -36,6 +36,8 @@ const Button = styled.button`
 `;
 
 function BoardPage() {
+  const boards = {};
+
   return (
     <Row padding="25px 172px 0px" align="flex-start">
       <Col width="len8">
