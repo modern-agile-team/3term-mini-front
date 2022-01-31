@@ -5,12 +5,14 @@ import { MainStyle } from '../../style';
 const ButtonWrap = styled.button.attrs(
   ({
     width = 'default',
+    padding,
     backColor = 'red',
     fontSize = 'size8',
     fontColor = 'white',
     borderRadius = 'radius5',
   }) => ({
     col: MainStyle.checkWidth[width],
+    padding,
     backColor: MainStyle.checkColor[backColor],
     fontSize: MainStyle.checkFontSize[fontSize],
     fontColor: MainStyle.checkColor[fontColor],
@@ -18,6 +20,7 @@ const ButtonWrap = styled.button.attrs(
   })
 )`
   width: ${(props) => props.col};
+  padding: ${(props) => props.padding};
   height: fit-content;
   background-color: ${(props) => props.backColor};
   font-size: ${(props) => props.fontSize};
@@ -32,6 +35,7 @@ const ButtonWrap = styled.button.attrs(
 const Button = (props) => {
   const {
     width,
+    padding,
     backColor,
     fontSize,
     fontColor,
@@ -43,6 +47,7 @@ const Button = (props) => {
   return (
     <ButtonWrap
       width={width}
+      padding={padding}
       backColor={backColor}
       fontSize={fontSize}
       fontColor={fontColor}
