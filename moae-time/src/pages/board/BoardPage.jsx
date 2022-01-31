@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Box, SideBar, PageNation, BigModal } from '../../components';
@@ -37,6 +38,15 @@ const Button = styled.button`
 
 function BoardPage() {
   const boards = {};
+  // const ENDPOINT = '13.209.76.148:8080';
+  // axios
+  //   .get(`${ENDPOINT}/board`)
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log('ERR : ', err);
+  //   });
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">

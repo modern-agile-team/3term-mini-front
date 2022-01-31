@@ -26,6 +26,8 @@ const MainStyle = {
     len11: '1168px',
     len12: '656px',
     len13: '110px',
+    len14: '155px',
+    len15: '200px',
     default: '100%',
   },
 
