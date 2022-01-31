@@ -84,16 +84,14 @@ function Layout(props) {
           width="len7"
           close={closeModal}
           padding={'124px 105px'}
-          next={clickNext}
-        >
+          next={clickNext}>
           {<HomeModal content={'joinModal1'}></HomeModal>}
         </Alert>
         <Alert
           visible={modalVisible1}
           width="len7"
           close={closeModal}
-          padding={'124px 105px'}
-        >
+          padding={'124px 105px'}>
           {<HomeModal content={'joinModal2'}></HomeModal>}
         </Alert>
       </HeaderBox>
