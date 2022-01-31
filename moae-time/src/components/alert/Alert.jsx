@@ -56,12 +56,14 @@ function Alert(props) {
   const { children, visible, onCloseModal, width, padding, close, next } =
     props;
 
-  const closeModal = () => {
-    close();
+  const closeModal = (e) => {
+    if (e.target === e.currentTarget) {
+      close();
+    }
   };
 
   return (
-    <Background visible={visible} onClick={onCloseModal}>
+    <Background visible={visible} onClick={closeModal}>
       <ModalWrapper width={width} padding={padding}>
         <Close src={deleteImg} onClick={closeModal}>
           {}
