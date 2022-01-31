@@ -12,6 +12,7 @@ const MyPageWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  background-color: teal;
 `;
 
 const LeftWrap = styled.div`
@@ -22,8 +23,9 @@ const LeftWrap = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  background-color: teal;
 `;
 
 const RightWrap = styled.div`
@@ -38,12 +40,9 @@ const ProfileAndTextWrap = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-`;
-
-const ForMargin = styled.div`
-  margin: 30px;
+  align-items: center;
+  background-color: yellow;
 `;
 
 function MyPagePresenter(props) {
@@ -51,12 +50,14 @@ function MyPagePresenter(props) {
 
   return (
     <MyPageWrap>
-      <Box width="1168px" height="65px" />
-      <LeftWrap>
+      <Box width={'len11'} padding={'16px'}>
+        <h2>마이페이지</h2>
+      </Box>
+      {/* <LeftWrap>
         <ProfileAndTextWrap>
-          {/* <Box width="155px" height="155px" />
-          <Box width="100px" height="15px" />
-          <Box width="200px" height="32px" /> */}
+          <Box width="len14" padding={'10px'}></Box>
+          <Box width="len1" padding={'10px'}></Box>
+          <Box width="len15" padding={'10px'}></Box>
         </ProfileAndTextWrap>
         <Box width="479px" height="90px" margin="30px 0px 0px 0px" />
         <Box width="479px" height="362px" />
@@ -64,7 +65,7 @@ function MyPagePresenter(props) {
       <RightWrap>
         <Box width="673px" height="720px" />
         <Box size="large"></Box>
-      </RightWrap>
+      </RightWrap> */}
     </MyPageWrap>
   );
 }
