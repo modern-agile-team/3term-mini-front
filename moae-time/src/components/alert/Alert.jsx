@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React, { useEffect, cloneElement } from 'react';
 import styled from 'styled-components';
 import { Col, MainStyle } from '../../style';
 import deleteImg from '../../assets/delete.png';
@@ -53,14 +53,22 @@ const Close = styled.img.attrs(({ closeTop, closeRight }) => ({
 `;
 
 function Alert(props) {
-  const { children, visible, onCloseModal, width, padding, close, next } =
-    props;
+  const { children, visible, width, padding, close, next } = props;
 
   const closeModal = (e) => {
     if (e.target === e.currentTarget) {
       close();
     }
   };
+
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [visible]);
 
   return (
     <Background visible={visible} onClick={closeModal}>
