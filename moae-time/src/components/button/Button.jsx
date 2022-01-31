@@ -1,39 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MainStyle } from '../../style';
 
 const ButtonWrap = styled.button.attrs(
   ({
-    width,
-    height,
-    bgColor = '#C62935',
-    fontSize = '18px',
+    width = 'default',
+    backColor = 'red',
+    fontSize = 'size8',
     fontColor = 'white',
-    borderRadius = '14px',
+    borderRadius = 'radius5',
   }) => ({
-    col: width,
-    row: height,
-    bgColor,
-    fontSize,
-    fontColor,
-    borderRadius,
+    col: MainStyle.checkWidth[width],
+    backColor: MainStyle.checkColor[backColor],
+    fontSize: MainStyle.checkFontSize[fontSize],
+    fontColor: MainStyle.checkColor[fontColor],
+    borderRadius: MainStyle.checkRadius[borderRadius],
   })
 )`
   width: ${(props) => props.col};
-  height: ${(props) => props.row};
-  background-color: ${(props) => props.bgColor};
+  height: fit-content;
+  background-color: ${(props) => props.backColor};
   font-size: ${(props) => props.fontSize};
   color: ${(props) => props.fontColor};
   border-radius: ${(props) => props.borderRadius};
   border: none;
   text-align: center;
+  vertical-align: middle;
   cursor: pointer;
 `;
 
 const Button = (props) => {
   const {
     width,
-    height,
-    bgColor,
+    backColor,
     fontSize,
     fontColor,
     borderRadius,
@@ -43,14 +42,12 @@ const Button = (props) => {
 
   return (
     <ButtonWrap
-      height={height}
       width={width}
-      bgColor={bgColor}
+      backColor={backColor}
       fontSize={fontSize}
       fontColor={fontColor}
       borderRadius={borderRadius}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       {children}
     </ButtonWrap>
   );
