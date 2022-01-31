@@ -36,10 +36,7 @@ const ModalWrapper = styled.div.attrs(({ width, padding }) => ({
   background-color: #f9f9f9;
 `;
 
-const Close = styled.img.attrs(({ closeTop, closeRight }) => ({
-  closeTop,
-  closeRight,
-}))`
+const Close = styled.img`
   outline: none;
   position: absolute;
   z-index: 5;
