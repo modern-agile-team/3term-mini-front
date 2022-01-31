@@ -170,24 +170,20 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 6px 0'}
-        ></Description>
+          margin={'0 0 6px 0'}></Description>
         <Description
           width="324px"
           height="44px"
-          margin={'0 0 48px 0'}
-        ></Description>
+          margin={'0 0 48px 0'}></Description>
         <Description
           width="99px"
           height="35px"
-          margin={'0 0 25px 0'}
-        ></Description>
+          margin={'0 0 25px 0'}></Description>
         <Label
           width="47px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <SelectBox>
           <option key="dummy1" value="dummy1">
             dummy1
@@ -203,14 +199,12 @@ function HomeModal(props) {
           width="24px"
           height="18px"
           margin={'28px 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'학교 이름'}
           width="451px"
           height="41px"
-          margin={'0 0 25px 0'}
-        ></InputInfo>
+          margin={'0 0 25px 0'}></InputInfo>
         <Button height={'43px'} onClick={next}>
           {'다음'}
         </Button>
@@ -224,8 +218,7 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 26px 0'}
-        ></Description>
+          margin={'0 0 26px 0'}></Description>
         <div>
           <CheckBox name="keeping" id="check" />
           <Label to="check" width="163px" margin={'0 0 24px 0'}>
@@ -285,56 +278,47 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 26px 0'}
-        ></Description>
+          margin={'0 0 26px 0'}></Description>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'아이디 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Label
           width="47px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'비밀번호 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'이메일 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'닉네임 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Button height={'43px'}>{'회원가입'}</Button>
       </Col>
     );
@@ -353,6 +337,87 @@ function HomeModal(props) {
   };
 
   return <>{renderMain()}</>;
+  // return (
+  //   <Col padding={'0 105px'}>
+  //     <Row padding={'10px 100px'}>
+  //       <Button
+  //         width={'46px'}
+  //         height={'30px'}
+  //         fontSize={'14px'}
+  //         borderRadius={'5px'}>
+  //         {'전송'}
+  //       </Button>
+  //       <Button
+  //         width={'46px'}
+  //         height={'30px'}
+  //         bgColor={'#D6D6D6'}
+  //         fontSize={'14px'}
+  //         borderRadius={'5px'}>
+  //         {'전송'}
+  //       </Button>
+  //     </Row>
+  //     <Col padding={'10px'}>
+  //       <Button width={'84px'} height={'32px'} borderRadius={'3px'}>
+  //         {'로그인'}
+  //       </Button>
+  //     </Col>
+  //     <Col padding={'10px'}>
+  //       <Button
+  //         width={'371px'}
+  //         height={'42px'}
+  //         fontSize={'18px'}
+  //         borderRadius={'0px'}>
+  //         {'로그인'}
+  //       </Button>
+  //     </Col>
+  //     <Col padding={'10px'}>
+  //       <Button width={'452px'} height={'43px'}>
+  //         {'다음'}
+  //       </Button>
+  //     </Col>
+  //     <Col padding={'10px'}>
+  //       <Button
+  //         width={'460px'}
+  //         height={'43px'}
+  //         fontSize={'18px'}
+  //         borderRadius={'14px'}>
+  //         {'휴대폰 인증'}
+  //       </Button>
+  //     </Col>
+  //     <Col padding={'10px'}>
+  //       <Button
+  //         width={'460px'}
+  //         height={'43px'}
+  //         bgColor={'#F2F2F2'}
+  //         fontSize={'18px'}
+  //         fontColor={'#737373'}
+  //         borderRadius={'14px'}>
+  //         {'아이핀 인증'}
+  //       </Button>
+  //     </Col>
+  //     <Col padding={'10px'}>
+  //       <Button
+  //         width={'452px'}
+  //         height={'43px'}
+  //         fontSize={'18px'}
+  //         borderRadius={'14px'}>
+  //         {'회원가입'}
+  //       </Button>
+  //     </Col>
+  //   </Col>
+  //   // <ModalWrapper visible={visible} onClick={onCloseModal}>
+  //   //   <ModalBox width="len7" height="len15">
+  //   //     <ModalContainer>
+  //   //       {/* <button onClick={closeBtn}>X</button> */}
+  //   //       {/* {loginModal()} */}
+  //   //       {/* 여기에 loginModal 처럼 만들어서 테스트 */}
+  //   //       {/* joinModal1() */}
+  //   //       {/* joinModal2() */}
+  //   //       {/* {joinModal3()} */}
+  //   //     </ModalContainer>
+  //   //   </ModalBox>
+  //   // </ModalWrapper>
+  // );
 }
 
 export default HomeModal;
