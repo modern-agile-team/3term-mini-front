@@ -1,17 +1,79 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Box, SideBar, PageNation, BigModal } from '../../components';
+import {
+  Box,
+  SideBar,
+  PageNation,
+  BigModal,
+  Text,
+  HotBoard,
+} from '../../components';
 import { Col, Row } from '../../style';
+
+const Input = styled.input`
+  width: 100%;
+  height: 173px;
+  max-height: 173px;
+  /* overflow: scroll; */
+  font-size: 16px;
+  outline: none;
+  border: solid 1px #c62935;
+  background-color: rgba(0, 0, 0, 0);
+  vertical-align: top;
+`;
 
 function BoardOne() {
   const boards = {};
+
+  const comments = [
+    { commentId: 1, userName: '성제', date: '02/13 08:13', content: '123' },
+    { commentId: 2, userName: 'Lee', date: '02/13 08:13', content: '456' },
+    { commentId: 3, userName: 'Kim', date: '02/13 08:13', content: '789' },
+  ];
+
+  const showComeents = () =>
+    comments.map((comment) => (
+      <>
+        <Row padding="5px 0 0" key={comments.commentId}>
+          <div>
+            <Text>icon</Text>
+            <Text>{comment.userName}</Text>
+          </div>
+        </Row>
+        <Row>
+          <Text>{comment.content}</Text>
+          <Text>{comment.date}</Text>
+        </Row>
+      </>
+    ));
+
+  const [content, setContent] = useState(
+    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!'
+  );
+  const [isEdit, setIsEdit] = useState(false);
+
+  const clickEdit = () => {
+    setIsEdit(!isEdit);
+  };
+
+  const showContent = () => <div>{content}</div>;
+
+  const editContent = () => <Input type="text" value={content} />;
+
+  const contentState = () => (isEdit ? editContent() : showContent());
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
       <Col width="len8" align="flex-start">
         <Row padding="0 0 5px">
-          <Box padding="15px">자유 게시판</Box>
+          <Box padding="15px">
+            <div>
+              <Text color={'gray1'} size={'size6'} weight={'medium'}>
+                자유 게시판
+              </Text>
+            </div>
+          </Box>
         </Row>
         <Box width="len8" padding="15px">
           <Col align="flex-start">
@@ -19,23 +81,17 @@ function BoardOne() {
               <div>icon</div>
               <Col>
                 <Row>
-                  <div>작성자 이름</div>
+                  <Text color={'gray1'}>작성자 이름</Text>
                   <div>
-                    <a>수정</a>
-                    <a>삭제</a>
+                    <button onClick={clickEdit}>수정</button>
+                    <button>삭제</button>
                   </div>
                 </Row>
                 <Col align="flex-start">날짜</Col>
               </Col>
             </Row>
             <h1>게시글 제목</h1>
-            <div>
-              {/* max-height, scroll 고고 */}
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Necessitatibus laborum consequatur nostrum molestiae eveniet
-              nihil, tempore sequi eos nesciunt iusto maiores temporibus dolores
-              quas dolore quis quos! Quae, beatae laboriosam!
-            </div>
+            {contentState()}
             <Row>
               <div>
                 <span>댓글 수</span>
@@ -54,8 +110,8 @@ function BoardOne() {
                 </Row>
               </div>
               <div>
-                <input id="익명" type="checkbox" />
-                <label for="익명">익명</label>
+                <input type="checkbox" id="nonShow" value="nonShow" />
+                <label for="nonShow">{'익명'}</label>
                 <span>버튼</span>
               </div>
             </Row>
@@ -63,40 +119,7 @@ function BoardOne() {
         </Row>
         <Col padding="5px 0 ">
           <Box padding="15px">
-            <Col>
-              <Row padding="5px 0 0">
-                <div>
-                  <span>icon</span>
-                  <span>댓글 단 사람1</span>
-                </div>
-              </Row>
-              <Row>
-                <div>댓글 내용</div>
-                <span>날짜</span>
-              </Row>
-              {/* --- */}
-              <Row padding="5px 0 0">
-                <div>
-                  <span>icon</span>
-                  <span>댓글 단 사람1</span>
-                </div>
-              </Row>
-              <Row>
-                <div>댓글 내용</div>
-                <span>날짜</span>
-              </Row>
-              {/* --- */}
-              <Row padding="5px 0 0">
-                <div>
-                  <span>icon</span>
-                  <span>댓글 단 사람1</span>
-                </div>
-              </Row>
-              <Row>
-                <div>댓글 내용</div>
-                <span>날짜</span>
-              </Row>
-            </Col>
+            <Col>{showComeents()}</Col>
           </Box>
         </Col>
         <div>
@@ -104,9 +127,7 @@ function BoardOne() {
         </div>
       </Col>
       <Box width="len3">
-        <Row padding="10px">
-          <span>HOT 게시물</span> <Link to={'/'}>더 보기</Link>
-        </Row>
+        <HotBoard />
       </Box>
     </Row>
   );

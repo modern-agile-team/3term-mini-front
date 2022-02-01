@@ -6,6 +6,8 @@ import PageNation from './pagenation/PageNation';
 import HomeModal from './modal/HomeModal';
 import BoardBox from './boardbox/BoardBox';
 import Alert from './alert/Alert';
+import Text from './text/Text';
+import HotBoard from './hotboard/HotBoard';
 
 export {
   SideBar,
@@ -16,4 +18,6 @@ export {
   HomeModal,
   BoardBox,
   Alert,
+  Text,
+  HotBoard,
 };
