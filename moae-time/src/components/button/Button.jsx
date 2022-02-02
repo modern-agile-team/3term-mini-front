@@ -5,14 +5,14 @@ import { MainStyle } from '../../style';
 const ButtonWrap = styled.button.attrs(
   ({
     width = 'default',
-    padding,
+    padding = 'default',
     backColor = 'red',
     fontSize = 'size8',
     fontColor = 'white',
     borderRadius = 'radius5',
   }) => ({
     col: MainStyle.checkWidth[width],
-    padding,
+    padding: MainStyle.checkPadding[padding],
     backColor: MainStyle.checkColor[backColor],
     fontSize: MainStyle.checkFontSize[fontSize],
     fontColor: MainStyle.checkColor[fontColor],

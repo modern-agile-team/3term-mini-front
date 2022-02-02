@@ -48,23 +48,37 @@ const LoginBtn = styled.button`
 function Layout(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
-  // const [modalVisible2, setModalVisible2] = useState(false);
-  // const [modalVisible3, setModalVisible3] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+  const [modalVisible3, setModalVisible3] = useState(false);
 
   const handleModalState = (modalVisible) => {
-    // joinModal1 에 대한 토글
+    // loginModal 에 대한 토글
     setModalVisible(!modalVisible);
-    setModalVisible1(false);
   };
 
   const clickNext = () => {
+    // joinModal1로 전환
     setModalVisible(false);
     setModalVisible1(true);
+  };
+
+  const clickNext1 = () => {
+    // joinModal2로 전환
+    setModalVisible1(false);
+    setModalVisible2(true);
+  };
+
+  const clickNext2 = () => {
+    // joinModal3로 전환
+    setModalVisible2(false);
+    setModalVisible3(true);
   };
 
   const closeAll = () => {
     setModalVisible(false);
     setModalVisible1(false);
+    setModalVisible2(false);
+    setModalVisible3(false);
   };
 
   const closeModal = () => {
@@ -83,16 +97,32 @@ function Layout(props) {
           visible={modalVisible}
           width="len7"
           close={closeModal}
-          padding={'124px 105px'}
+          padding={'144px 133px'}
           next={clickNext}>
-          {<HomeModal content={'joinModal1'}></HomeModal>}
+          {<HomeModal content={'loginModal'}></HomeModal>}
         </Alert>
         <Alert
           visible={modalVisible1}
           width="len7"
           close={closeModal}
-          padding={'124px 105px'}>
+          padding={'124px 105px'}
+          next={clickNext1}>
+          {<HomeModal content={'joinModal1'}></HomeModal>}
+        </Alert>
+        <Alert
+          visible={modalVisible2}
+          width="len7"
+          close={closeModal}
+          padding={'71px 105px'}
+          next={clickNext2}>
           {<HomeModal content={'joinModal2'}></HomeModal>}
+        </Alert>
+        <Alert
+          visible={modalVisible3}
+          width="len7"
+          close={closeModal}
+          padding={'90px 105px'}>
+          {<HomeModal content={'joinModal3'}></HomeModal>}
         </Alert>
       </HeaderBox>
       <MainBox>{main}</MainBox>

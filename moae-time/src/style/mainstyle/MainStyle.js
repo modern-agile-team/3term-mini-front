@@ -71,6 +71,7 @@ const MainStyle = {
     len3: '12px',
     len4: '15px',
     len5: '25px',
+    default: '0 0 0 0',
   },
 };
 
