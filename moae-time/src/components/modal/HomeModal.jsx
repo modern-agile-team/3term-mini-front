@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import searchImg from '../../style/image/search.png';
+import { Text } from '../index';
 
 import { Box, Button } from '../';
 import { Col, Row, MainStyle } from '../../style';
@@ -112,7 +113,10 @@ function HomeModal(props) {
     return (
       <Col>
         <Row padding={'0 0 15px'} align={'flex-end'}>
-          <Icon /> <Description fontSize={'size7'}>description</Description>
+          <Icon />{' '}
+          <Text size={'size7'} color={'gray2'}>
+            description
+          </Text>
         </Row>
         <InputInfo
           placeholder={'Id'}
@@ -244,7 +248,7 @@ function HomeModal(props) {
         <Description width="452px" height="38px" margin={'20px 0 36px 0'}>
           {'dummy'}
         </Description>
-        <Button height={'43px'} margin={'0 0 10px 0'}>
+        <Button height={'43px'} margin={'0 0 10px 0'} onClick={next}>
           {'휴대폰 인증'}
         </Button>
         <Button height={'43px'}>{'아이핀 인증'}</Button>
@@ -307,6 +311,7 @@ function HomeModal(props) {
   const main = {
     loginModal: loginModal(),
     joinModal1: joinModal1(),
+    joinModal2: joinModal2(),
     joinModal3: joinModal3(),
     undefined: <div>잘못된 경로입니다</div>,
     // switch - case => lookup table
