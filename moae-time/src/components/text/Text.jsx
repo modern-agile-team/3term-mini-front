@@ -19,7 +19,6 @@ const Text = styled.span.attrs(
   color: ${(props) => props.color};
   font-weight: ${(props) => props.weight};
   padding: ${(props) => props.padding};
-  text-align: center;
   vertical-align: middle;
 `;
 
