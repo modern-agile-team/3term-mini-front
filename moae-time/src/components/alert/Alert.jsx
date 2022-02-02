@@ -72,7 +72,7 @@ function Alert(props) {
       <ModalWrapper width={width} padding={padding}>
         <Close src={deleteImg} onClick={closeModal} />
         {/* {children} */}
-        {cloneElement(children, { next })}
+        {cloneElement(children, { next, close })}
       </ModalWrapper>
     </Background>
   );
