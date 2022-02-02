@@ -58,18 +58,6 @@ const MainStyle = {
     default: '24px',
   },
 
-  checkFontSize: {
-    size1: '12px',
-    size2: '14px',
-    size3: '15px',
-    size4: '16px',
-    size5: '18px',
-    size6: '22px',
-    size7: '24px',
-    size8: '11px',
-    default: '15px',
-  },
-
   checkWeight: {
     medium: '500',
     regular: '400',
