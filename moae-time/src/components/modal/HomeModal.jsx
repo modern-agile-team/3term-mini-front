@@ -2,52 +2,43 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import searchImg from '../../style/image/search.png';
-import { Text } from '../index';
-
-import { Box, Button } from '../';
+import { Box, Button, Text } from '../';
 import { Col, Row, MainStyle } from '../../style';
 
-const Description = styled.span.attrs(
-  ({ margin = '0 0 0 0', fontSize = 'default' }) => ({
-    margin,
-    fontSize: MainStyle.checkFontSize[fontSize],
-  })
-)`
-  /* width: 211px;
-  height: 24px;
-  font-size: 20px; */
-  /* width: ${(props) => props.col}; */
-  width: fit-content;
-  height: fit-content;
-  margin: ${(props) => props.margin};
-  font-size: ${(props) => props.fontSize};
-  border: 1px solid gray;
+const LoginInput = styled(Col)`
+  & :not(:last-child) {
+    margin-bottom: 5px;
+  }
 `;
 
 const InputInfo = styled.input.attrs(
   ({
     width = '100%',
-    height,
     margin,
+    padding = 'default',
     borderRadius = 'default',
     fontSize = 'default',
+    fontColor = 'default',
   }) => ({
-    row: height,
     col: width,
     margin: margin,
+    padding: MainStyle.checkPadding[padding],
     borderRadius: MainStyle.checkRadius[borderRadius],
     fontSize: MainStyle.checkFontSize[fontSize],
+    fontColor: MainStyle.checkColor[fontColor],
   })
 )`
   width: ${(props) => props.col};
-  height: ${(props) => props.row};
+  height: fit-content;
   margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   padding-left: 10px;
 
   outline: none;
   border-radius: ${(props) => props.borderRadius};
-  border: 1px solid gray;
+  border: 1px solid #ededed;
   font-size: ${(props) => props.fontSize};
+  color: ${(props) => props.fontColor};
 `;
 
 const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
@@ -64,23 +55,32 @@ const SelectBox = styled.select`
   height: 41px;
   padding-left: 9px;
   border-radius: ${MainStyle.checkRadius.radius4};
-  border: 1px solid gray;
+  border: 1px solid #ededed;
+  outline: none;
   font-size: ${MainStyle.checkFontSize.size8};
 `;
 
 const Label = styled.label.attrs(
-  ({ to, margin, display = 'inline-block', fontSize = 'default' }) => ({
+  ({
+    to,
+    fontSize = 'default',
+    fontColor = 'default',
+    margin,
+    display = 'inline-block',
+  }) => ({
     for: to,
+    fontSize: MainStyle.checkFontSize[fontSize],
+    fontColor: MainStyle.checkColor[fontColor],
     margin: margin,
     display: display,
-    fontSize: MainStyle.checkFontSize[fontSize],
   })
 )`
   width: fit-content;
   height: fit-content;
+  font-size: ${(props) => props.fontSize};
+  color: ${(props) => props.fontColor};
   margin: ${(props) => props.margin};
   display: ${(props) => props.display};
-  font-size: ${(props) => props.fontSize};
   background-color: aqua;
   border: 1px solid gray;
 `;
@@ -89,7 +89,7 @@ const Search = styled.img`
   width: 15px;
   height: 15px;
   position: absolute;
-  bottom: 205px;
+  bottom: 206px;
   right: 122px;
   cursor: pointer;
 `;
@@ -100,37 +100,48 @@ const Icon = styled.img`
   background-color: ${MainStyle.checkColor.red};
 `;
 
-const TagA = styled.a`
+// const TagA = styled(Text)`
+//   background-color: #f7fbd1;
+//   cursor: pointer;
+// `;
+
+const TagA = styled.span`
   width: 125px;
   height: 20px;
   background-color: aqua;
 `;
 
 function HomeModal(props) {
-  const { content, next } = props;
+  const { content, next, close } = props;
 
   const loginModal = () => {
     return (
       <Col>
         <Row padding={'0 0 15px'} align={'flex-end'}>
           <Icon />{' '}
-          <Text size={'size7'} color={'gray2'}>
+          <Text size={'size7'} color={'gray2'} weight={'medium'}>
             description
           </Text>
         </Row>
-        <InputInfo
-          placeholder={'Id'}
-          height={'41px'}
-          fontSize={'size6'}
-          margin={'0 0 5px 0'}></InputInfo>
-        <InputInfo
-          placeholder={'PassWord'}
-          height={'41px'}
-          fontSize={'size6'}
-          margin={'0 0 5px 0'}></InputInfo>
-        <Button height={'42px'} padding={'10px 0'} borderRadius="default">
-          {'로그인'}
-        </Button>
+        <LoginInput>
+          <InputInfo
+            placeholder={'Id'}
+            height={'41px'}
+            fontSize={'size6'}
+            fontColor={'gray1'}
+            padding={'len2'}
+          />
+          <InputInfo
+            placeholder={'PassWord'}
+            height={'41px'}
+            fontSize={'size6'}
+            fontColor={'gray1'}
+            padding={'len2'}
+          />
+          <Button padding={'len2'} borderRadius={'default'}>
+            {'로그인'}
+          </Button>
+        </LoginInput>
         <Row padding={'12px 0 29px'}>
           <div>
             <CheckBox name="keeping" id="check" />
@@ -138,13 +149,23 @@ function HomeModal(props) {
               keep info
             </Label>
           </div>
-          <TagA>find...</TagA>
+
+          <TagA size={'size5'} color={'gray2'} weight={'light'}>
+            find...
+          </TagA>
         </Row>
         <Row padding={'0 120px'}>
-          <span>{'처음?'}</span>
-          <button to={'/board'} onClick={next}>
-            {'가입'}
-          </button>
+          <Text size={'size8'} color={'gray4'}>
+            {'처음?'}
+          </Text>
+          <TagA
+            to={'/board'}
+            onClick={next}
+            size={'size8'}
+            color={'red'}
+            weight={'medium'}>
+            {'회원가입'}
+          </TagA>
         </Row>
       </Col>
     );
@@ -153,14 +174,22 @@ function HomeModal(props) {
   const joinModal1 = () => {
     return (
       <Col align={'left'}>
-        <Description margin={'0 0 6px 0'} fontSize={'default'}>
-          {'Description'}
-        </Description>
-        <Description fontSize={'size7'}>{'Description'}</Description>
-        <Description margin={'48px 0 25px 0'} fontSize={'default'}>
-          {'Description'}
-        </Description>
-        <Label margin={'0 0 6px 0'} display="inline-block" fontSize={'size4'}>
+        <Col align={'left'} padding={'0 0 6px'}>
+          <Text size={'default'} color={'gray1'} weight={'medium'}>
+            {'Description'}
+          </Text>
+        </Col>
+        <Col align={'left'} padding={'0 0 48px'}>
+          <Text size={'size7'} color={'gray3'} weight={'default'}>
+            {'Description'}
+          </Text>
+        </Col>
+        <Col align={'left'} padding={'0 0 25px'}>
+          <Text size={'default'} color={'gray1'} weight={'medium'}>
+            {'Description'}
+          </Text>
+        </Col>
+        <Label margin={'0 0 6px 0'} fontSize={'size4'}>
           {'Label'}
         </Label>
         <SelectBox>
@@ -183,13 +212,15 @@ function HomeModal(props) {
         <Row>
           <InputInfo
             placeholder={'학교 이름을 검색하세요'}
-            height="41px"
             margin={'0 0 25px 0'}
+            padding={'len2'}
             fontSize={'size8'}
-            borderRadius={'radius4'}></InputInfo>
+            fontColor={'gray1'}
+            borderRadius={'radius4'}
+          />
           <Search src={searchImg} />
         </Row>
-        <Button padding={'9px 0'} onClick={next}>
+        <Button padding={'len2'} onClick={next} weight={'bold'}>
           {'다음'}
         </Button>
       </Col>
@@ -198,112 +229,160 @@ function HomeModal(props) {
 
   const joinModal2 = () => {
     return (
-      <Col padding={'0 105px'}>
-        <Description
-          width="202px"
-          height="35px"
-          margin={'0 0 26px 0'}></Description>
+      <Col align={'left'}>
+        <Col align={'left'} padding={'0 0 26px'}>
+          <Text size={'default'} color={'gray1'} weight={'medium'}>
+            {'Description'}
+          </Text>
+        </Col>
         <div>
           <CheckBox name="keeping" id="check" />
-          <Label to="check" width="163px" margin={'0 0 24px 0'}>
+          <Label
+            to="check"
+            width="163px"
+            margin={'0 0 24px 0'}
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
         <div>
           <CheckBox name="keeping" id="check" />
-          <Label to="check" width="150px" margin={'0 0 24px 0'}>
+          <Label
+            to="check"
+            width="150px"
+            margin={'0 0 24px 0'}
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
         <div>
           <CheckBox name="keeping" id="check" />
-          <Label to="check" width="186px" margin={'0 0 24px 0'}>
+          <Label
+            to="check"
+            width="186px"
+            margin={'0 0 24px 0'}
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
         <div>
           <CheckBox name="keeping" id="check" />
-          <Label to="check" width="165px" margin={'0 0 24px 0'}>
+          <Label
+            to="check"
+            width="165px"
+            margin={'0 0 24px 0'}
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
         <div>
           <CheckBox name="keeping" id="check" />
-          <Label to="check" width="158px" margin={'0 0 24px 0'}>
+          <Label
+            to="check"
+            width="158px"
+            margin={'0 0 24px 0'}
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
         <div>
           <CheckBox name="keeping" id="check" />
-          <Label to="check" width="253px" margin={'0 0 24px 0'}>
+          <Label
+            to="check"
+            width="253px"
+            margin={'0 0 24px 0'}
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
         <div>
           <CheckBox name="keeping" id="check" />
-          <Label to="check" width="112px">
+          <Label to="check" width="112px" fontSize={'size5'}>
             keep info
           </Label>
         </div>
-        <Description width="452px" height="38px" margin={'20px 0 36px 0'}>
-          {'dummy'}
-        </Description>
-        <Button height={'43px'} margin={'0 0 10px 0'} onClick={next}>
-          {'휴대폰 인증'}
+        <Col align={'left'} padding={'20px 0 36px'}>
+          <Text size={'size5'} color={'gray4'} weight={'light'}>
+            {'dummy'}
+          </Text>
+        </Col>
+        <Col align={'left'} padding={'0 0 10px'}>
+          <Button
+            padding={'len2'}
+            fontSize={'size8'}
+            weight={'bold'}
+            onClick={next}>
+            {'휴대폰 인증'}
+          </Button>
+        </Col>
+        <Button
+          backColor={'gray7'}
+          padding={'len2'}
+          fontSize={'size8'}
+          fontColor={'gray3'}
+          weight={'bold'}
+          onClick={next}>
+          {'아이핀 인증'}
         </Button>
-        <Button height={'43px'}>{'아이핀 인증'}</Button>
       </Col>
     );
   };
 
   const joinModal3 = () => {
     return (
-      <Col padding={'0 105px'}>
-        <Description
-          width="202px"
-          height="35px"
-          margin={'0 0 26px 0'}></Description>
-        <Label
-          width="36px"
-          height="18px"
-          margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+      <Col align={'left'}>
+        <Col align={'left'} padding={'0 0 16px'}>
+          <Text color={'gray1'} weight={'medium'}>
+            {'Description'}
+          </Text>
+        </Col>
+        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
+          {'Label'}
+        </Label>
         <InputInfo
           placeholder={'아이디 입력'}
-          width="451px"
-          height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
-        <Label
-          width="47px"
-          height="18px"
-          margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          margin={'0 0 30px 0'}
+          padding={'len2'}
+          borderRadius={'radius4'}
+          fontSize={'size8'}
+          fontColor={'gray4'}
+        />
+        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
+          {'Label'}
+        </Label>
         <InputInfo
           placeholder={'비밀번호 입력'}
-          width="451px"
-          height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
-        <Label
-          width="36px"
-          height="18px"
-          margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          margin={'0 0 30px 0'}
+          padding={'len2'}
+          borderRadius={'radius4'}
+          fontSize={'size8'}
+          fontColor={'gray4'}
+        />
+        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
+          {'Label'}
+        </Label>
         <InputInfo
           placeholder={'이메일 입력'}
-          width="451px"
-          height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
-        <Label
-          width="36px"
-          height="18px"
-          margin={'0 0 6px 0'}
-          display="inline-block"></Label>
+          margin={'0 0 30px 0'}
+          padding={'len2'}
+          borderRadius={'radius4'}
+          fontSize={'size8'}
+          fontColor={'gray4'}
+        />
+        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
+          {'Label'}
+        </Label>
         <InputInfo
           placeholder={'닉네임 입력'}
-          width="451px"
-          height="41px"
-          margin={'0 0 30px 0'}></InputInfo>
-        <Button height={'43px'}>{'회원가입'}</Button>
+          margin={'0 0 30px 0'}
+          padding={'len2'}
+          borderRadius={'radius4'}
+          fontSize={'size8'}
+          fontColor={'gray4'}
+        />
+        <Button padding={'len2'} onClick={close} weight={'bold'}>
+          {'회원가입'}
+        </Button>
       </Col>
     );
   };
