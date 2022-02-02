@@ -9,6 +9,8 @@ const MainStyle = {
     gray4: '#a6a6a6',
     gray5: '#f9f9f9',
     gray6: '#ededed',
+    gray7: '#f2f2f2',
+    gray8: '#757575',
     default: '#d6d6d6',
   },
 
@@ -63,6 +65,7 @@ const MainStyle = {
     regular: '400',
     light: '300',
     default: '400',
+    bold: 'bold',
   },
 
   checkPadding: {
