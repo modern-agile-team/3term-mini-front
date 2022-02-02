@@ -1,7 +1,7 @@
 import React, { useEffect, cloneElement } from 'react';
 import styled from 'styled-components';
 import { Col, MainStyle } from '../../style';
-import deleteImg from '../../assets/delete.png';
+import deleteImg from '../../style/image/delete.png';
 
 const Background = styled.div.attrs(({ visible }) => ({
   visible,
@@ -70,9 +70,7 @@ function Alert(props) {
   return (
     <Background visible={visible} onClick={closeModal}>
       <ModalWrapper width={width} padding={padding}>
-        <Close src={deleteImg} onClick={closeModal}>
-          {}
-        </Close>
+        <Close src={deleteImg} onClick={closeModal} />
         {/* {children} */}
         {cloneElement(children, { next })}
       </ModalWrapper>

@@ -1,74 +1,52 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import searchImg from '../../style/image/search.png';
 
 import { Box, Button } from '../';
-import { Col, Row } from '../../style';
-
-const ModalWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1;
-  display: ${(props) => (props.visible ? 'block' : 'none')};
-  overflow: auto;
-`;
-
-const ModalBox = styled(Box)`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  border-radius: 24px;
-  overflow: auto;
-`;
-
-const ModalContainer = styled.div`
-  /* background-color: red; */
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import { Col, Row, MainStyle } from '../../style';
 
 const Description = styled.span.attrs(
-  ({ width, height, fontSize, margin }) => ({
-    row: height,
-    col: width,
-    fontSize: fontSize,
-    margin: margin,
+  ({ margin = '0 0 0 0', fontSize = 'default' }) => ({
+    margin,
+    fontSize: MainStyle.checkFontSize[fontSize],
   })
 )`
   /* width: 211px;
   height: 24px;
   font-size: 20px; */
-  width: ${(props) => props.col};
-  height: ${(props) => props.row};
-  font-size: ${(props) => props.fontSize};
+  /* width: ${(props) => props.col}; */
+  width: fit-content;
+  height: fit-content;
   margin: ${(props) => props.margin};
+  font-size: ${(props) => props.fontSize};
   border: 1px solid gray;
 `;
 
-const InputInfo = styled.input.attrs(({ width = '100%', height, margin }) => ({
-  row: height,
-  col: width,
-  margin,
-}))`
+const InputInfo = styled.input.attrs(
+  ({
+    width = '100%',
+    height,
+    margin,
+    borderRadius = 'default',
+    fontSize = 'default',
+  }) => ({
+    row: height,
+    col: width,
+    margin: margin,
+    borderRadius: MainStyle.checkRadius[borderRadius],
+    fontSize: MainStyle.checkFontSize[fontSize],
+  })
+)`
   width: ${(props) => props.col};
   height: ${(props) => props.row};
   margin: ${(props) => props.margin};
+  padding-left: 10px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
   outline: none;
-  border-radius: 11px;
+  border-radius: ${(props) => props.borderRadius};
   border: 1px solid gray;
+  font-size: ${(props) => props.fontSize};
 `;
 
 const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
@@ -83,31 +61,42 @@ const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
 const SelectBox = styled.select`
   width: 451px;
   height: 41px;
-  border-radius: 11px;
+  padding-left: 9px;
+  border-radius: ${MainStyle.checkRadius.radius4};
   border: 1px solid gray;
+  font-size: ${MainStyle.checkFontSize.size8};
 `;
 
 const Label = styled.label.attrs(
-  ({ to, width, height, margin, display = 'inline-block' }) => ({
+  ({ to, margin, display = 'inline-block', fontSize = 'default' }) => ({
     for: to,
-    row: height,
-    col: width,
     margin: margin,
     display: display,
+    fontSize: MainStyle.checkFontSize[fontSize],
   })
 )`
-  width: ${(props) => props.col};
-  height: ${(props) => props.row};
+  width: fit-content;
+  height: fit-content;
   margin: ${(props) => props.margin};
   display: ${(props) => props.display};
+  font-size: ${(props) => props.fontSize};
   background-color: aqua;
   border: 1px solid gray;
+`;
+
+const Search = styled.img`
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  bottom: 205px;
+  right: 122px;
+  cursor: pointer;
 `;
 
 const Icon = styled.img`
   width: 93px;
   height: 93px;
-  background-color: #c62935;
+  background-color: ${MainStyle.checkColor.red};
 `;
 
 const TagA = styled.a`
@@ -117,48 +106,41 @@ const TagA = styled.a`
 `;
 
 function HomeModal(props) {
-  const { visible, handleModalState, content, next } = props;
-
-  const onCloseModal = (e) => {
-    if (e.target === e.currentTarget) {
-      handleModalState(visible);
-    }
-  };
-
-  useEffect(() => {
-    if (visible) {
-      document.body.style.overflow = 'hidden';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [visible]);
-
-  const closeBtn = () => {
-    handleModalState(visible);
-  };
+  const { content, next } = props;
 
   const loginModal = () => {
     return (
-      <Col padding={'0 145px'}>
+      <Col>
         <Row padding={'0 0 15px'} align={'flex-end'}>
-          <Icon /> <Description>description</Description>
+          <Icon /> <Description fontSize={'size7'}>description</Description>
         </Row>
-        <InputInfo placeholder={'Id'}></InputInfo>
-        <InputInfo placeholder={'PassWord'}></InputInfo>
-        <Button height={'42px'} margin={'0 0 12px 0'}>
-          {'로그인 버튼'}
+        <InputInfo
+          placeholder={'Id'}
+          height={'41px'}
+          fontSize={'size6'}
+          margin={'0 0 5px 0'}></InputInfo>
+        <InputInfo
+          placeholder={'PassWord'}
+          height={'41px'}
+          fontSize={'size6'}
+          margin={'0 0 5px 0'}></InputInfo>
+        <Button height={'42px'} padding={'10px 0'} borderRadius="default">
+          {'로그인'}
         </Button>
-        <Row padding={'0 0 29px'}>
+        <Row padding={'12px 0 29px'}>
           <div>
             <CheckBox name="keeping" id="check" />
-            <Label to="check">keep info</Label>
+            <Label to="check" fontSize={'size5'}>
+              keep info
+            </Label>
           </div>
           <TagA>find...</TagA>
         </Row>
         <Row padding={'0 120px'}>
           <span>{'처음?'}</span>
-          <button to={'/board'}>{'가입'}</button>
+          <button to={'/board'} onClick={next}>
+            {'가입'}
+          </button>
         </Row>
       </Col>
     );
@@ -166,31 +148,20 @@ function HomeModal(props) {
 
   const joinModal1 = () => {
     return (
-      <Col padding={'0 105px'}>
-        <Description
-          width="202px"
-          height="35px"
-          margin={'0 0 6px 0'}
-        ></Description>
-        <Description
-          width="324px"
-          height="44px"
-          margin={'0 0 48px 0'}
-        ></Description>
-        <Description
-          width="99px"
-          height="35px"
-          margin={'0 0 25px 0'}
-        ></Description>
-        <Label
-          width="47px"
-          height="18px"
-          margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+      <Col align={'left'}>
+        <Description margin={'0 0 6px 0'} fontSize={'default'}>
+          {'Description'}
+        </Description>
+        <Description fontSize={'size7'}>{'Description'}</Description>
+        <Description margin={'48px 0 25px 0'} fontSize={'default'}>
+          {'Description'}
+        </Description>
+        <Label margin={'0 0 6px 0'} display="inline-block" fontSize={'size4'}>
+          {'Label'}
+        </Label>
         <SelectBox>
-          <option key="dummy1" value="dummy1">
-            dummy1
+          <option key="dummy1" value="none">
+            연도 선택 (학번)
           </option>
           <option key="dummy2" value="dummy2">
             dummy2
@@ -200,18 +171,21 @@ function HomeModal(props) {
           </option>
         </SelectBox>
         <Label
-          width="24px"
-          height="18px"
           margin={'28px 0 6px 0'}
           display="inline-block"
-        ></Label>
-        <InputInfo
-          placeholder={'학교 이름'}
-          width="451px"
-          height="41px"
-          margin={'0 0 25px 0'}
-        ></InputInfo>
-        <Button height={'43px'} onClick={next}>
+          fontSize={'size4'}>
+          {'Label'}
+        </Label>
+        <Row>
+          <InputInfo
+            placeholder={'학교 이름을 검색하세요'}
+            height="41px"
+            margin={'0 0 25px 0'}
+            fontSize={'size8'}
+            borderRadius={'radius4'}></InputInfo>
+          <Search src={searchImg} />
+        </Row>
+        <Button padding={'9px 0'} onClick={next}>
           {'다음'}
         </Button>
       </Col>
@@ -224,8 +198,7 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 26px 0'}
-        ></Description>
+          margin={'0 0 26px 0'}></Description>
         <div>
           <CheckBox name="keeping" id="check" />
           <Label to="check" width="163px" margin={'0 0 24px 0'}>
@@ -285,64 +258,55 @@ function HomeModal(props) {
         <Description
           width="202px"
           height="35px"
-          margin={'0 0 26px 0'}
-        ></Description>
+          margin={'0 0 26px 0'}></Description>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'아이디 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Label
           width="47px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'비밀번호 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'이메일 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Label
           width="36px"
           height="18px"
           margin={'0 0 6px 0'}
-          display="inline-block"
-        ></Label>
+          display="inline-block"></Label>
         <InputInfo
           placeholder={'닉네임 입력'}
           width="451px"
           height="41px"
-          margin={'0 0 30px 0'}
-        ></InputInfo>
+          margin={'0 0 30px 0'}></InputInfo>
         <Button height={'43px'}>{'회원가입'}</Button>
       </Col>
     );
   };
 
   const main = {
+    loginModal: loginModal(),
     joinModal1: joinModal1(),
-    joinModal2: joinModal2(),
     joinModal3: joinModal3(),
     undefined: <div>잘못된 경로입니다</div>,
     // switch - case => lookup table
@@ -353,87 +317,6 @@ function HomeModal(props) {
   };
 
   return <>{renderMain()}</>;
-  // return (
-  //   <Col padding={'0 105px'}>
-  //     <Row padding={'10px 100px'}>
-  //       <Button
-  //         width={'46px'}
-  //         height={'30px'}
-  //         fontSize={'14px'}
-  //         borderRadius={'5px'}>
-  //         {'전송'}
-  //       </Button>
-  //       <Button
-  //         width={'46px'}
-  //         height={'30px'}
-  //         bgColor={'#D6D6D6'}
-  //         fontSize={'14px'}
-  //         borderRadius={'5px'}>
-  //         {'전송'}
-  //       </Button>
-  //     </Row>
-  //     <Col padding={'10px'}>
-  //       <Button width={'84px'} height={'32px'} borderRadius={'3px'}>
-  //         {'로그인'}
-  //       </Button>
-  //     </Col>
-  //     <Col padding={'10px'}>
-  //       <Button
-  //         width={'371px'}
-  //         height={'42px'}
-  //         fontSize={'18px'}
-  //         borderRadius={'0px'}>
-  //         {'로그인'}
-  //       </Button>
-  //     </Col>
-  //     <Col padding={'10px'}>
-  //       <Button width={'452px'} height={'43px'}>
-  //         {'다음'}
-  //       </Button>
-  //     </Col>
-  //     <Col padding={'10px'}>
-  //       <Button
-  //         width={'460px'}
-  //         height={'43px'}
-  //         fontSize={'18px'}
-  //         borderRadius={'14px'}>
-  //         {'휴대폰 인증'}
-  //       </Button>
-  //     </Col>
-  //     <Col padding={'10px'}>
-  //       <Button
-  //         width={'460px'}
-  //         height={'43px'}
-  //         bgColor={'#F2F2F2'}
-  //         fontSize={'18px'}
-  //         fontColor={'#737373'}
-  //         borderRadius={'14px'}>
-  //         {'아이핀 인증'}
-  //       </Button>
-  //     </Col>
-  //     <Col padding={'10px'}>
-  //       <Button
-  //         width={'452px'}
-  //         height={'43px'}
-  //         fontSize={'18px'}
-  //         borderRadius={'14px'}>
-  //         {'회원가입'}
-  //       </Button>
-  //     </Col>
-  //   </Col>
-  //   // <ModalWrapper visible={visible} onClick={onCloseModal}>
-  //   //   <ModalBox width="len7" height="len15">
-  //   //     <ModalContainer>
-  //   //       {/* <button onClick={closeBtn}>X</button> */}
-  //   //       {/* {loginModal()} */}
-  //   //       {/* 여기에 loginModal 처럼 만들어서 테스트 */}
-  //   //       {/* joinModal1() */}
-  //   //       {/* joinModal2() */}
-  //   //       {/* {joinModal3()} */}
-  //   //     </ModalContainer>
-  //   //   </ModalBox>
-  //   // </ModalWrapper>
-  // );
 }
 
 export default HomeModal;
