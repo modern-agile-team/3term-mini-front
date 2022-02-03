@@ -1,8 +1,10 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Box, SideBar, PageNation, BigModal, PostList } from '../../components';
+import BasicProfile from "../../style/image/BasicProfile.png"
+import dummyBoard from '../../apis/dummyBoard.json';
+import { Box, SideBar, PageNation, BigModal, PostList, HotBoard } from '../../components';
 import { Col, Row } from '../../style';
 
 const SelectBox = styled.select`
@@ -36,9 +38,147 @@ const Button = styled.button`
   height: 100%;
 `;
 
-function BoardPage() {
+const WholeWrap = styled.div`
+  padding-top: 20px;
+  & :last-child {
+    border-bottom: none;
+  }
+`
+
+const TitleDiv = styled.span`
+  height: 23px;
+
+  padding: 15px;
+  margin-bottom: 12px;
+  font-weight: bold;  
+`
+
+const WrapToFlex = styled.div`
+  display: flex;
+  align-items: center;
+
+  padding-left: 15px;
+  margin-bottom: 24px;
+`//row
+
+const ImgWriterDateWrap = styled.div`
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: flex-end;
+
+  margin-top: 12px;
+`//row
+
+const WriterImage = styled.img`
+  width: 25px;
+  height: 25px;
+
+  margin-right: 5px;
+`//감싼 거의 패딩
+
+const WriterDiv = styled.span`
+  height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+
+  margin-right: 10px;
+`//감싼 거의 패딩
+
+const DateAndTimeDiv = styled.span`
+  height: 17px;
+  color: #A6A6A6;
+  display: flex;
+  align-items: flex-end;
   
 
+  font-weight: 300;
+  font-size: 12px;
+`
+
+const CommentsAndViewsWrap = styled.div`
+  height: 17px;
+  display: flex;
+
+  margin-left: 463px;
+  font-weight: 300;
+  font-size: 12px;
+`
+
+const CommentsNumDiv = styled.div`
+  margin-right: 30px;
+`
+
+const ViewsDiv = styled.div`
+  margin-right: 19px;
+`
+
+const BottomLine = styled.div`
+  width: 816px;
+  border: 0.5px solid #D6D6D6;
+
+`
+
+function BoardPagePresenter() {
+  const [pageNation, setPageNation] = useState(0)
+
+  const clickPageNationOne = () => {
+    setPageNation(0)
+  }
+
+  const clickPageNationTwo = () => {
+    setPageNation(1)
+  }
+  
+  const clickPageNationThr = () => {
+    setPageNation(2)
+  }
+
+  const clickRight = () => {
+    if(pageNation < 2) {
+    setPageNation(pageNation+1)
+    } else {
+    setPageNation(0)
+    }
+  }
+
+  const clickLeft = () => {
+    if(pageNation > 0) {
+      setPageNation(pageNation-1)
+      } else {
+      setPageNation(2)
+      }
+  }
+
+  const start = pageNation*6
+  const end = pageNation*6+6;
+
+  useEffect(() => {
+    console.log('pageNation :>> ', pageNation);
+    console.log('start :>> ', start);
+    console.log('end :>> ', end);
+  }, [pageNation]);
+
+  const mapToWrite = () => dummyBoard.postsData.slice(start, end).map((post) => {
+    return (
+      <WholeWrap key={post.postId}>
+        <TitleDiv>{post.postTitle}</TitleDiv><br/>
+        <WrapToFlex>
+          <ImgWriterDateWrap>
+            <WriterImage src={BasicProfile}/>
+            <WriterDiv>{post.writer}</WriterDiv>
+            <DateAndTimeDiv>{post.dateAndTime}</DateAndTimeDiv>
+          </ImgWriterDateWrap>
+          <CommentsAndViewsWrap>
+            <CommentsNumDiv>댓글 수 {post.conmmentNum}</CommentsNumDiv>
+            <ViewsDiv>조회수 {post.views}</ViewsDiv>
+          </CommentsAndViewsWrap>
+        </WrapToFlex>
+        <BottomLine/>
+      </WholeWrap>
+    )
+  })
+  
   return (
     <Row padding="25px 172px 0px" align="flex-start">
       <Col width="len8">
@@ -60,23 +200,27 @@ function BoardPage() {
           <Button>사진</Button>
         </Row>
         <Box>
-          <PostList />
+          {mapToWrite()}
         </Box>
-        <PageNation />
+        <PageNation 
+          clickPageNationOne={clickPageNationOne}
+          clickPageNationTwo={clickPageNationTwo} 
+          clickPageNationThr={clickPageNationThr}
+          clickLeft={clickLeft} 
+          clickRight={clickRight}/>
       </Col>
       <Box width="len3">
         <Row padding="10px">
-          <span>HOT 게시물</span> <Link to={'/'}>더 보기</Link>
+          <HotBoard/>
         </Row>
         <Col>
-          {/* <PostList /> */}
         </Col>
       </Box>
     </Row>
   );
 }
 
-export default BoardPage;
+export default BoardPagePresenter;
 
 
 

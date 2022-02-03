@@ -7,7 +7,6 @@ import BoardBox from './boardbox/BoardBox';
 import Alert from './alert/Alert';
 import Text from './text/Text';
 import HotBoard from './hotboard/HotBoard';
-import PostList from './postlist/PostList';
 
 export {
   BigModal,
@@ -19,5 +18,4 @@ export {
   Alert,
   Text,
   HotBoard,
-  PostList,
 };
