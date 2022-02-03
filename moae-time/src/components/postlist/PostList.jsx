@@ -112,6 +112,35 @@ function PostList() {
         conmmentNum: "117개",
         views: "488회"
       },
+      { postId: 1, 
+        postTitle: "Hi Front End", 
+        writer: "한결", 
+        dateAndTime: "02/01 14:32", 
+        conmmentNum: "128개",
+        views: "587회"
+      },
+
+      { postId: 2, 
+        postTitle: "Hi Back End", 
+        writer: "승범", 
+        dateAndTime: "01/31 18:52", 
+        conmmentNum: "78개",
+        views: "389회"
+      },
+      { postId: 3, 
+        postTitle: "Hi Design", 
+        writer: "재희", 
+        dateAndTime: "02/02 09:00", 
+        conmmentNum: "117개",
+        views: "488회"
+      },
+      { postId: 4, 
+        postTitle: "2페이지에 보일 녀석", 
+        writer: "1페이지에 난 안보여야 해", 
+        dateAndTime: "02/02 09:00", 
+        conmmentNum: "117개",
+        views: "488회"
+      },
     ]
   }
 

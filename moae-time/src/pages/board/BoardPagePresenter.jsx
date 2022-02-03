@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Box, SideBar, PageNation, BigModal } from '../../components';
+import { Box, SideBar, PageNation, BigModal, PostList } from '../../components';
 import { Col, Row } from '../../style';
 
 const SelectBox = styled.select`
@@ -37,16 +37,7 @@ const Button = styled.button`
 `;
 
 function BoardPage() {
-  const boards = {};
-  // const ENDPOINT = '13.209.76.148:8080';
-  // axios
-  //   .get(`${ENDPOINT}/board`)
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((err) => {
-  //     console.log('ERR : ', err);
-  //   });
+  
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -69,9 +60,7 @@ function BoardPage() {
           <Button>사진</Button>
         </Row>
         <Box>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
+          <PostList />
         </Box>
         <PageNation />
       </Col>
@@ -80,9 +69,7 @@ function BoardPage() {
           <span>HOT 게시물</span> <Link to={'/'}>더 보기</Link>
         </Row>
         <Col>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
+          {/* <PostList /> */}
         </Col>
       </Box>
     </Row>
@@ -90,3 +77,17 @@ function BoardPage() {
 }
 
 export default BoardPage;
+
+
+
+
+  // const boards = {};
+  // const ENDPOINT = '13.209.76.148:8080';
+  // axios
+  //   .get(`${ENDPOINT}/board`)
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log('ERR : ', err);
+  //   });
