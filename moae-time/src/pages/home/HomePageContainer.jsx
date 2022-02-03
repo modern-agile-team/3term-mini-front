@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import HomePagePresenter from './HomePagePresenter';
+import dummyProfile from '../../apis/dummyProfile.json';
 import dummyBoard from '../../apis/dummyBoard.json';
 import { Text } from '../../components';
 import { Row, MainStyle } from '../../style';
@@ -26,6 +27,13 @@ const NewText = styled(Text)`
 `;
 
 function HomePage() {
+  const showProfile = () => (
+    <>
+      <span>{dummyProfile.profile.nickname}</span>
+      <span>{dummyProfile.profile.name}</span>
+      <span>{dummyProfile.profile.id}</span>
+    </>
+  );
   const showBoards = () =>
     dummyBoard.postsData.map((board) => (
       <NewRow padding={'10px'}>
@@ -38,7 +46,9 @@ function HomePage() {
       </NewRow>
     ));
 
-  return <HomePagePresenter showBoards={showBoards} />;
+  return (
+    <HomePagePresenter showProfile={showProfile} showBoards={showBoards} />
+  );
 }
 
 export default HomePage;

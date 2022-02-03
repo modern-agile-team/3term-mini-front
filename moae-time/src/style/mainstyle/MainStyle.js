@@ -35,6 +35,8 @@ const MainStyle = {
     len16: '246px',
     lent17: '20px',
     len18: '45px',
+    len19: '69px',
+    len20: '74px',
     default: '100%',
   },
 
@@ -78,6 +80,7 @@ const MainStyle = {
     len3: '12px',
     len4: '15px',
     len5: '25px',
+    len6: '4px 10px',
     default: '0 0 0 0',
   },
 };

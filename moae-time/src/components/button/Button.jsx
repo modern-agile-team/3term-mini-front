@@ -11,6 +11,7 @@ const ButtonWrap = styled.button.attrs(
     fontColor = 'white',
     weight = 'default',
     borderRadius = 'radius5',
+    border = 'none',
   }) => ({
     width: MainStyle.checkWidth[width],
     padding: MainStyle.checkPadding[padding],
@@ -19,6 +20,7 @@ const ButtonWrap = styled.button.attrs(
     fontColor: MainStyle.checkColor[fontColor],
     weight: MainStyle.checkWeight[weight],
     borderRadius: MainStyle.checkRadius[borderRadius],
+    border,
   })
 )`
   width: ${(props) => props.width};
@@ -29,7 +31,7 @@ const ButtonWrap = styled.button.attrs(
   color: ${(props) => props.fontColor};
   font-weight: ${(props) => props.weight};
   border-radius: ${(props) => props.borderRadius};
-  border: none;
+  border: ${(props) => props.border};
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -44,6 +46,7 @@ const Button = (props) => {
     fontColor,
     weight,
     borderRadius,
+    border,
     children,
     onClick,
   } = props;
@@ -57,8 +60,8 @@ const Button = (props) => {
       fontColor={fontColor}
       weight={weight}
       borderRadius={borderRadius}
-      onClick={onClick}
-    >
+      border={border}
+      onClick={onClick}>
       {children}
     </ButtonWrap>
   );
