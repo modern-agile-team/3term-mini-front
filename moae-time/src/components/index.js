@@ -1,4 +1,3 @@
-import SideBar from './sidebar/SideBar';
 import BigModal from './bigmodal/BigModal';
 import Box from './box/Box';
 import Button from './button/Button';
@@ -8,9 +7,9 @@ import BoardBox from './boardbox/BoardBox';
 import Alert from './alert/Alert';
 import Text from './text/Text';
 import HotBoard from './hotboard/HotBoard';
+import PostList from './postlist/PostList';
 
 export {
-  SideBar,
   BigModal,
   Box,
   Button,
@@ -20,4 +19,5 @@ export {
   Alert,
   Text,
   HotBoard,
+  PostList,
 };
