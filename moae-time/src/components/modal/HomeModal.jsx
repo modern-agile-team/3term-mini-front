@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import searchImg from '../../style/image/search.png';
@@ -39,6 +39,10 @@ const InputInfo = styled.input.attrs(
   border: 1px solid #ededed;
   font-size: ${(props) => props.fontSize};
   color: ${(props) => props.fontColor};
+
+  &::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
 `;
 
 const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
@@ -57,6 +61,7 @@ const SelectBox = styled.select`
   border-radius: ${MainStyle.checkRadius.radius4};
   border: 1px solid #ededed;
   outline: none;
+  -webkit-appearance: none;
   font-size: ${MainStyle.checkFontSize.size8};
 `;
 
@@ -81,8 +86,6 @@ const Label = styled.label.attrs(
   color: ${(props) => props.fontColor};
   margin: ${(props) => props.margin};
   display: ${(props) => props.display};
-  background-color: aqua;
-  border: 1px solid gray;
 `;
 
 const Search = styled.img`
@@ -161,36 +164,68 @@ function HomeModal(props) {
     );
   };
 
+  const [selectedYear, setSelectedYear] = useState('none');
+  const [selectedSchool, setSelectedSchool] = useState('none');
+
+  const targetYear = (e) => {
+    setSelectedYear(e.target.value);
+  };
+
+  const targetSchool = (e) => {
+    setSelectedSchool(e.target.value);
+  };
+
+  const clickNext = () => {
+    next();
+    console.log(
+      'selectedYear, selectedSchool :>> ',
+      selectedYear,
+      selectedSchool
+    );
+  };
+
   const joinModal1 = () => {
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 6px'}>
           <Text size={'default'} color={'gray1'} weight={'medium'}>
-            {'Description'}
+            {'모-애 타임 회원가입'}
           </Text>
         </Col>
         <Col align={'left'} padding={'0 0 48px'}>
           <Text size={'size7'} color={'gray3'} weight={'default'}>
-            {'Description'}
+            {'모애 타임 계정으로 캠퍼스픽, 모-애 타임 등 '}
+          </Text>
+          <Text size={'size7'} color={'gray3'} weight={'default'}>
+            {'다양한 대학생 서비스를 모두 이용하실 수 있습니다.'}
           </Text>
         </Col>
         <Col align={'left'} padding={'0 0 25px'}>
           <Text size={'default'} color={'gray1'} weight={'medium'}>
-            {'Description'}
+            {'학교 선택'}
           </Text>
         </Col>
         <Label margin={'0 0 6px 0'} fontSize={'size4'}>
-          {'Label'}
+          {'입학년도'}
         </Label>
-        <SelectBox>
-          <option key="dummy1" value="none">
+        <SelectBox onChange={targetYear}>
+          <option key={0} value={false}>
             연도 선택 (학번)
           </option>
-          <option key="dummy2" value="dummy2">
-            dummy2
+          <option key={1} value="2017">
+            2017
           </option>
-          <option key="dummy3" value="dummy3">
-            dummy3
+          <option key={2} value="2018">
+            2018
+          </option>
+          <option key={3} value="2019">
+            2019
+          </option>
+          <option key={4} value="2020">
+            2020
+          </option>
+          <option key={5} value="2021">
+            2021
           </option>
         </SelectBox>
         <Label
@@ -198,20 +233,36 @@ function HomeModal(props) {
           display="inline-block"
           fontSize={'size4'}
         >
-          {'Label'}
+          {'학교'}
         </Label>
         <Row>
           <InputInfo
+            list="schools"
             placeholder={'학교 이름을 검색하세요'}
             margin={'0 0 25px 0'}
             padding={'len2'}
             fontSize={'size8'}
             fontColor={'gray1'}
             borderRadius={'radius4'}
+            onChange={targetSchool}
           />
+          <datalist id="schools">
+            <option key={1} value="인덕대학교">
+              인덕대학교
+            </option>
+            <option key={2} value="ㅈ덕대학교">
+              ㅈ덕대학교
+            </option>
+            <option key={3} value="광운대학교">
+              광운대학교
+            </option>
+            <option key={4} value="망해라">
+              망해라
+            </option>
+          </datalist>
           <Search src={searchImg} />
         </Row>
-        <Button padding={'len2'} onClick={next} weight={'bold'}>
+        <Button padding={'len2'} onClick={clickNext} weight={'bold'}>
           {'다음'}
         </Button>
       </Col>
