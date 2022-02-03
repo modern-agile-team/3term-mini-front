@@ -18,15 +18,6 @@ const Side = styled(Col)`
   width: 180px;
   max-height: 696px;
   justify-content: space-between;
-  * {
-    margin-bottom: 6px;
-  }
-  & :nth-child(1) {
-    margin-bottom: 5px;
-  }
-  & :last-child {
-    margin-bottom: 0;
-  }
 `;
 
 const SideAdBox = styled.div`
