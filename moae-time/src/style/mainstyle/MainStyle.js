@@ -11,6 +11,7 @@ const MainStyle = {
     gray6: '#ededed',
     gray7: '#f2f2f2',
     gray8: '#757575',
+    gray9: '#EDEDED',
     default: '#d6d6d6',
   },
 

@@ -2,21 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Text } from '../';
-import { Col, Row } from '../../style';
+import { Col, Row, MainStyle } from '../../style';
 
 const NewRow = styled(Row)`
   & {
-    border-top: solid 1px #ededed;
+    border-top: solid 1px ${MainStyle.checkColor.gray9};
   }
 `;
 
 const NewText = styled(Text)`
   /* padding: 10px; */
   display: block;
-  width: 246px;
-  font-size: 16px;
-  font-weight: 300 !important;
-  color: #444444;
+  width: ${MainStyle.checkWidth.len16};
+  font-size: ${MainStyle.checkFontSize.size7};
+  font-weight: ${MainStyle.checkWeight.light} !important;
+  color: ${MainStyle.checkColor.gray2};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -61,15 +61,22 @@ const HotBoard = () => {
             <Link to="/board">{board.title}</Link>
           </NewText>
         </Row>
-        <Text size={'size8'}>{board.date}</Text>
-        <Text size={'size8'}>{board.time}</Text>
+        <Text size={'size2'}>{board.date}</Text>
+        <Text size={'size2'}>{board.time}</Text>
       </NewRow>
     ));
 
   return (
     <Col>
       <Row padding={'10px'}>
-        <span>HOT 게시물</span> <Link to={'/'}>더 보기</Link>
+        <Text size={'size6'} color={'green'} weight={'medium'}>
+          HOT 게시물
+        </Text>
+        <Link to={'/'}>
+          <Text size={'size5'} color={'gray4'} weight={'light'}>
+            더 보기
+          </Text>
+        </Link>
       </Row>
       {showHotBoard()}
     </Col>
