@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Box } from '../../components';
+import { Box, Text } from '../../components';
 import { Col, Row } from '../../style';
+import { HotBoard } from '../../components';
 
 const HomeLayout = styled.div`
   display: flex;
@@ -41,7 +42,6 @@ const MainContent = styled.div`
   max-height: 100%;
   border: none;
   position: relative;
-  background-color: yellow;
 `;
 
 const TopAd = styled(Box)`
@@ -64,13 +64,19 @@ function HomePage({ showBoards }) {
       </Side>
       <MainContent>
         <TopAd></TopAd>
-        <Row width="100%" height="100px">
-          <Box width={'len5'} height={'len12'} color={'gray6'}>
-            <div>공지 게시판</div>
-            {showBoards()}
+        <Row width="100%" height="100px" align="left">
+          <Box width={'len5'} height={'len12'} backColor={'white'}>
+            <Col>
+              <Col padding={'10px'} align={'left'}>
+                <Text size={'size6'} color={'red'} weight={'medium'}>
+                  자유게시판
+                </Text>
+              </Col>
+              {showBoards()}
+            </Col>
           </Box>
-          <Box width={'len3'} height={'len5'} padding={'10px'}>
-            HOT board
+          <Box width={'len3'} height={'len5'}>
+            <HotBoard />
           </Box>
         </Row>
       </MainContent>
