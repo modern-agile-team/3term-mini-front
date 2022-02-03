@@ -1,8 +1,8 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Row } from '../../style';
 
-const PageNationNumber = styled.div.attrs(({ marginValue }) => ({
+const PageNationNumber = styled.button.attrs(({ marginValue }) => ({
   margin: marginValue,
 }))`
   width: 28px;
@@ -33,15 +33,22 @@ const PageNationArrow = styled.i.attrs(({ direction = 'right' }) => ({
 `;
 
 function PageNation(props) {
+  const {
+    clickLeft, 
+    clickRight, 
+    clickPageNationOne, 
+    clickPageNationTwo, 
+    clickPageNationThr} = props;
+
   return (
     <Row width={'len2'} padding={'25px 0 0'}>
-      <PageNationArrow direction={'left'}></PageNationArrow>
+      <PageNationArrow direction={'left'} onClick={clickLeft}></PageNationArrow>
       <Row width={'len13'}>
-        <PageNationNumber>{}</PageNationNumber>
-        <PageNationNumber></PageNationNumber>
-        <PageNationNumber></PageNationNumber>
+        <PageNationNumber onClick={clickPageNationOne}></PageNationNumber>
+        <PageNationNumber onClick={clickPageNationTwo}></PageNationNumber>
+        <PageNationNumber onClick={clickPageNationThr}></PageNationNumber>
       </Row>
-      <PageNationArrow direction={'right'}></PageNationArrow>
+      <PageNationArrow direction={'right'} onClick={clickRight}></PageNationArrow>
     </Row>
   );
 }
