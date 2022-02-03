@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { MainStyle } from '../../style';
 
 const Box = styled.div.attrs(
-  ({ width = 'default', color = 'default', padding }) => ({
+  ({ width = 'default', color = 'default', padding, backColor = 'gray5' }) => ({
     col: MainStyle.checkWidth[width],
     color: MainStyle.checkColor[color],
     padding,
+    backColor: MainStyle.checkColor[backColor],
   })
 )`
   /* 일단 눈으로 확인하기 위해서 height로 했고
@@ -16,7 +17,7 @@ const Box = styled.div.attrs(
   width: ${(props) => props.col};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
-  background-color: #f9f9f9;
+  background-color: ${(props) => props.backColor};
   /* background-color: blue; */
   border: 1px solid ${(props) => props.color};
   display: flex;
