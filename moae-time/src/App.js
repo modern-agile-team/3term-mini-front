@@ -8,7 +8,7 @@ import {
 } from './pages';
 import { GlobalStyle, MainLayout } from './style';
 import { Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 // import { createStore, compose, applyMiddleware } from "redux";
 
 function App() {
