@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import HomePagePresenter from './HomePagePresenter';
 import dummyBoard from '../../apis/dummyBoard.json';
-import { Row } from '../../style';
+import { Text } from '../../components';
+import { Row, MainStyle } from '../../style';
 
 const NewRow = styled(Row)`
   & {
-    border-bottom: 1px solid green;
+    border-top: 1px solid ${MainStyle.checkColor.gray9};
   }
-  :last-child {
-    border-bottom: none;
-  }
+`;
+
+const NewText = styled(Text)`
+  /* padding: 10px; */
+  display: block;
+  width: ${MainStyle.checkWidth.len16};
+  font-size: ${MainStyle.checkFontSize.size7};
+  font-weight: ${MainStyle.checkWeight.light} !important;
+  color: ${MainStyle.checkColor.gray2};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
 `;
 
 function HomePage() {
   const showBoards = () =>
-    dummyBoard.result.map((board) => (
-      <NewRow>
-        <span>{board.title}</span>
-        <div>
-          <span>{board.date}</span>
-          <span>{board.time}</span>
-        </div>
+    dummyBoard.postsData.map((board) => (
+      <NewRow padding={'10px'}>
+        <Row width={'len5'}>
+          <NewText>
+            <Link to="/board">{board.postTitle}</Link>
+          </NewText>
+          <Text size={'size2'}>{board.dateAndTime}</Text>
+        </Row>
       </NewRow>
     ));
 
