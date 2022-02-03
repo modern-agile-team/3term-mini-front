@@ -11,7 +11,6 @@ const NewRow = styled(Row)`
 `;
 
 const NewText = styled(Text)`
-  /* padding: 10px; */
   display: block;
   width: ${MainStyle.checkWidth.len16};
   font-size: ${MainStyle.checkFontSize.size7};

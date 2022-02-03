@@ -100,17 +100,6 @@ const Icon = styled.img`
   background-color: ${MainStyle.checkColor.red};
 `;
 
-// const TagA = styled(Text)`
-//   background-color: #f7fbd1;
-//   cursor: pointer;
-// `;
-
-const TagA = styled.span`
-  width: 125px;
-  height: 20px;
-  background-color: aqua;
-`;
-
 function HomeModal(props) {
   const { content, next, close } = props;
 
@@ -150,22 +139,23 @@ function HomeModal(props) {
             </Label>
           </div>
 
-          <TagA size={'size5'} color={'gray2'} weight={'light'}>
+          <Text size={'size5'} color={'gray2'} weight={'light'}>
             find...
-          </TagA>
+          </Text>
         </Row>
         <Row padding={'0 120px'}>
           <Text size={'size8'} color={'gray4'}>
             {'처음?'}
           </Text>
-          <TagA
+          <Text
             to={'/board'}
             onClick={next}
             size={'size8'}
             color={'red'}
-            weight={'medium'}>
+            weight={'medium'}
+          >
             {'회원가입'}
-          </TagA>
+          </Text>
         </Row>
       </Col>
     );
@@ -206,7 +196,8 @@ function HomeModal(props) {
         <Label
           margin={'28px 0 6px 0'}
           display="inline-block"
-          fontSize={'size4'}>
+          fontSize={'size4'}
+        >
           {'Label'}
         </Label>
         <Row>
@@ -241,7 +232,8 @@ function HomeModal(props) {
             to="check"
             width="163px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
+            fontSize={'size5'}
+          >
             keep info
           </Label>
         </div>
@@ -251,7 +243,8 @@ function HomeModal(props) {
             to="check"
             width="150px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
+            fontSize={'size5'}
+          >
             keep info
           </Label>
         </div>
@@ -261,7 +254,8 @@ function HomeModal(props) {
             to="check"
             width="186px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
+            fontSize={'size5'}
+          >
             keep info
           </Label>
         </div>
@@ -271,7 +265,8 @@ function HomeModal(props) {
             to="check"
             width="165px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
+            fontSize={'size5'}
+          >
             keep info
           </Label>
         </div>
@@ -281,7 +276,8 @@ function HomeModal(props) {
             to="check"
             width="158px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
+            fontSize={'size5'}
+          >
             keep info
           </Label>
         </div>
@@ -291,7 +287,8 @@ function HomeModal(props) {
             to="check"
             width="253px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
+            fontSize={'size5'}
+          >
             keep info
           </Label>
         </div>
@@ -311,7 +308,8 @@ function HomeModal(props) {
             padding={'len2'}
             fontSize={'size8'}
             weight={'bold'}
-            onClick={next}>
+            onClick={next}
+          >
             {'휴대폰 인증'}
           </Button>
         </Col>
@@ -321,7 +319,8 @@ function HomeModal(props) {
           fontSize={'size8'}
           fontColor={'gray3'}
           weight={'bold'}
-          onClick={next}>
+          onClick={next}
+        >
           {'아이핀 인증'}
         </Button>
       </Col>

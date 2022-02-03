@@ -12,6 +12,7 @@ const MainStyle = {
     gray7: '#f2f2f2',
     gray8: '#757575',
     gray9: '#EDEDED',
+    Transparency: 'rgba(1, 1, 1, 0)',
     default: '#d6d6d6',
   },
 
@@ -32,6 +33,8 @@ const MainStyle = {
     len14: '155px',
     len15: '200px',
     len16: '246px',
+    lent17: '20px',
+    len18: '45px',
     default: '100%',
   },
 
