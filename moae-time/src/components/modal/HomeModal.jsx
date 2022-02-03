@@ -164,8 +164,8 @@ function HomeModal(props) {
     );
   };
 
-  const [selectedYear, setSelectedYear] = useState('none');
-  const [selectedSchool, setSelectedSchool] = useState('none');
+  const [selectedYear, setSelectedYear] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState(false);
 
   const targetYear = (e) => {
     setSelectedYear(e.target.value);
@@ -176,7 +176,7 @@ function HomeModal(props) {
   };
 
   const clickNext = () => {
-    next();
+    selectedYear && selectedSchool ? next() : alert('모두 선택해주세요');
     console.log(
       'selectedYear, selectedSchool :>> ',
       selectedYear,
