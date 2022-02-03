@@ -11,6 +11,12 @@ import {
 } from '../../components';
 import { Col, Row } from '../../style';
 
+const ContentBox = styled(Box)`
+  border: none;
+  max-height: 173px;
+  overflow: scroll;
+`;
+
 const Input = styled.input`
   width: 100%;
   height: 173px;
@@ -24,15 +30,17 @@ const Input = styled.input`
 `;
 
 function BoardOne() {
-  const boards = {};
-
   const comments = [
     { commentId: 1, userName: '성제', date: '02/13 08:13', content: '123' },
     { commentId: 2, userName: 'Lee', date: '02/13 08:13', content: '456' },
     { commentId: 3, userName: 'Kim', date: '02/13 08:13', content: '789' },
   ];
 
-  const showComeents = () =>
+  const deleteComment = () => {
+    console.log('1 :>> ', '삭제 시이이이이이잉이바');
+  };
+
+  const showComments = () =>
     comments.map((comment) => (
       <>
         <Row padding="5px 0 0" key={comments.commentId}>
@@ -40,6 +48,7 @@ function BoardOne() {
             <Text>icon</Text>
             <Text>{comment.userName}</Text>
           </div>
+          {<button onClick={deleteComment}>삭제</button>}
         </Row>
         <Row>
           <Text>{comment.content}</Text>
@@ -49,19 +58,13 @@ function BoardOne() {
     ));
 
   const [content, setContent] = useState(
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!'
+    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!'
   );
   const [isEdit, setIsEdit] = useState(false);
 
   const clickEdit = () => {
     setIsEdit(!isEdit);
   };
-
-  const showContent = () => <div>{content}</div>;
-
-  const editContent = () => <Input type="text" value={content} />;
-
-  const contentState = () => (isEdit ? editContent() : showContent());
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -83,7 +86,7 @@ function BoardOne() {
                 <Row>
                   <Text color={'gray1'}>작성자 이름</Text>
                   <div>
-                    <button onClick={clickEdit}>수정</button>
+                    <Link to={'/edit'}>수정</Link>
                     <button>삭제</button>
                   </div>
                 </Row>
@@ -91,7 +94,7 @@ function BoardOne() {
               </Col>
             </Row>
             <h1>게시글 제목</h1>
-            {contentState()}
+            <ContentBox>{content}</ContentBox>
             <Row>
               <div>
                 <span>댓글 수</span>
@@ -110,8 +113,6 @@ function BoardOne() {
                 </Row>
               </div>
               <div>
-                <input type="checkbox" id="nonShow" value="nonShow" />
-                <label for="nonShow">{'익명'}</label>
                 <span>버튼</span>
               </div>
             </Row>
@@ -119,7 +120,7 @@ function BoardOne() {
         </Row>
         <Col padding="5px 0 ">
           <Box padding="15px">
-            <Col>{showComeents()}</Col>
+            <Col>{showComments()}</Col>
           </Box>
         </Col>
         <div>
