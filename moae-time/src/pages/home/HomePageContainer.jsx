@@ -35,7 +35,7 @@ function HomePage() {
     </>
   );
   const showBoards = () =>
-    dummyBoard.postsData.map((board) => (
+    dummyBoard.postsData.slice(0, 8).map((board) => (
       <NewRow padding={'10px'}>
         <Row width={'len5'}>
           <NewText>
@@ -45,7 +45,6 @@ function HomePage() {
         </Row>
       </NewRow>
     ));
-
   return (
     <HomePagePresenter showProfile={showProfile} showBoards={showBoards} />
   );
