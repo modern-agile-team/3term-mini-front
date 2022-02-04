@@ -1,5 +1,5 @@
 import { React, useRef, useEffect, useState } from "react";
-import { Box } from "..";
+import { Box, Button } from "..";
 import styled from "styled-components";
 
 const Modal = styled.div.attrs(({ modalState, width, height, topMargin, leftMargin }) => ({
@@ -66,12 +66,12 @@ const Btn = styled.button.attrs(({ height, width, margin }) => ({
 
 
 
-function SmallModal() {
+function SmallModal(props) {
   const modalEl = useRef();
-  const [reportModalState, setReportModalState] = useState(false);
+  const {smallModalState, setSmallModalState} = props
 
   const handleClickOutside = ({ target }) => {
-    if (reportModalState && !modalEl.current.contains(target)) setReportModalState(false);
+    if (smallModalState && !modalEl.current.contains(target)) setSmallModalState(false);
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ function SmallModal() {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [reportModalState]);
+  }, [smallModalState]);
 
   const checkBoxNum = [1, 2, 3, 4, 5, 6, 7]
   const drawing = () => {
@@ -93,11 +93,11 @@ function SmallModal() {
   return (
     <>
       {
-        reportModalState &&
-          <ModalBackGround modalState={reportModalState}>
+        smallModalState &&
+          <ModalBackGround modalState={smallModalState}>
             <Modal 
               ref={modalEl} 
-              modalState={reportModalState}
+              modalState={smallModalState}
               width="400px"
               height="480px"
               topMargin="121px" 
@@ -106,7 +106,7 @@ function SmallModal() {
               width="9.69px"
               height="9.69px" 
               margin="21.66px 20.66px 0px 369.66px"
-              onClick={() => setReportModalState(false)}></Btn>
+              onClick={() => setSmallModalState(false)}></Btn>
               <Box width="250px" height="23px" margin="27px 0px 5px 75px"/>
               <Box width="250px" height="14px" margin="0px 0px 15px 75px"/>
               { drawing() }
