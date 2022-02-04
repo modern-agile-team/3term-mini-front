@@ -8,7 +8,7 @@ import {
 } from './pages';
 import { GlobalStyle, MainLayout } from './style';
 import { Routes, Route } from 'react-router-dom';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 // import { createStore, compose, applyMiddleware } from "redux";
 
 function App() {
@@ -27,6 +27,14 @@ function App() {
         <Route
           path="/board/:boardId/edit"
           element={<MainLayout main={<BoardEditPresenter />} />}
+        />
+        <Route
+          path="/notice"
+          element={<MainLayout main={<h1>공지 게시판이다 나가라</h1>} />}
+        />
+        <Route
+          path="/QandA"
+          element={<MainLayout main={<h1>{'Q & A니까 나가'}</h1>} />}
         />
       </Routes>
     </>

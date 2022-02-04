@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Box, HotBoard, Text, Button } from '../../components';
 import { Row, Col } from '../../style';
@@ -27,7 +27,8 @@ const MainInput = styled.textarea`
   overflow: scroll;
   font-size: 20px;
   outline: none;
-  border: none;
+  background-color: rgba(1, 1, 1, 0);
+  resize: none;
 `;
 
 const Input = styled.input`
@@ -40,8 +41,13 @@ const Input = styled.input`
 `;
 
 function BoardEditPresenter() {
-  const content =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.';
+  const [content, setContent] = useState(
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque. consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam i consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fugit ea voluptatum placeat quis qui laudantium, facilis, quod fuga explicabo, autem a tempora at aliquid maxime aliquam ipsa. Repellendus, cumque.psa. Repellendus, cumque.'
+  );
+
+  const editContent = (e) => {
+    setContent(e.target.value);
+  };
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -94,7 +100,11 @@ function BoardEditPresenter() {
               </Button>
             </Row>
             <MainContent padding={'15px'}>
-              <MainInput>{content}</MainInput>
+              <MainInput
+                type="text"
+                value={content}
+                onChange={editContent}
+              ></MainInput>
             </MainContent>
           </ContentBox>
         </Col>
