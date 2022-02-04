@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import searchImg from '../../style/image/search.png';
+import everytime from '../../style/image/everytimeNoBack.png';
 import { Box, Button, Text } from '../';
 import { Col, Row, MainStyle } from '../../style';
 
@@ -96,67 +98,108 @@ const Search = styled.img`
 `;
 
 const Icon = styled.img`
-  width: 93px;
-  height: 93px;
-  background-color: ${MainStyle.checkColor.red};
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 15px;
 `;
 
 function HomeModal(props) {
   const { content, next, close } = props;
 
+  const [inputId, setInputId] = useState('');
+  const [inputPw, setInputPw] = useState('');
+
+  const handleInputId = (e) => {
+    setInputId(e.target.value);
+  };
+
+  const handleInputPw = (e) => {
+    setInputPw(e.target.value);
+  };
+
+  const onClickLogin = () => {
+    inputId && inputPw ? login() : alert('아이디와 비밀번호를 입력하세요.');
+    function login() {
+      console.log('test');
+      axios
+        .post('http://3.38.117.49/user/login', {
+          id: inputId,
+          password: inputPw,
+        })
+        .then((res) => {
+          alert(res.data.msg);
+          if (res.data.success) {
+            close();
+          }
+          console.log(res.data);
+        });
+    }
+  };
+
   const loginModal = () => {
     return (
       <Col>
         <Row padding={'0 0 15px'} align={'flex-end'}>
-          <Icon />{' '}
+          <Icon src={everytime} />
           <Text size={'size7'} color={'gray2'} weight={'medium'}>
-            description
+            {'지금 모-애 타임을 시작하세요!'}
           </Text>
         </Row>
         <LoginInput>
           <InputInfo
+            type={'text'}
+            name={'input_id'}
+            value={inputId}
             placeholder={'Id'}
+            onChange={handleInputId}
             height={'41px'}
             fontSize={'size6'}
             fontColor={'gray1'}
             padding={'len2'}
           />
           <InputInfo
+            type={'password'}
+            name={'input_pw'}
+            value={inputPw}
+            onChange={handleInputPw}
             placeholder={'PassWord'}
             height={'41px'}
             fontSize={'size6'}
             fontColor={'gray1'}
             padding={'len2'}
           />
-          <Button padding={'len2'} borderRadius={'default'}>
+          <Button
+            onClick={onClickLogin}
+            padding={'len2'}
+            borderRadius={'default'}>
             {'로그인'}
           </Button>
         </LoginInput>
-        <Row padding={'12px 0 29px'}>
+        <Row padding={'12px 10px 29px'}>
           <div>
             <CheckBox name="keeping" id="check" />
-            <Label htmlFor="check" fontSize={'size5'}>
-              keep info
+            <Label htmlFor="check" fontSize={'size5'} fontColor={'gray4'}>
+              {'로그인 유지'}
             </Label>
           </div>
-
           <Text size={'size5'} color={'gray2'} weight={'light'}>
-            find...
+            {'아이디/비밀번호 찾기'}
           </Text>
         </Row>
-        <Row padding={'0 120px'}>
+        <Row padding={'0 46px'}>
           <Text size={'size8'} color={'gray4'}>
-            {'처음?'}
+            {'모-애 타임에 처음이신가요?'}
           </Text>
-          <Text
-            to={'/board'}
+          <Button
             onClick={next}
-            size={'size8'}
-            color={'red'}
-            weight={'medium'}
-          >
+            width={'len19'}
+            fontSize={'size8'}
+            fontColor={'red'}
+            backColor={'gray5'}
+            weight={'medium'}>
             {'회원가입'}
-          </Text>
+          </Button>
         </Row>
       </Col>
     );
@@ -229,8 +272,7 @@ function HomeModal(props) {
         <Label
           margin={'28px 0 6px 0'}
           display="inline-block"
-          fontSize={'size4'}
-        >
+          fontSize={'size4'}>
           {'학교'}
         </Label>
         <Row>
@@ -281,8 +323,7 @@ function HomeModal(props) {
             to="check"
             width="163px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}
-          >
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
@@ -292,8 +333,7 @@ function HomeModal(props) {
             to="check"
             width="150px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}
-          >
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
@@ -303,8 +343,7 @@ function HomeModal(props) {
             to="check"
             width="186px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}
-          >
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
@@ -314,8 +353,7 @@ function HomeModal(props) {
             to="check"
             width="165px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}
-          >
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
@@ -325,8 +363,7 @@ function HomeModal(props) {
             to="check"
             width="158px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}
-          >
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
@@ -336,8 +373,7 @@ function HomeModal(props) {
             to="check"
             width="253px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}
-          >
+            fontSize={'size5'}>
             keep info
           </Label>
         </div>
@@ -357,8 +393,7 @@ function HomeModal(props) {
             padding={'len2'}
             fontSize={'size8'}
             weight={'bold'}
-            onClick={next}
-          >
+            onClick={next}>
             {'휴대폰 인증'}
           </Button>
         </Col>
@@ -368,8 +403,7 @@ function HomeModal(props) {
           fontSize={'size8'}
           fontColor={'gray3'}
           weight={'bold'}
-          onClick={next}
-        >
+          onClick={next}>
           {'아이핀 인증'}
         </Button>
       </Col>
