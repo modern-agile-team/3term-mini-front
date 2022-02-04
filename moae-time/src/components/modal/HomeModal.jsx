@@ -67,13 +67,11 @@ const SelectBox = styled.select`
 
 const Label = styled.label.attrs(
   ({
-    to,
     fontSize = 'default',
     fontColor = 'default',
     margin,
     display = 'inline-block',
   }) => ({
-    for: to,
     fontSize: MainStyle.checkFontSize[fontSize],
     fontColor: MainStyle.checkColor[fontColor],
     margin: margin,
@@ -137,7 +135,7 @@ function HomeModal(props) {
         <Row padding={'12px 0 29px'}>
           <div>
             <CheckBox name="keeping" id="check" />
-            <Label to="check" fontSize={'size5'}>
+            <Label htmlFor="check" fontSize={'size5'}>
               keep info
             </Label>
           </div>

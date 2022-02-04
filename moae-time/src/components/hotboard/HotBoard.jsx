@@ -54,7 +54,7 @@ const HotBoard = () => {
 
   const showHotBoard = () =>
     hotBoard.map((board) => (
-      <NewRow padding={'10px'}>
+      <NewRow key={board.id} padding={'10px'}>
         <Row width={'len16'}>
           <NewText>
             <Link to="/board">{board.title}</Link>

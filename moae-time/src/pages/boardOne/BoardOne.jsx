@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   Box,
@@ -66,6 +66,8 @@ function BoardOne() {
     setIsEdit(!isEdit);
   };
 
+  const { boardId } = useParams();
+
   return (
     <Row padding="25px 172px 0px" align="flex-start">
       <Col width="len8" align="flex-start">
@@ -86,7 +88,7 @@ function BoardOne() {
                 <Row>
                   <Text color={'gray1'}>작성자 이름</Text>
                   <div>
-                    <Link to={'/edit'}>수정</Link>
+                    <Link to={`/board/${boardId}/edit`}>수정</Link>
                     <button>삭제</button>
                   </div>
                 </Row>
