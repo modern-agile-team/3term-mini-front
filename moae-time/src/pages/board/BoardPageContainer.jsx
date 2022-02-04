@@ -5,8 +5,6 @@ import dummyBoard from '../../apis/dummyBoard.json';
 
 function BoardPage() {
   
-  const [state, setState] = useState()
-
   return (
   <BoardPagePresenter />
   );

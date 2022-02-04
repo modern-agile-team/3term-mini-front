@@ -1,6 +1,9 @@
 import { React, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Box } from '../';
+import { Box, Text } from '../';
+import SmallModal from '../smallmodal/SmallModal';
+import BasicProfile from "../../style/image/BasicProfile.png"
+import dummyBoard from "../../apis/dummyBoard.json"
 
 const Modal = styled.div.attrs(({ modalState, width, height, topMargin, leftMargin }) => ({
   state: modalState,
@@ -74,6 +77,12 @@ const ReportBoxAndTextWrap = styled.div`
   justify-content: space-between;
 `
 
+const WriterImage = styled.img`
+  width: 200px;
+  height: 200px;
+  margin: 0px 0px 20px 0px
+`
+
 const Btn = styled.button.attrs(({ height, width, margin }) => ({
   row: height,
   col: width,
@@ -105,10 +114,10 @@ const ReportBtnWrap = styled.div`
   align-items: center;
 `
 
-function BigModal() {
+function BigModal(props) {
+  console.log('dummyBoard :>> ', dummyBoard);
   const modalEl = useRef();
-  const [modalState, setModalState] = useState(false);
-  const [reportModalState, setReportModalState] = useState(false);
+  const {modalState, setModalState, smallModalState, setSmallModalState} = props
   const handleClickOutside = ({ target }) => {
     if (modalState && !modalEl.current.contains(target)) setModalState(false);
   };
@@ -125,53 +134,28 @@ function BigModal() {
     else document.body.style.overflow = 'visible';
   }, [modalState]);
 
-  const checkBoxNum = [1, 2, 3, 4, 5, 6, 7]
-  const drawing = () => {
-    return checkBoxNum.map((item, i) => 
-      <ReportBoxAndTextWrap key={i}>
-          <Box width="16px" height="16px" margin="0px 0px 12px 0px"/>
-          <Box width="224px" height="16px" margin="0px 0px 20px 0px" />
-      </ReportBoxAndTextWrap>
-      )}
   return (
     <>  
-      <Btn onClick={() => setModalState(true)}>O</Btn>
       {
         modalState &&
       <Wrap>
         <ModalBackGround modalState={modalState}>
           <Modal
-            ref={modalEl} 
+            ref={modalEl}
             modalState={modalState}
             width="907px"
             height="590px"
             topMargin="66px" 
             leftMargin="303px">
-          <ModalBackGround modalState={reportModalState}>
-            <Modal 
-              modalState={reportModalState}
-              width="400px"
-              height="480px"
-              topMargin="121px" 
-              leftMargin="556px">
-              <Btn
-              width="9.69px"
-              height="9.69px" 
-              margin="21.66px 20.66px 0px 369.66px"
-              onClick={() => setReportModalState(false)}></Btn>
-              <Box width="250px" height="23px" margin="27px 0px 5px 75px"/>
-              <Box width="250px" height="14px" margin="0px 0px 15px 75px"/>
-              { drawing() }
-              <Box width="250px" height="100px" margin="0px 0px 15px 75px"/>
-              <Box width="46px" height="30px" margin="0px 0px 27px 177px"/>
-            </Modal>
-          </ModalBackGround>
+            <SmallModal
+              smallModalState={smallModalState}
+              setSmallModalState={setSmallModalState}/>
           <BtnWrap>
             <ReportBtnWrap>
               <Btn 
                 width="19.5px"
                 height="20.75px"
-                onClick={() => setReportModalState(true)}>R</Btn>
+                onClick={() => setSmallModalState(true)}>R</Btn>
               <Box width="19.5px" height="10px"/>
             </ReportBtnWrap>
             <Btn
@@ -180,12 +164,21 @@ function BigModal() {
               margin="0px 64.25px 0px 0px"
               onClick={() => setModalState(false)}>X</Btn>
           </BtnWrap>
-          <CenterWrap>
-            <Box width='200px' height='200px' margin="0px 0px 20px 0px"/>
-            <Box width='200px' height='32px' margin="0px 0px 51px 0px"/>
-            <Box width='232px' height='29px' margin="0px 0px 21px 0px"/>
-            <Box width='232px' height='29px' margin="0px 0px 21px 0px"/>
-            <Box width='232px' height='29px' margin="0px 0px 98px 0px"/>
+          <CenterWrap CenterWrap>
+            <WriterImage src={BasicProfile} />
+            <Box width='200px' height='32px' margin="0px 0px 51px 0px">
+              123
+              {/* <Text>{dummyBoard.id}</Text> */}
+            </Box>
+            <Box width='232px' height='29px' margin="0px 0px 21px 0px">
+
+            </Box>
+            <Box width='232px' height='29px' margin="0px 0px 21px 0px">
+
+            </Box>
+            <Box width='232px' height='29px' margin="0px 0px 98px 0px">
+
+            </Box>
           </CenterWrap>
           </Modal>
         </ModalBackGround>

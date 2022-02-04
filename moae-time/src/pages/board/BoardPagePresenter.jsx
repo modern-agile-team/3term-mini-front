@@ -121,6 +121,9 @@ const BottomLine = styled.div`
 
 function BoardPagePresenter() {
   const [pageNation, setPageNation] = useState(0)
+  const [modalState, setModalState] = useState(false);
+  const [smallModalState, setSmallModalState] = useState(false);
+  
 
   const clickPageNationOne = () => {
     setPageNation(0)
@@ -153,25 +156,21 @@ function BoardPagePresenter() {
   const start = pageNation*6
   const end = pageNation*6+6;
 
-  useEffect(() => {
-    console.log('pageNation :>> ', pageNation);
-    console.log('start :>> ', start);
-    console.log('end :>> ', end);
-  }, [pageNation]);
+  
 
-  const mapToWrite = () => dummyBoard.postsData.slice(start, end).map((post) => {
+  const mapToWrite = () => dummyBoard.slice(start, end).map((post) => {
     return (
-      <WholeWrap key={post.postId}>
-        <TitleDiv>{post.postTitle}</TitleDiv><br/>
+      <WholeWrap key={post.no}>
+        <TitleDiv>{post.title}</TitleDiv><br/>
         <WrapToFlex>
           <ImgWriterDateWrap>
-            <WriterImage src={BasicProfile}/>
-            <WriterDiv>{post.writer}</WriterDiv>
-            <DateAndTimeDiv>{post.dateAndTime}</DateAndTimeDiv>
+            <WriterImage onClick={() => setModalState(true)}src={BasicProfile}/>
+            <WriterDiv>{post.nickname}</WriterDiv>
+            <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
           </ImgWriterDateWrap>
           <CommentsAndViewsWrap>
-            <CommentsNumDiv>댓글 수 {post.conmmentNum}</CommentsNumDiv>
-            <ViewsDiv>조회수 {post.views}</ViewsDiv>
+            <CommentsNumDiv>댓글 수 {post.comments_length}</CommentsNumDiv>
+            <ViewsDiv>조회수 {post.hit}</ViewsDiv>
           </CommentsAndViewsWrap>
         </WrapToFlex>
         <BottomLine/>
@@ -183,7 +182,9 @@ function BoardPagePresenter() {
     <Row padding="25px 172px 0px" align="flex-start">
       <Col width="len8">
         <Row padding="0 0 5px">
-          <Box padding="15px">자유 게시판</Box>
+          <Box padding="15px">
+            자유 게시판
+          </Box>
         </Row>
         <Row padding="0 0 5px">
           <SelectBox name="sort">
@@ -206,7 +207,7 @@ function BoardPagePresenter() {
           clickPageNationOne={clickPageNationOne}
           clickPageNationTwo={clickPageNationTwo} 
           clickPageNationThr={clickPageNationThr}
-          clickLeft={clickLeft} 
+          clickLeft={clickLeft}
           clickRight={clickRight}/>
       </Col>
       <Box width="len3">
@@ -214,9 +215,15 @@ function BoardPagePresenter() {
           <HotBoard/>
         </Row>
         <Col>
+        <BigModal 
+          modalState={modalState}
+          setModalState={setModalState}
+          smallModalState={smallModalState}
+          setSmallModalState={setSmallModalState}/>
         </Col>
       </Box>
     </Row>
+    
   );
 }
 

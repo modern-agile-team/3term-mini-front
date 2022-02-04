@@ -5,6 +5,7 @@ import {
   MyPage,
   BoardOne,
   BoardEditPresenter,
+  BoardWritePresenter
 } from './pages';
 import { GlobalStyle, MainLayout } from './style';
 import { Routes, Route } from 'react-router-dom';
@@ -35,6 +36,8 @@ function App() {
         <Route
           path="/QandA"
           element={<MainLayout main={<h1>{'Q & A니까 나가'}</h1>} />}
+          path="/board/:boardId/write"
+          element={<MainLayout main={<BoardWritePresenter />} />}
         />
       </Routes>
     </>
