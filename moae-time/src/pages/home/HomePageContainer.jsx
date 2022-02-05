@@ -35,13 +35,13 @@ function HomePage() {
     </>
   );
   const showBoards = () =>
-    dummyBoard.postsData.slice(0, 8).map((board) => (
+    dummyBoard.slice(0, 8).map((board) => (
       <NewRow padding={'10px'}>
         <Row width={'len5'}>
           <NewText>
-            <Link to="/board">{board.postTitle}</Link>
+            <Link to="/board">{board.title}</Link>
           </NewText>
-          <Text size={'size2'}>{board.dateAndTime}</Text>
+          <Text size={'size2'}>{board.inDate}</Text>
         </Row>
       </NewRow>
     ));
