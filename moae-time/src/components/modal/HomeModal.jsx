@@ -194,7 +194,7 @@ function HomeModal(props) {
           </Text>
           <Button
             onClick={next}
-            width={'len19'}
+            width={'len20'}
             fontSize={'size8'}
             fontColor={'red'}
             backColor={'gray5'}
