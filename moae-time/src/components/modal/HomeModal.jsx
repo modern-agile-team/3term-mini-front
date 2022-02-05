@@ -121,9 +121,8 @@ function HomeModal(props) {
   const onClickLogin = () => {
     inputId && inputPw ? login() : alert('아이디와 비밀번호를 입력하세요.');
     function login() {
-      console.log('test');
       axios
-        .post('http://3.38.117.49/user/login', {
+        .post('http://3.36.125.16:8080/user/login', {
           id: inputId,
           password: inputPw,
         })
@@ -132,7 +131,9 @@ function HomeModal(props) {
           if (res.data.success) {
             close();
           }
-          console.log(res.data);
+        })
+        .catch((error) => {
+          alert(error.response.data.msg);
         });
     }
   };
@@ -309,83 +310,97 @@ function HomeModal(props) {
     );
   };
 
+  const [isAllChecked, setIsAllChecked] = useState(false);
+
   const joinModal2 = () => {
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 26px'}>
           <Text size={'default'} color={'gray1'} weight={'medium'}>
-            {'Description'}
+            {'약관 동의'}
           </Text>
         </Col>
         <div>
-          <CheckBox name="keeping" id="check" />
+          <CheckBox name="keeping" id="check1" />
           <Label
-            to="check"
+            htmlFor="check1"
             width="163px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
-            keep info
+            fontSize={'size5'}
+            fontColor={'gray1'}>
+            {'아래 약관에 모두 동의합니다.'}
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check" />
+          <CheckBox name="keeping" id="check2" />
           <Label
-            to="check"
+            htmlFor="check2"
             width="150px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
-            keep info
+            fontSize={'size5'}
+            fontColor={'gray3'}>
+            {'서비스이용약관 동의(필수)'}
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check" />
+          <CheckBox name="keeping" id="check3" />
           <Label
-            to="check"
+            htmlFor="check3"
             width="186px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
-            keep info
+            fontSize={'size5'}
+            fontColor={'gray3'}>
+            {'개인정보 수집 및 이용 동의 (필수)'}
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check" />
+          <CheckBox name="keeping" id="check4" />
           <Label
-            to="check"
+            htmlFor="check4"
             width="165px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
-            keep info
+            fontSize={'size5'}
+            fontColor={'gray3'}>
+            {'커뮤니티이용규칙 확인 (필수)'}
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check" />
+          <CheckBox name="keeping" id="check5" />
           <Label
-            to="check"
+            htmlFor="check5"
             width="158px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
-            keep info
+            fontSize={'size5'}
+            fontColor={'gray3'}>
+            {'광고성 정보 수신 동의 (선택)'}
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check" />
+          <CheckBox name="keeping" id="check6" />
           <Label
-            to="check"
+            htmlFor="check6"
             width="253px"
             margin={'0 0 24px 0'}
-            fontSize={'size5'}>
-            keep info
+            fontSize={'size5'}
+            fontColor={'gray1'}>
+            {'본인 명의를 이용하여 가입을 진행하겠습니다.'}
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check" />
-          <Label to="check" width="112px" fontSize={'size5'}>
-            keep info
+          <CheckBox name="keeping" id="check7" />
+          <Label
+            htmlFor="check7"
+            width="112px"
+            fontSize={'size5'}
+            fontColor={'gray3'}>
+            {'만 14세 이상입니다.'}
           </Label>
         </div>
         <Col align={'left'} padding={'20px 0 36px'}>
           <Text size={'size5'} color={'gray4'} weight={'light'}>
-            {'dummy'}
+            {
+              '모 -애 타임은 국내 대학생을 위한 서비스이며, 본인 인증을 통해 만 14세 이상만 가입할 수 있습니다. '
+            }
           </Text>
         </Col>
         <Col align={'left'} padding={'0 0 10px'}>
