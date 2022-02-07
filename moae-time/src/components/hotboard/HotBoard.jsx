@@ -12,20 +12,17 @@ const NewRow = styled(Row)`
 
 const NewText = styled(Text)`
   display: block;
-  width: ${MainStyle.checkWidth.len16};
-  font-size: ${MainStyle.checkFontSize.size7};
-  font-weight: ${MainStyle.checkWeight.light} !important;
-  color: ${MainStyle.checkColor.gray2};
+  font-size: ${MainStyle.checkFontSize['size7']};
+  font-weight: ${MainStyle.checkWeight['light']} !important;
+  color: ${MainStyle.checkColor['gray2']};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: left;
-  & {
-  }
 `;
 
 const HotBoard = () => {
-  const hotBoard = [
+  const hotBoards = [
     {
       id: 1,
       title: '핫 게시물인데 글자가 길어지면 어쩌라는',
@@ -53,9 +50,9 @@ const HotBoard = () => {
   ];
 
   const showHotBoard = () =>
-    hotBoard.map((board) => (
+    hotBoards.map((board) => (
       <NewRow key={board.id} padding={'10px'}>
-        <Row width={'len16'}>
+        <Row width={'len15'}>
           <NewText>
             <Link to="/board">{board.title}</Link>
           </NewText>

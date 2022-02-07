@@ -39,7 +39,11 @@ const SideAdBox = styled.div`
   border: none;
   width: 100%;
   height: 120px;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center auto;
 `;
 
 const MainContent = styled.div`
@@ -76,7 +80,8 @@ function HomePage({ showProfile, showBoards }) {
                 padding={'len6'}
                 backColor={'gray5'}
                 fontColor={'gray3'}
-                border={'1px solid #D6D6D6'}>
+                border={'1px solid #D6D6D6'}
+              >
                 {'내 정보'}
               </Button>
               <Button
@@ -86,7 +91,8 @@ function HomePage({ showProfile, showBoards }) {
                 padding={'len6'}
                 backColor={'gray5'}
                 fontColor={'gray3'}
-                border={'1px solid #D6D6D6'}>
+                border={'1px solid #D6D6D6'}
+              >
                 {'로그아웃'}
               </Button>
             </Row>
