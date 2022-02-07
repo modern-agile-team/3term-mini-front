@@ -115,9 +115,14 @@ const ReportBtnWrap = styled.div`
 `
 
 function BigModal(props) {
-  console.log('dummyBoard :>> ', dummyBoard);
   const modalEl = useRef();
-  const {modalState, setModalState, smallModalState, setSmallModalState} = props
+  const {
+    modalState, 
+    setModalState, 
+    smallModalState, 
+    setSmallModalState,
+    idState
+  } = props
   const handleClickOutside = ({ target }) => {
     if (modalState && !modalEl.current.contains(target)) setModalState(false);
   };
@@ -134,55 +139,55 @@ function BigModal(props) {
     else document.body.style.overflow = 'visible';
   }, [modalState]);
 
+  console.log('idState :>> ', idState);
+
   return (
     <>  
       {
         modalState &&
-      <Wrap>
-        <ModalBackGround modalState={modalState}>
-          <Modal
-            ref={modalEl}
-            modalState={modalState}
-            width="907px"
-            height="590px"
-            topMargin="66px" 
-            leftMargin="303px">
-            <SmallModal
-              smallModalState={smallModalState}
-              setSmallModalState={setSmallModalState}/>
-          <BtnWrap>
-            <ReportBtnWrap>
-              <Btn 
-                width="19.5px"
-                height="20.75px"
-                onClick={() => setSmallModalState(true)}>R</Btn>
-              <Box width="19.5px" height="10px"/>
-            </ReportBtnWrap>
-            <Btn
-              width="15.5px"
-              height="15.5px" 
-              margin="0px 64.25px 0px 0px"
-              onClick={() => setModalState(false)}>X</Btn>
-          </BtnWrap>
-          <CenterWrap CenterWrap>
-            <WriterImage src={BasicProfile} />
-            <Box width='200px' height='32px' margin="0px 0px 51px 0px">
-              123
-              {/* <Text>{dummyBoard.id}</Text> */}
-            </Box>
-            <Box width='232px' height='29px' margin="0px 0px 21px 0px">
+        <Wrap>
+          <ModalBackGround modalState={modalState}>
+            <Modal
+              ref={modalEl}
+              modalState={modalState}
+              width="907px"
+              height="590px"
+              topMargin="66px" 
+              leftMargin="303px">
+              <SmallModal
+                smallModalState={smallModalState}
+                setSmallModalState={setSmallModalState}/>
+            <BtnWrap>
+              <ReportBtnWrap>
+                <Btn 
+                  width="19.5px"
+                  height="20.75px"
+                  onClick={() => setSmallModalState(true)}>R</Btn>
+                <Box width="19.5px" height="10px"/>
+              </ReportBtnWrap>
+              <Btn
+                width="15.5px"
+                height="15.5px" 
+                margin="0px 64.25px 0px 0px"
+                onClick={() => setModalState(false)}>X</Btn>
+            </BtnWrap>
+            <CenterWrap CenterWrap>
+              <WriterImage src={BasicProfile} />
+              <Box width='200px' height='32px' margin="0px 0px 51px 0px">
+                {idState}
+              </Box>
+              <Box width='232px' height='29px' margin="0px 0px 21px 0px">
+              </Box>
+              <Box width='232px' height='29px' margin="0px 0px 21px 0px">
 
-            </Box>
-            <Box width='232px' height='29px' margin="0px 0px 21px 0px">
+              </Box>
+              <Box width='232px' height='29px' margin="0px 0px 98px 0px">
 
-            </Box>
-            <Box width='232px' height='29px' margin="0px 0px 98px 0px">
-
-            </Box>
-          </CenterWrap>
-          </Modal>
-        </ModalBackGround>
-      </Wrap>
+              </Box>
+            </CenterWrap>
+            </Modal>
+          </ModalBackGround>
+        </Wrap>
       }
     </>
   );

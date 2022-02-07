@@ -123,7 +123,7 @@ function BoardPagePresenter() {
   const [pageNation, setPageNation] = useState(0)
   const [modalState, setModalState] = useState(false);
   const [smallModalState, setSmallModalState] = useState(false);
-  
+  const [idState, setIdState] = useState(null)
 
   const clickPageNationOne = () => {
     setPageNation(0)
@@ -156,15 +156,21 @@ function BoardPagePresenter() {
   const start = pageNation*6
   const end = pageNation*6+6;
 
-  
+  const clickEmoji = (e) => {
+    setModalState(true)
+    setIdState(e.target.parentElement.id)
+  }
 
   const mapToWrite = () => dummyBoard.slice(start, end).map((post) => {
     return (
       <WholeWrap key={post.no}>
         <TitleDiv>{post.title}</TitleDiv><br/>
         <WrapToFlex>
-          <ImgWriterDateWrap>
-            <WriterImage onClick={() => setModalState(true)}src={BasicProfile}/>
+          <ImgWriterDateWrap id={post.id}>
+            <WriterImage 
+            // img 태그는 onClick event 사용 불가
+              onClick={clickEmoji}
+              src={BasicProfile}/>
             <WriterDiv>{post.nickname}</WriterDiv>
             <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
           </ImgWriterDateWrap>
@@ -177,7 +183,7 @@ function BoardPagePresenter() {
       </WholeWrap>
     )
   })
-  
+
   return (
     <Row padding="25px 172px 0px" align="flex-start">
       <Col width="len8">
@@ -215,14 +221,16 @@ function BoardPagePresenter() {
           <HotBoard/>
         </Row>
         <Col>
-        <BigModal 
-          modalState={modalState}
-          setModalState={setModalState}
-          smallModalState={smallModalState}
-          setSmallModalState={setSmallModalState}/>
         </Col>
       </Box>
+      <BigModal 
+        modalState={modalState}
+        setModalState={setModalState}
+        smallModalState={smallModalState}
+        setSmallModalState={setSmallModalState}
+        idState={idState}/>
     </Row>
+    
     
   );
 }
