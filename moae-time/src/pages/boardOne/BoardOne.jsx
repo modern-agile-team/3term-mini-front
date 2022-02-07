@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -43,7 +43,7 @@ function BoardOne() {
 
   const showComments = () =>
     comments.map((comment) => (
-      <>
+      <Fragment key={comment.commentId}>
         <Row padding="5px 0 0" key={comments.commentId}>
           <div>
             <Text>icon</Text>
@@ -55,7 +55,7 @@ function BoardOne() {
           <Text>{comment.content}</Text>
           <Text>{comment.date}</Text>
         </Row>
-      </>
+      </Fragment>
     ));
 
   const [content, setContent] = useState(

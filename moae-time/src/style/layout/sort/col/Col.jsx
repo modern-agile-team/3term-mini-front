@@ -13,7 +13,7 @@ const Col = styled.div.attrs(
   flex-direction: column;
   justify-content: space-between;
   align-items: ${(props) => props.align};
-
+  text-align: center;
   width: ${(props) => props.width};
   height: fit-content;
 

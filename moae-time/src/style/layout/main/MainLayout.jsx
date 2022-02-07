@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Box, HomeModal, Alert, Text, Button } from '../../../components';
-import { Link } from 'react-router-dom';
+import { HomeModal, Alert, Text, Button } from '../../../components';
+import { MainStyle } from '../../';
+import { Link, useParams, useLocation, useHistory } from 'react-router-dom';
 import { Row, Col } from '../../';
 import EveryTime from '../../image/everytime.png';
 
@@ -65,12 +66,39 @@ const FooterBox = styled.div`
   background-color: #f9f9f9;
 `;
 
-const LoginBtn = styled.button`
-  width: 84px;
-  height: 32px;
+const Menu = styled.span.attrs(
+  ({
+    size = 'default',
+    color = 'default',
+    weight = 'default',
+    padding = 'default',
+  }) => ({
+    size: MainStyle.checkFontSize[size],
+    color: MainStyle.checkColor[color],
+    weight: MainStyle.checkWeight[weight],
+    padding: MainStyle.checkPadding[padding],
+  })
+)`
+  position: relative;
+  font-size: ${(props) => props.size};
+  color: ${(props) => props.color};
+  font-weight: ${(props) => props.weight};
+  padding: ${(props) => props.padding};
+  vertical-align: middle;
+`;
+
+const UnderLine = styled.div`
+  position: absolute;
+  left: 0;
+  top: 48px;
+  width: 100%;
+  height: 3px;
+  background-color: #c62935;
 `;
 
 function Layout(props) {
+  const { main, path } = props;
+
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
@@ -116,14 +144,29 @@ function Layout(props) {
     { name: 'Q & A', url: '/QandA' },
   ];
 
-  const menuButtons = () =>
-    basicMenu.map((menu) => (
+  const menuButtons = () => {
+    const target = {
+      true: 'red',
+      false: 'gray1',
+    };
+    return basicMenu.map((menu) => (
       <Link key={menu.url} to={menu.url}>
-        <Text size={'size8'} weight={'medium'} color={'gray1'}>
+        <Menu
+          size={'size8'}
+          weight={'medium'}
+          color={target[path === menu.url]}
+          underline={path === menu.url}
+        >
           {menu.name}
-        </Text>
+          {path === menu.url && <UnderLine></UnderLine>}
+        </Menu>
       </Link>
     ));
+  };
+
+  // useEffect(() => {
+  //   console.log('path :>> ', path);
+  // });
 
   const footerMenu = [
     { name: '이용약관', url: '/notice' },
@@ -134,14 +177,13 @@ function Layout(props) {
 
   const footerButtons = () =>
     footerMenu.map((menu) => (
-      <Link key={menu.url} to={menu.url}>
+      <Link key={menu.name} to={menu.url}>
         <Text size={'size5'} weight={'light'} color={'gray4'}>
           {menu.name}
         </Text>
       </Link>
     ));
 
-  const { main } = props;
   return (
     <WholeWrapper>
       <HeaderBox>
@@ -196,7 +238,7 @@ function Layout(props) {
                 모-애 타임
               </Text>
               <Text color={'gray1'} weight={'light'}>
-                인덕대
+                {'인덕대'}
               </Text>
             </Col>
           </Row>
