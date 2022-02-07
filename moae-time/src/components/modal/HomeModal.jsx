@@ -122,7 +122,7 @@ function HomeModal(props) {
     inputId && inputPw ? login() : alert('아이디와 비밀번호를 입력하세요.');
     function login() {
       axios
-        .post('http://3.36.125.16:8080/user/login', {
+        .post('http://3.36.125.16:8080/moae/user/login', {
           id: inputId,
           password: inputPw,
         })
@@ -342,6 +342,16 @@ function HomeModal(props) {
     }
   }, [checkedInputs]);
 
+  const clickNext2 = () => {
+    checkedInputs.includes(1) &&
+    checkedInputs.includes(2) &&
+    checkedInputs.includes(3) &&
+    checkedInputs.includes(5) &&
+    checkedInputs.includes(6)
+      ? next()
+      : alert('필수 항목을 모두 체크해주세요.');
+  };
+
   const joinModal2 = () => {
     return (
       <Col align={'left'}>
@@ -455,7 +465,7 @@ function HomeModal(props) {
             margin={'0 0 24px 0'}
             fontSize={'size5'}
             fontColor={'gray1'}>
-            {'본인 명의를 이용하여 가입을 진행하겠습니다.'}
+            {'본인 명의를 이용하여 가입을 진행하겠습니다. (필수)'}
           </Label>
         </div>
         <div>
@@ -472,13 +482,13 @@ function HomeModal(props) {
             width="112px"
             fontSize={'size5'}
             fontColor={'gray3'}>
-            {'만 14세 이상입니다.'}
+            {'만 14세 이상입니다. (필수)'}
           </Label>
         </div>
         <Col align={'left'} padding={'20px 0 36px'}>
           <Text size={'size5'} color={'gray4'} weight={'light'}>
             {
-              '모 -애 타임은 국내 대학생을 위한 서비스이며, 본인 인증을 통해 만 14세 이상만 가입할 수 있습니다. '
+              '모 -애 타임은 국내 대학생을 위한 서비스이며, 본인 인증을 통해 만 14세 이상만 가입할 수 있습니다.'
             }
           </Text>
         </Col>
@@ -487,10 +497,7 @@ function HomeModal(props) {
             padding={'len2'}
             fontSize={'size8'}
             weight={'bold'}
-            onClick={() => {
-              console.log(checkedInputs);
-              next();
-            }}>
+            onClick={clickNext2}>
             {'휴대폰 인증'}
           </Button>
         </Col>
