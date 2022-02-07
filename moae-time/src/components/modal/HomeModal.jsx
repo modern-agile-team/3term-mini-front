@@ -104,6 +104,10 @@ const Icon = styled.img`
   top: 15px;
 `;
 
+const ToggleText = styled(Text)`
+  color: red;
+`;
+
 function HomeModal(props) {
   const { content, next, close } = props;
 
@@ -527,56 +531,72 @@ function HomeModal(props) {
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 16px'}>
           <Text color={'gray1'} weight={'medium'}>
-            {'Description'}
+            {'모-애 타임  회원가입'}
           </Text>
         </Col>
         <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
-          {'Label'}
+          {'아이디'}
         </Label>
         <InputInfo
-          placeholder={'아이디 입력'}
-          margin={'0 0 30px 0'}
+          type={'text'}
+          placeholder={'아이디를 입력하세요.'}
+          margin={'0 0 -9px 0'}
           padding={'len2'}
           borderRadius={'radius4'}
           fontSize={'size8'}
-          fontColor={'gray4'}
+          fontColor={'gray1'}
         />
-        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
-          {'Label'}
+        <ToggleText size={'size3'} color={'red'} padding={'len3'}>
+          {'중복된 아이디 입니다.'}
+        </ToggleText>
+        <Label fontSize={'size4'} fontColor={'gray8'} margin={'12px 0 6px 0'}>
+          {'비밀번호'}
         </Label>
         <InputInfo
-          placeholder={'비밀번호 입력'}
-          margin={'0 0 30px 0'}
+          type={'password'}
+          placeholder={'비밀번호를 입력하세요.'}
+          margin={'0 0 31px 0'}
           padding={'len2'}
           borderRadius={'radius4'}
           fontSize={'size8'}
-          fontColor={'gray4'}
+          fontColor={'gray1'}
         />
-        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
-          {'Label'}
+
+        <Label fontSize={'size4'} fontColor={'gray8'} margin={'12px 0 6px 0'}>
+          {'이메일'}
         </Label>
         <InputInfo
-          placeholder={'이메일 입력'}
-          margin={'0 0 30px 0'}
+          type={'email'}
+          placeholder={'이메일을 입력하세요.'}
+          margin={'0 0 -9px 0'}
           padding={'len2'}
           borderRadius={'radius4'}
           fontSize={'size8'}
-          fontColor={'gray4'}
+          fontColor={'gray1'}
         />
-        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
-          {'Label'}
+        <Text size={'size3'} color={'red'} padding={'len3'}>
+          {'올바르지 않은 형식입니다.'}
+        </Text>
+        <Label fontSize={'size4'} fontColor={'gray8'} margin={'12px 0 6px 0'}>
+          {'닉네임'}
         </Label>
         <InputInfo
-          placeholder={'닉네임 입력'}
-          margin={'0 0 30px 0'}
+          placeholder={'닉네임을 입력하세요.'}
+          margin={'0 0 -9px 0'}
           padding={'len2'}
           borderRadius={'radius4'}
           fontSize={'size8'}
-          fontColor={'gray4'}
+          fontColor={'gray1'}
         />
-        <Button padding={'len2'} onClick={close} weight={'bold'}>
-          {'회원가입'}
-        </Button>
+
+        <Text size={'size3'} color={'red'} padding={'len3'}>
+          {'중복된 닉네임입니다.'}
+        </Text>
+        <Col padding={'28px 0 0 0'}>
+          <Button padding={'len2'} onClick={close} weight={'bold'}>
+            {'회원가입'}
+          </Button>
+        </Col>
       </Col>
     );
   };
