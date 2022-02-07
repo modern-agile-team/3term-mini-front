@@ -310,7 +310,37 @@ function HomeModal(props) {
     );
   };
 
-  const [isAllChecked, setIsAllChecked] = useState(false);
+  const [allChecked, setAllChecked] = useState(false);
+  const [checkedInputs, setCheckedInputs] = useState([]);
+
+  const allCheckHandler = (checked) => {
+    setAllChecked(!allChecked);
+    if (checked) {
+      setCheckedInputs([1, 2, 3, 4, 5, 6]);
+      console.log('전체 선택 완료');
+    } else {
+      setCheckedInputs([]);
+      console.log('전체 해제 완료');
+    }
+  };
+
+  const changeHandler = (checked, id) => {
+    if (checked) {
+      setCheckedInputs([...checkedInputs, id]);
+      console.log('체크 반영 완료');
+    } else {
+      setCheckedInputs(checkedInputs.filter((el) => el !== id));
+      console.log('체크 해제 반영 완료');
+    }
+  };
+
+  useEffect(() => {
+    if (checkedInputs.length >= 6) {
+      setAllChecked(true);
+    } else {
+      setAllChecked(false);
+    }
+  }, [checkedInputs]);
 
   const joinModal2 = () => {
     return (
@@ -321,7 +351,14 @@ function HomeModal(props) {
           </Text>
         </Col>
         <div>
-          <CheckBox name="keeping" id="check1" />
+          <CheckBox
+            name="keeping"
+            id="check1"
+            onChange={(e) => {
+              allCheckHandler(e.currentTarget.checked);
+            }}
+            checked={allChecked}
+          />
           <Label
             htmlFor="check1"
             width="163px"
@@ -332,7 +369,14 @@ function HomeModal(props) {
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check2" />
+          <CheckBox
+            name="keeping"
+            id="check2"
+            onChange={(e) => {
+              changeHandler(e.currentTarget.checked, 1);
+            }}
+            checked={checkedInputs.includes(1) ? true : false}
+          />
           <Label
             htmlFor="check2"
             width="150px"
@@ -343,7 +387,14 @@ function HomeModal(props) {
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check3" />
+          <CheckBox
+            name="keeping"
+            id="check3"
+            onChange={(e) => {
+              changeHandler(e.currentTarget.checked, 2);
+            }}
+            checked={checkedInputs.includes(2) ? true : false}
+          />
           <Label
             htmlFor="check3"
             width="186px"
@@ -354,7 +405,14 @@ function HomeModal(props) {
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check4" />
+          <CheckBox
+            name="keeping"
+            id="check4"
+            onChange={(e) => {
+              changeHandler(e.currentTarget.checked, 3);
+            }}
+            checked={checkedInputs.includes(3) ? true : false}
+          />
           <Label
             htmlFor="check4"
             width="165px"
@@ -365,7 +423,14 @@ function HomeModal(props) {
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check5" />
+          <CheckBox
+            name="keeping"
+            id="check5"
+            onChange={(e) => {
+              changeHandler(e.currentTarget.checked, 4);
+            }}
+            checked={checkedInputs.includes(4) ? true : false}
+          />
           <Label
             htmlFor="check5"
             width="158px"
@@ -376,7 +441,14 @@ function HomeModal(props) {
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check6" />
+          <CheckBox
+            name="keeping"
+            id="check6"
+            onChange={(e) => {
+              changeHandler(e.currentTarget.checked, 5);
+            }}
+            checked={checkedInputs.includes(5) ? true : false}
+          />
           <Label
             htmlFor="check6"
             width="253px"
@@ -387,7 +459,14 @@ function HomeModal(props) {
           </Label>
         </div>
         <div>
-          <CheckBox name="keeping" id="check7" />
+          <CheckBox
+            name="keeping"
+            id="check7"
+            onChange={(e) => {
+              changeHandler(e.currentTarget.checked, 6);
+            }}
+            checked={checkedInputs.includes(6) ? true : false}
+          />
           <Label
             htmlFor="check7"
             width="112px"
@@ -408,7 +487,10 @@ function HomeModal(props) {
             padding={'len2'}
             fontSize={'size8'}
             weight={'bold'}
-            onClick={next}>
+            onClick={() => {
+              console.log(checkedInputs);
+              next();
+            }}>
             {'휴대폰 인증'}
           </Button>
         </Col>
@@ -418,7 +500,15 @@ function HomeModal(props) {
           fontSize={'size8'}
           fontColor={'gray3'}
           weight={'bold'}
-          onClick={next}>
+          onClick={() => {
+            console.log(checkedInputs);
+            const checkResult = {};
+            const check = [1, 2, 3, 4, 5, 6];
+            check.forEach((el) => {
+              checkResult[el] = checkedInputs.includes(el) ? 1 : 0;
+            });
+            console.log(checkResult);
+          }}>
           {'아이핀 인증'}
         </Button>
       </Col>
