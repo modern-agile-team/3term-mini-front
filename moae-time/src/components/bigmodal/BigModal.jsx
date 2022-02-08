@@ -140,7 +140,6 @@ function BigModal(props) {
     else document.body.style.overflow = 'visible';
   }, [modalState]);
 
-  console.log('idState :>> ', idState);
 
   return (
     <>
