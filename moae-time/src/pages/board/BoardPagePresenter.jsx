@@ -190,8 +190,6 @@ function BoardPagePresenter() {
       </option>
     ));
 
- 
-
   useEffect(() => {
 //    sortType -> 1 => 오래된순 받고
 //    sortType -> 0 => 기본, 최신순
@@ -265,7 +263,7 @@ function BoardPagePresenter() {
   };
 
   const mapToWrite = (way) => {
-    const lists = way ? ASCState : DESCState;
+    const lists = Number(way) ? DESCState : ASCState;
     return lists && lists.slice(start, end).map((post) => {
       return (
         <WholeWrap key={post.postId}>
