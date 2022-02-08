@@ -177,22 +177,48 @@ function BoardPagePresenter() {
   const [modalState, setModalState] = useState(false);
   const [smallModalState, setSmallModalState] = useState(false);
   const [idState, setIdState] = useState(null);
-  const ENDPOINT = 'http://3.35.11.34/moae';
-  const [getedBoard, setBoard] = useState(null);
+  const [DESCState, setDESCState] =useState(null);
+  const [ASCState, setASCState] =useState(null);
+  const [sortType, setSortType] = useState(0);
+
+  const sortTypes = ['최신순', '오래된순'];
+
+  const showSortTypes = () =>
+    sortTypes.map((sort, index) => (
+      <option key={index} value={index}>
+        {sort}
+      </option>
+    ));
+
+ 
 
   useEffect(() => {
+//    sortType -> 1 => 오래된순 받고
+//    sortType -> 0 => 기본, 최신순
+//    최신인 것 : "http://3.36.125.16:8080/moae/board/sort?order=DESC"
     axios
-      .get(`${ENDPOINT}/board`)
+      .get("http://3.36.125.16:8080/moae/board/sort?order=DESC")
       .then((res) => {
-        console.log(res.data);
-        setBoard(res.data);
+        setDESCState(res.data.order)
       })
       .catch((err) => {
-        console.log('ERR : ', err);
-      });
-  }, []);
+        console.log('err :>> ', err);
+      })
 
-  const [sortType, setSortType] = useState(0);
+//    오래된 것 : "http://3.36.125.16:8080/moae/board/sort?order=ASC"
+    axios
+      .get("http://3.36.125.16:8080/moae/board/sort?order=ASC")
+      .then((res) => {
+        setASCState(res.data.order)
+      })
+      .catch((err) => {
+        console.log('err :>> ', err);
+      })
+  }, [])
+  // console.log('sortType :>> ', sortType);
+  // console.log('DESC :>> ', DESCState);
+  // console.log('ASC :>> ', ASCState);
+
   const clickPageNationOne = () => {
     setPageNation(0);
   };
@@ -226,15 +252,30 @@ function BoardPagePresenter() {
 
   // const reverseDummy = dummyBoard.postsData.map((post) => {});
 
-  const mapToWrite = () =>
-    getedBoard.slice(start, end).map((post) => {
+  const clickEmoji = (e) => {
+    setModalState(true)
+    setIdState(e.target.parentElement.id)
+  }
+  // console.log('sortType', sortType);
+  // console.log('DESCState :>> ', DESCState);
+  // console.log('ASCState :>> ', ASCState);
+
+  const selectedSort = (e) => {
+    setSortType(e.target.value);
+  };
+
+  const mapToWrite = (way) => {
+    const lists = way ? ASCState : DESCState;
+    return lists && lists.slice(start, end).map((post) => {
       return (
         <WholeWrap key={post.postId}>
           <TitleDiv>{post.title}</TitleDiv>
           <br />
           <WrapToFlex>
             <ImgWriterDateWrap id={post.nickname}>
-              <WriterImage src={BasicProfile} onClick={clickEmoji} />
+              <WriterImage 
+              onClick={clickEmoji}
+              src={BasicProfile} />
               <WriterDiv>{post.nickname}</WriterDiv>
               <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
             </ImgWriterDateWrap>
@@ -248,25 +289,8 @@ function BoardPagePresenter() {
           <BottomLine />
         </WholeWrap>
       );
-    });
+    })};
 
-  const sortTypes = ['최신순', '오래된순'];
-
-  const showSortTypes = () =>
-    sortTypes.map((sort, index) => (
-      <Option key={index} value={index}>
-        {sort}
-      </Option>
-    ));
-
-  const selectedSort = (e) => {
-    setSortType(e.target.value);
-  };
-
-  const clickEmoji = (e) => {
-    setModalState(true);
-    setIdState(e.target.parentElement.id);
-  };
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -281,12 +305,14 @@ function BoardPagePresenter() {
           <Box width="len12" padding="14px">
             <Row>
               <Input placeholder="검색어를 입력하세요." />
-              <span>사진</span>
+              <span>{'사진'}</span>
             </Row>
           </Box>
           <Button>사진</Button>
         </Row>
-        <Box>{getedBoard && mapToWrite()}</Box>
+        <Box>
+          {mapToWrite(sortType)}
+        </Box>
         <PageNation
           clickPageNationOne={clickPageNationOne}
           clickPageNationTwo={clickPageNationTwo}
@@ -314,13 +340,5 @@ function BoardPagePresenter() {
 
 export default BoardPagePresenter;
 
-// const boards = {};
-// const ENDPOINT = '13.209.76.148:8080';
-// axios
-//   .get(`${ENDPOINT}/board`)
-//   .then((res) => {
-//     console.log(res);
-//   })
-//   .catch((err) => {
-//     console.log('ERR : ', err);
-//   });
+
+
