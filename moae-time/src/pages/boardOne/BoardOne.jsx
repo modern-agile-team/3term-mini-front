@@ -95,7 +95,7 @@ function BoardOne() {
                 </Row>
                 <Col align="flex-start">날짜</Col>
               </Col>
-            </Row >
+            </Row>
             <h1>게시글 제목</h1>
             <ContentBox>{content}</ContentBox>
             <Row>

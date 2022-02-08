@@ -1,24 +1,25 @@
 import { React, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Box, Text } from '../';
+import { Box } from '../';
 import SmallModal from '../smallmodal/SmallModal';
-import BasicProfile from "../../style/image/BasicProfile.png"
-import dummyBoard from "../../apis/dummyBoard.json"
+import BasicProfile from '../../style/image/BasicProfile.png';
+import dummyBoard from '../../apis/dummyBoard.json';
 
-const Modal = styled.div.attrs(({ modalState, width, height, topMargin, leftMargin }) => ({
-  state: modalState,
-  row: height,
-  col: width,
-  top: topMargin,
-  left: leftMargin,
-}))`
-  width: ${(props) => (props.width)};
-  height: ${(props) => (props.height)};
+const Modal = styled.div.attrs(
+  ({ modalState, width, height, topMargin, leftMargin }) => ({
+    state: modalState,
+    row: height,
+    col: width,
+    top: topMargin,
+    left: leftMargin,
+  })
+)`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 
-  
   position: fixed;
-  top: ${(props) => (props.topMargin)};
-  left: ${(props) => (props.leftMargin)};
+  top: ${(props) => props.topMargin};
+  left: ${(props) => props.leftMargin};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,10 +41,10 @@ const ModalBackGround = styled.div.attrs(({ modalState }) => ({
   top: 0;
   left: 0;
 
-  display: ${(props) => props.modalState ? "block" : "none"};
+  display: ${(props) => (props.modalState ? 'block' : 'none')};
 
   background-color: rgba(97, 94, 94, 0.7);
-`
+`;
 
 const Wrap = styled.div`
   width: 773.75px;
@@ -75,13 +76,13 @@ const ReportBoxAndTextWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`
+`;
 
 const WriterImage = styled.img`
   width: 200px;
   height: 200px;
-  margin: 0px 0px 20px 0px
-`
+  margin: 0px 0px 20px 0px;
+`;
 
 const Btn = styled.button.attrs(({ height, width, margin }) => ({
   row: height,
@@ -112,25 +113,25 @@ const ReportBtnWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 function BigModal(props) {
   const modalEl = useRef();
   const {
-    modalState, 
-    setModalState, 
-    smallModalState, 
+    modalState,
+    setModalState,
+    smallModalState,
     setSmallModalState,
-    idState
-  } = props
+    idState,
+  } = props;
   const handleClickOutside = ({ target }) => {
     if (modalState && !modalEl.current.contains(target)) setModalState(false);
   };
 
   useEffect(() => {
-    window.addEventListener("click", handleClickOutside);
+    window.addEventListener('click', handleClickOutside);
     return () => {
-      window.removeEventListener("click", handleClickOutside);
+      window.removeEventListener('click', handleClickOutside);
     };
   }, [modalState]);
 
@@ -142,9 +143,8 @@ function BigModal(props) {
   console.log('idState :>> ', idState);
 
   return (
-    <>  
-      {
-        modalState &&
+    <>
+      {modalState && (
         <Wrap>
           <ModalBackGround modalState={modalState}>
             <Modal
@@ -152,43 +152,58 @@ function BigModal(props) {
               modalState={modalState}
               width="907px"
               height="590px"
-              topMargin="66px" 
-              leftMargin="303px">
+              topMargin="66px"
+              leftMargin="303px"
+            >
               <SmallModal
                 smallModalState={smallModalState}
-                setSmallModalState={setSmallModalState}/>
-            <BtnWrap>
-              <ReportBtnWrap>
-                <Btn 
-                  width="19.5px"
-                  height="20.75px"
-                  onClick={() => setSmallModalState(true)}>R</Btn>
-                <Box width="19.5px" height="10px"/>
-              </ReportBtnWrap>
-              <Btn
-                width="15.5px"
-                height="15.5px" 
-                margin="0px 64.25px 0px 0px"
-                onClick={() => setModalState(false)}>X</Btn>
-            </BtnWrap>
-            <CenterWrap CenterWrap>
-              <WriterImage src={BasicProfile} />
-              <Box width='200px' height='32px' margin="0px 0px 51px 0px">
-                {idState}
-              </Box>
-              <Box width='232px' height='29px' margin="0px 0px 21px 0px">
-              </Box>
-              <Box width='232px' height='29px' margin="0px 0px 21px 0px">
-
-              </Box>
-              <Box width='232px' height='29px' margin="0px 0px 98px 0px">
-
-              </Box>
-            </CenterWrap>
+                setSmallModalState={setSmallModalState}
+              />
+              <BtnWrap>
+                <ReportBtnWrap>
+                  <Btn
+                    width="19.5px"
+                    height="20.75px"
+                    onClick={() => setSmallModalState(true)}
+                  >
+                    R
+                  </Btn>
+                  <Box width="19.5px" height="10px" />
+                </ReportBtnWrap>
+                <Btn
+                  width="15.5px"
+                  height="15.5px"
+                  margin="0px 64.25px 0px 0px"
+                  onClick={() => setModalState(false)}
+                >
+                  X
+                </Btn>
+              </BtnWrap>
+              <CenterWrap CenterWrap>
+                <WriterImage src={BasicProfile} />
+                <Box width="200px" height="32px" margin="0px 0px 51px 0px">
+                  {idState}
+                </Box>
+                <Box
+                  width="232px"
+                  height="29px"
+                  margin="0px 0px 21px 0px"
+                ></Box>
+                <Box
+                  width="232px"
+                  height="29px"
+                  margin="0px 0px 21px 0px"
+                ></Box>
+                <Box
+                  width="232px"
+                  height="29px"
+                  margin="0px 0px 98px 0px"
+                ></Box>
+              </CenterWrap>
             </Modal>
           </ModalBackGround>
         </Wrap>
-      }
+      )}
     </>
   );
 }

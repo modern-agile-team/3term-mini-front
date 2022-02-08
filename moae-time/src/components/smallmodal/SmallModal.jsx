@@ -1,21 +1,22 @@
-import { React, useRef, useEffect, useState } from "react";
-import { Box, Button } from "..";
-import styled from "styled-components";
+import { React, useRef, useEffect, useState } from 'react';
+import { Box } from '..';
+import styled from 'styled-components';
 
-const Modal = styled.div.attrs(({ modalState, width, height, topMargin, leftMargin }) => ({
-  state: modalState,
-  row: height,
-  col: width,
-  top: topMargin,
-  left: leftMargin,
-}))`
-  width: ${(props) => (props.width)};
-  height: ${(props) => (props.height)};
+const Modal = styled.div.attrs(
+  ({ modalState, width, height, topMargin, leftMargin }) => ({
+    state: modalState,
+    row: height,
+    col: width,
+    top: topMargin,
+    left: leftMargin,
+  })
+)`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 
-  
   position: fixed;
-  top: ${(props) => (props.topMargin)};
-  left: ${(props) => (props.leftMargin)};
+  top: ${(props) => props.topMargin};
+  left: ${(props) => props.leftMargin};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -37,7 +38,7 @@ const ModalBackGround = styled.div.attrs(({ modalState }) => ({
   top: 0;
   left: 0;
 
-  display: ${(props) => props.modalState ? "block" : "none"};
+  display: ${(props) => (props.modalState ? 'block' : 'none')};
 
   background-color: rgba(97, 94, 94, 0.7);
 `;
@@ -64,59 +65,60 @@ const Btn = styled.button.attrs(({ height, width, margin }) => ({
   margin: ${(props) => props.margin};
 `;
 
-
-
 function SmallModal(props) {
   const modalEl = useRef();
-  const {smallModalState, setSmallModalState} = props
+  const { smallModalState, setSmallModalState } = props;
 
   const handleClickOutside = ({ target }) => {
-    if (smallModalState && !modalEl.current.contains(target)) setSmallModalState(false);
+    if (smallModalState && !modalEl.current.contains(target))
+      setSmallModalState(false);
   };
 
   useEffect(() => {
-    window.addEventListener("click", handleClickOutside);
+    window.addEventListener('click', handleClickOutside);
     return () => {
-      window.removeEventListener("click", handleClickOutside);
+      window.removeEventListener('click', handleClickOutside);
     };
   }, [smallModalState]);
 
-  const checkBoxNum = [1, 2, 3, 4, 5, 6, 7]
+  const checkBoxNum = [1, 2, 3, 4, 5, 6, 7];
   const drawing = () => {
-    return checkBoxNum.map((item, i) => 
+    return checkBoxNum.map((item, i) => (
       <ReportBoxAndTextWrap key={i}>
-          <Box width="16px" height="16px" margin="0px 0px 12px 0px"/>
-          <Box width="224px" height="16px" margin="0px 0px 20px 0px" />
+        <Box width="16px" height="16px" margin="0px 0px 12px 0px" />
+        <Box width="224px" height="16px" margin="0px 0px 20px 0px" />
       </ReportBoxAndTextWrap>
-      )}
+    ));
+  };
 
   return (
     <>
-      {
-        smallModalState &&
-          <ModalBackGround modalState={smallModalState}>
-            <Modal 
-              ref={modalEl} 
-              modalState={smallModalState}
-              width="400px"
-              height="480px"
-              topMargin="121px" 
-              leftMargin="556px">
-              <Btn
+      {smallModalState && (
+        <ModalBackGround modalState={smallModalState}>
+          <Modal
+            ref={modalEl}
+            modalState={smallModalState}
+            width="400px"
+            height="480px"
+            topMargin="121px"
+            leftMargin="556px"
+          >
+            <Btn
               width="9.69px"
-              height="9.69px" 
+              height="9.69px"
               margin="21.66px 20.66px 0px 369.66px"
-              onClick={() => setSmallModalState(false)}></Btn>
-              <Box width="250px" height="23px" margin="27px 0px 5px 75px"/>
-              <Box width="250px" height="14px" margin="0px 0px 15px 75px"/>
-              { drawing() }
-              <Box width="250px" height="100px" margin="0px 0px 15px 75px"/>
-              <Box width="46px" height="30px" margin="0px 0px 27px 177px"/>
-            </Modal>
-          </ModalBackGround>
-      }
+              onClick={() => setSmallModalState(false)}
+            ></Btn>
+            <Box width="250px" height="23px" margin="27px 0px 5px 75px" />
+            <Box width="250px" height="14px" margin="0px 0px 15px 75px" />
+            {drawing()}
+            <Box width="250px" height="100px" margin="0px 0px 15px 75px" />
+            <Box width="46px" height="30px" margin="0px 0px 27px 177px" />
+          </Modal>
+        </ModalBackGround>
+      )}
     </>
-  )
+  );
 }
 
 export default SmallModal;

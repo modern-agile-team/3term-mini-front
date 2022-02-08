@@ -18,7 +18,7 @@ import { Col, Row } from '../../style';
 const SelectBox = styled.div`
   outline: none;
   width: 100px;
-  padding: 14.5px 0;
+  padding: 15.3px 0;
   border: 1px solid #d6d6d6;
   background-color: #f9f9f9;
   color: #737373;
@@ -28,13 +28,9 @@ const SelectBox = styled.div`
   align-items: center;
   position: relative;
 
-  & select {
-    outline: none;
-    width: 100%;
-    height: fit-content;
-    border: none;
-    /* background-color: blue; */
-  }
+  /* & option {
+    background-color: lightcoral;
+  } */
 `;
 
 const Select = styled.select`
@@ -43,17 +39,37 @@ const Select = styled.select`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* &::-ms-expand {
-    display: none;
-  } */
+  outline: none;
+  width: 100%;
+  height: fit-content;
+  border: none;
 
-  /* -o-appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; */
-  option {
-    width: 80px;
+  &::-ms-expand {
+    display: none;
   }
+
+  width: inherit;
+  height: inherit;
+  background: transparent;
+  border: 0 none;
+  outline: 0 none;
+  padding: 0 5px;
+  position: relative;
+  z-index: 3;
+
+  & * {
+  }
+
+  /* -webkit-appearance: none;
+  appearance: none; */
+`;
+
+const Option = styled.option`
+  height: 100px;
+  background-color: blue;
+  color: gray;
+  padding: 3px 0;
+  font-size: 16px;
 `;
 
 const Input = styled.input`
@@ -217,8 +233,8 @@ function BoardPagePresenter() {
           <TitleDiv>{post.title}</TitleDiv>
           <br />
           <WrapToFlex>
-            <ImgWriterDateWrap>
-              <WriterImage src={BasicProfile} />
+            <ImgWriterDateWrap id={post.nickname}>
+              <WriterImage src={BasicProfile} onClick={clickEmoji} />
               <WriterDiv>{post.nickname}</WriterDiv>
               <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
             </ImgWriterDateWrap>
@@ -238,9 +254,9 @@ function BoardPagePresenter() {
 
   const showSortTypes = () =>
     sortTypes.map((sort, index) => (
-      <option key={index} value={index}>
+      <Option key={index} value={index}>
         {sort}
-      </option>
+      </Option>
     ));
 
   const selectedSort = (e) => {
@@ -262,15 +278,6 @@ function BoardPagePresenter() {
           <SelectBox name="sort">
             <Select onChange={selectedSort}>{showSortTypes()}</Select>
           </SelectBox>
-          {/* <SelectBox name="sort">
-            <select>
-              <option disabled selected>
-                정렬
-              </option>
-              <option value="last">추신수</option>
-              <option value="old">오래된순</option>
-            </select>
-          </SelectBox> */}
           <Box width="len12" padding="14px">
             <Row>
               <Input placeholder="검색어를 입력하세요." />

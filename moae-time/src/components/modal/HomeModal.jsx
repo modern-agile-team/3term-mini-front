@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import searchImg from '../../style/image/search.png';
 import everytime from '../../style/image/everytimeNoBack.png';
-import { Box, Button, Text } from '../';
+import { Box, Button, Text } from '../index';
 import { Col, Row, MainStyle } from '../../style';
 
 const LoginInput = styled(Col)`
@@ -104,10 +104,6 @@ const Icon = styled.img`
   top: 15px;
 `;
 
-const ToggleText = styled(Text)`
-  color: red;
-`;
-
 function HomeModal(props) {
   const { content, next, close } = props;
 
@@ -177,7 +173,8 @@ function HomeModal(props) {
           <Button
             onClick={onClickLogin}
             padding={'len2'}
-            borderRadius={'default'}>
+            borderRadius={'default'}
+          >
             {'로그인'}
           </Button>
         </LoginInput>
@@ -202,7 +199,8 @@ function HomeModal(props) {
             fontSize={'size8'}
             fontColor={'red'}
             backColor={'gray5'}
-            weight={'medium'}>
+            weight={'medium'}
+          >
             {'회원가입'}
           </Button>
         </Row>
@@ -277,7 +275,8 @@ function HomeModal(props) {
         <Label
           margin={'28px 0 6px 0'}
           display="inline-block"
-          fontSize={'size4'}>
+          fontSize={'size4'}
+        >
           {'학교'}
         </Label>
         <Row>
@@ -378,7 +377,8 @@ function HomeModal(props) {
             width="163px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray1'}>
+            fontColor={'gray1'}
+          >
             {'아래 약관에 모두 동의합니다.'}
           </Label>
         </div>
@@ -396,7 +396,8 @@ function HomeModal(props) {
             width="150px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'서비스이용약관 동의(필수)'}
           </Label>
         </div>
@@ -414,7 +415,8 @@ function HomeModal(props) {
             width="186px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'개인정보 수집 및 이용 동의 (필수)'}
           </Label>
         </div>
@@ -432,7 +434,8 @@ function HomeModal(props) {
             width="165px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'커뮤니티이용규칙 확인 (필수)'}
           </Label>
         </div>
@@ -450,7 +453,8 @@ function HomeModal(props) {
             width="158px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'광고성 정보 수신 동의 (선택)'}
           </Label>
         </div>
@@ -468,7 +472,8 @@ function HomeModal(props) {
             width="253px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray1'}>
+            fontColor={'gray1'}
+          >
             {'본인 명의를 이용하여 가입을 진행하겠습니다. (필수)'}
           </Label>
         </div>
@@ -485,7 +490,8 @@ function HomeModal(props) {
             htmlFor="check7"
             width="112px"
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'만 14세 이상입니다. (필수)'}
           </Label>
         </div>
@@ -501,7 +507,8 @@ function HomeModal(props) {
             padding={'len2'}
             fontSize={'size8'}
             weight={'bold'}
-            onClick={clickNext2}>
+            onClick={clickNext2}
+          >
             {'휴대폰 인증'}
           </Button>
         </Col>
@@ -519,7 +526,8 @@ function HomeModal(props) {
               checkResult[el] = checkedInputs.includes(el) ? 1 : 0;
             });
             console.log(checkResult);
-          }}>
+          }}
+        >
           {'아이핀 인증'}
         </Button>
       </Col>
@@ -546,9 +554,14 @@ function HomeModal(props) {
           fontSize={'size8'}
           fontColor={'gray1'}
         />
-        <ToggleText size={'size3'} color={'red'} padding={'len3'}>
+        {/* <ToggleText
+          className={'shibal'}
+          size={'size3'}
+          color={'red'}
+          padding={'len3'}
+        >
           {'중복된 아이디 입니다.'}
-        </ToggleText>
+        </ToggleText> */}
         <Label fontSize={'size4'} fontColor={'gray8'} margin={'12px 0 6px 0'}>
           {'비밀번호'}
         </Label>
