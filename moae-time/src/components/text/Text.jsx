@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { MainStyle } from '../../style';
 
-const Text = styled.span.attrs(
+const SpanText = styled.span.attrs(
   ({
     size = 'default',
     color = 'default',
@@ -21,5 +21,19 @@ const Text = styled.span.attrs(
   padding: ${(props) => props.padding};
   vertical-align: middle;
 `;
+
+function Text({ className, children, size, color, weight, padding }) {
+  return (
+    <SpanText
+      size={size}
+      color={color}
+      weight={weight}
+      padding={padding}
+      className={className}
+    >
+      {children}
+    </SpanText>
+  );
+}
 
 export default Text;

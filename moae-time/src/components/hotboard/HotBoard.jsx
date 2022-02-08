@@ -21,7 +21,7 @@ const NewText = styled(Text)`
   text-align: left;
 `;
 
-const HotBoard = () => {
+function HotBoard() {
   const hotBoards = [
     {
       id: 1,
@@ -53,7 +53,7 @@ const HotBoard = () => {
     hotBoards.map((board) => (
       <NewRow key={board.id} padding={'10px'}>
         <Row width={'len15'}>
-          <NewText>
+          <NewText className={'성제'}>
             <Link to="/board">{board.title}</Link>
           </NewText>
         </Row>
@@ -77,6 +77,6 @@ const HotBoard = () => {
       {showHotBoard()}
     </Col>
   );
-};
+}
 
 export default HotBoard;
