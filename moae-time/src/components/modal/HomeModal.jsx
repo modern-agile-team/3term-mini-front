@@ -27,7 +27,6 @@ const InvisibleText = styled.span.attrs(
   font-weight: ${(props) => props.weight};
   padding: ${(props) => props.padding};
   vertical-align: middle;
-  /* display: none; */
   display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
@@ -129,7 +128,7 @@ const Icon = styled.img`
 `;
 
 function HomeModal(props) {
-  const { content, next, close } = props;
+  const { content, next, close, data } = props;
 
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
@@ -206,7 +205,8 @@ function HomeModal(props) {
           <Button
             onClick={onClickLogin}
             padding={'len2'}
-            borderRadius={'default'}>
+            borderRadius={'default'}
+          >
             {'로그인'}
           </Button>
         </LoginInput>
@@ -231,7 +231,8 @@ function HomeModal(props) {
             fontSize={'size8'}
             fontColor={'red'}
             backColor={'gray5'}
-            weight={'medium'}>
+            weight={'medium'}
+          >
             {'회원가입'}
           </Button>
         </Row>
@@ -241,6 +242,14 @@ function HomeModal(props) {
 
   const [selectedYear, setSelectedYear] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState(false);
+  const [fixedYear, setFixedYear] = useState('');
+  const [getData, setData] = useState(props.data);
+  const [asd, setAsd] = useState({});
+
+  const getInfo = (e) => {
+    console.log('asd :>> ', asd);
+    setAsd({ ...asd, [e.target.id]: e.target.value });
+  };
 
   const targetYear = (e) => {
     setSelectedYear(e.target.value);
@@ -258,19 +267,29 @@ function HomeModal(props) {
     2020: 4,
     2021: 5,
   };
+
+  // 가입 O ->
+  // 1 >> 게시글 API <user id, no>
+  // 2 >> state -> null, 153
+
   const school = {
     인덕대학교: 0,
     광운대학교: 1,
   };
   const clickNext = () => {
-    selectedYear && selectedSchool ? next() : alert('모두 선택해주세요');
-    console.log(
-      'year, school',
-      year[selectedYear],
-      selectedYear,
-      school[selectedSchool],
-      selectedSchool
-    );
+    setFixedYear(year[selectedYear]);
+    // console.log('selectedYear :>> ', selectedYear);
+    // console.log('fixedYear :>> ', fixedYear);
+    selectedYear && selectedSchool
+      ? next(selectedYear)
+      : alert('모두 선택해주세요');
+    // console.log(
+    //   'year, school',
+    //   year[selectedYear],
+    //   selectedYear,
+    //   school[selectedSchool],
+    //   selectedSchool
+    // );
     // console.log(
     //   'selectedYear, selectedSchool :>> ',
     //   selectedYear,
@@ -325,7 +344,8 @@ function HomeModal(props) {
         <Label
           margin={'28px 0 6px 0'}
           display="inline-block"
-          fontSize={'size4'}>
+          fontSize={'size4'}
+        >
           {'학교'}
         </Label>
         <Row>
@@ -363,20 +383,20 @@ function HomeModal(props) {
     setAllChecked(!allChecked);
     if (checked) {
       setCheckedInputs([1, 2, 3, 4, 5, 6]);
-      console.log('전체 선택 완료');
+      // console.log('전체 선택 완료');
     } else {
       setCheckedInputs([]);
-      console.log('전체 해제 완료');
+      // console.log('전체 해제 완료');
     }
   };
 
   const changeHandler = (checked, id) => {
     if (checked) {
       setCheckedInputs([...checkedInputs, id]);
-      console.log('체크 반영 완료');
+      // console.log('체크 반영 완료');
     } else {
       setCheckedInputs(checkedInputs.filter((el) => el !== id));
-      console.log('체크 해제 반영 완료');
+      // console.log('체크 해제 반영 완료');
     }
   };
 
@@ -388,17 +408,18 @@ function HomeModal(props) {
     }
   }, [checkedInputs]);
 
-  const clickNext2 = () => {
+  const clickNext2 = (data) => {
     checkedInputs.includes(1) &&
     checkedInputs.includes(2) &&
     checkedInputs.includes(3) &&
     checkedInputs.includes(5) &&
     checkedInputs.includes(6)
-      ? next()
+      ? next(data)
       : alert('필수 항목을 모두 체크해주세요.');
   };
 
-  const joinModal2 = (selectedYear) => {
+  const joinModal2 = () => {
+    console.log('asdlkfjsdal;gnslg :>> ', data);
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 26px'}>
@@ -420,7 +441,8 @@ function HomeModal(props) {
             width="163px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray1'}>
+            fontColor={'gray1'}
+          >
             {'아래 약관에 모두 동의합니다.'}
           </Label>
         </div>
@@ -438,7 +460,8 @@ function HomeModal(props) {
             width="150px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'서비스이용약관 동의(필수)'}
           </Label>
         </div>
@@ -456,7 +479,8 @@ function HomeModal(props) {
             width="186px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'개인정보 수집 및 이용 동의 (필수)'}
           </Label>
         </div>
@@ -474,7 +498,8 @@ function HomeModal(props) {
             width="165px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'커뮤니티이용규칙 확인 (필수)'}
           </Label>
         </div>
@@ -492,7 +517,8 @@ function HomeModal(props) {
             width="158px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'광고성 정보 수신 동의 (선택)'}
           </Label>
         </div>
@@ -510,7 +536,8 @@ function HomeModal(props) {
             width="253px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray1'}>
+            fontColor={'gray1'}
+          >
             {'본인 명의를 이용하여 가입을 진행하겠습니다. (필수)'}
           </Label>
         </div>
@@ -527,7 +554,8 @@ function HomeModal(props) {
             htmlFor="check7"
             width="112px"
             fontSize={'size5'}
-            fontColor={'gray3'}>
+            fontColor={'gray3'}
+          >
             {'만 14세 이상입니다. (필수)'}
           </Label>
         </div>
@@ -543,10 +571,11 @@ function HomeModal(props) {
             padding={'len2'}
             fontSize={'size8'}
             weight={'bold'}
-            onClick={(selectedYear) => {
-              console.log('selectedYear', selectedYear);
-              clickNext2();
-            }}>
+            onClick={() => {
+              // console.log(`data={getData}`, data);
+              clickNext2(data);
+            }}
+          >
             {'휴대폰 인증'}
           </Button>
         </Col>
@@ -557,22 +586,22 @@ function HomeModal(props) {
           fontColor={'gray3'}
           weight={'bold'}
           onClick={() => {
-            console.log(checkedInputs);
+            // console.log(checkedInputs);
             const checkResult = {};
             const check = [1, 2, 3, 4, 5, 6];
             check.forEach((el) => {
               checkResult[el] = checkedInputs.includes(el) ? 1 : 0;
             });
-            console.log(checkResult);
-          }}>
+            // console.log(checkResult);
+          }}
+        >
           {'아이핀 인증'}
         </Button>
       </Col>
     );
   };
 
-  let regEmail =
-    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
   const joinInputId = useRef(null);
   const joinInputPassword = useRef(null);
@@ -594,6 +623,8 @@ function HomeModal(props) {
           {'아이디'}
         </Label>
         <InputInfo
+          id={'id'}
+          onChange={getInfo}
           type={'text'}
           placeholder={'아이디를 입력하세요.'}
           ref={joinInputId}
@@ -607,13 +638,15 @@ function HomeModal(props) {
           visible={idVisible}
           size={'size3'}
           color={'red'}
-          padding={'len3'}>
+          padding={'len3'}
+        >
           {'중복된 아이디 입니다.'}
         </InvisibleText>
         <Label fontSize={'size4'} fontColor={'gray8'} margin={'12px 0 6px 0'}>
           {'비밀번호'}
         </Label>
         <InputInfo
+          onChange={getInfo}
           type={'password'}
           placeholder={'비밀번호를 입력하세요.'}
           ref={joinInputPassword}
@@ -627,6 +660,7 @@ function HomeModal(props) {
           {'이메일'}
         </Label>
         <InputInfo
+          onChange={getInfo}
           type={'email'}
           placeholder={'이메일을 입력하세요.'}
           ref={joinInputMail}
@@ -640,13 +674,15 @@ function HomeModal(props) {
           visible={MailVisible}
           size={'size3'}
           color={'red'}
-          padding={'len3'}>
+          padding={'len3'}
+        >
           {'올바르지 않은 형식입니다.'}
         </InvisibleText>
         <Label fontSize={'size4'} fontColor={'gray8'} margin={'12px 0 6px 0'}>
           {'닉네임'}
         </Label>
         <InputInfo
+          onChange={getInfo}
           placeholder={'닉네임을 입력하세요.'}
           ref={joinInputNickname}
           margin={'0 0 -9px 0'}
@@ -659,15 +695,18 @@ function HomeModal(props) {
           visible={nicknameVisible}
           size={'size3'}
           color={'red'}
-          padding={'len3'}>
+          padding={'len3'}
+        >
           {'중복된 닉네임입니다.'}
         </InvisibleText>
         <Col padding={'28px 0 0 0'}>
           <Button
             padding={'len2'}
             onClick={() => {
-              console.log('year', year);
-              console.log('selectedYear', selectedYear);
+              console.log(`asd`, asd);
+              // console.log('year', year);
+              // console.log('selectedYear', selectedYear);
+              // console.log(`data`, data);
               dataResult.id = joinInputId.current.value;
               dataResult.password = joinInputPassword.current.value;
               dataResult.mail = joinInputMail.current.value;
@@ -685,10 +724,10 @@ function HomeModal(props) {
                 alert('모두 입력해주세요.');
               } else {
                 if (regEmail.test(dataResult.mail) === true) {
-                  console.log('올바른 이메일 형식');
+                  // console.log('올바른 이메일 형식');
                   setMailVisible(false);
                 } else {
-                  console.log('잘못된 이메일 형식');
+                  // console.log('잘못된 이메일 형식');
                   setMailVisible(true);
                   joinInputMail.current.value = '';
                   dataResult.mail = '';
@@ -698,13 +737,13 @@ function HomeModal(props) {
                   joinInputNickname.current.value = '';
                   dataResult.nickname = '';
                 }
-                console.log('dataResult.id :>> ', dataResult.id);
-                console.log('dataResult.password :>> ', dataResult.password);
-                console.log('dataResult.mail :>> ', dataResult.mail);
-                console.log('dataResult.nickname :>> ', dataResult.nickname);
-                console.log('dataResult.year :>> ', dataResult.year);
-                console.log('dataResult.school :>> ', dataResult.school);
-                console.log('dataResult', dataResult);
+                // console.log('dataResult.id :>> ', dataResult.id);
+                // console.log('dataResult.password :>> ', dataResult.password);
+                // console.log('dataResult.mail :>> ', dataResult.mail);
+                // console.log('dataResult.nickname :>> ', dataResult.nickname);
+                // console.log('dataResult.year :>> ', dataResult.year);
+                // console.log('dataResult.school :>> ', dataResult.school);
+                // console.log('dataResult', dataResult);
               }
               // const dataResult = {
               //   id: '',
@@ -730,7 +769,8 @@ function HomeModal(props) {
               // 성공하면
               // close();
             }}
-            weight={'bold'}>
+            weight={'bold'}
+          >
             {'회원가입'}
           </Button>
         </Col>
