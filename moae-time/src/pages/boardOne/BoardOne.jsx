@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -30,34 +31,14 @@ const Input = styled.input`
   vertical-align: top;
 `;
 
-function BoardOne() {
-  const comments = [
-    { commentId: 1, userName: '성제', date: '02/13 08:13', content: '123' },
-    { commentId: 2, userName: 'Lee', date: '02/13 08:13', content: '456' },
-    { commentId: 3, userName: 'Kim', date: '02/13 08:13', content: '789' },
-  ];
+function BoardOne(props) {
+  const boardNo = useParams();
+  // const userNo = useParams();
+  // console.log('userNo :>> ', userNo);
 
-  const deleteComment = () => {
-    console.log('1 :>> ', '삭제 시이이이이이잉이바');
-  };
-
-  const showComments = () =>
-    comments.map((comment) => (
-      <Fragment key={comment.commentId}>
-        <Row padding="5px 0 0" key={comments.commentId}>
-          <div>
-            <Text>icon</Text>
-            <Text>{comment.userName}</Text>
-          </div>
-          {<button onClick={deleteComment}>삭제</button>}
-        </Row>
-        <Row>
-          <Text>{comment.content}</Text>
-          <Text>{comment.date}</Text>
-        </Row>
-      </Fragment>
-    ));
-
+  const [boardOneState, setBoardOneState] = useState(null);
+  const [commentsState, setCommentsState] = useState(null);
+  
   const [content, setContent] = useState(
     'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!'
   );
@@ -66,6 +47,45 @@ function BoardOne() {
   const clickEdit = () => {
     setIsEdit(!isEdit);
   };
+
+  useEffect(() => {
+    axios
+      .get(`http://3.36.125.16:8080/moae/board/connect/${boardNo.boardId}/14`)
+      .then((res) => {
+        setBoardOneState(res.data.boardData)
+        setCommentsState(res.data.comments)
+      })
+      .catch((err) =>{console.log('err', err)})
+  }, [])
+  
+//boardOneState.boardData.nickname == 작성자 이름
+//boardOneState.boardData.boardInDate == 날짜
+//boardOneState.boardData.title == 제목
+//boardOneState.boardData.description == 내용
+//boardOneState.boardData.hit == 조회수
+
+  const deleteComment = () => {
+    console.log('1 :>> ', '삭제 시이이이이이잉이바');
+  };
+
+  const showComments = () => {
+    return commentsState && commentsState.slice(0, 5).map((comment) => {
+    return (
+      <Fragment key={comment.cmtId}>
+        <Row padding="5px 0 0" key={comment.nickname}>
+          <div>
+            <Text>icon</Text>
+            <Text>{comment.nickname}</Text>
+          </div>
+          {<button onClick={deleteComment}>삭제</button>}
+        </Row>
+        <Row>
+          <Text>{comment.description}</Text>
+          <Text>{comment.inDate}</Text>
+        </Row>
+      </Fragment>
+      )})};
+
 
   const { boardId } = useParams();
 
@@ -87,21 +107,21 @@ function BoardOne() {
               <div>icon</div>
               <Col>
                 <Row>
-                  <Text color={'gray1'}>작성자 이름</Text>
+                  <Text color={'gray1'}>{boardOneState && boardOneState.nickname}</Text>
                   <div>
                     <Link to={`/board/${boardId}/edit`}>수정</Link>
                     <button>삭제</button>
                   </div>
                 </Row>
-                <Col align="flex-start">날짜</Col>
+                <Col align="flex-start">{boardOneState && boardOneState.boardInDate}</Col>
               </Col>
             </Row>
-            <h1>게시글 제목</h1>
+            <h1>{boardOneState && boardOneState.title}</h1>
             <ContentBox>{content}</ContentBox>
             <Row>
               <div>
-                <span>댓글 수</span>
-                <span>조회 수</span>
+                <span>댓글수:{boardOneState && boardOneState.comments_length}</span>
+                <span>조회수:{boardOneState && boardOneState.hit}</span>
               </div>
             </Row>
           </Col>
