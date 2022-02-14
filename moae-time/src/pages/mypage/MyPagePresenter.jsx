@@ -1,141 +1,259 @@
 import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BigModal, Box, PageNation } from '../../components';
+import { Text, Box, PageNation } from '../../components';
+import { Row, Col } from '../../style';
+import { Link } from 'react-router-dom';
 import dummyBoard from '../../apis/dummyBoard.json';
-import SmallModal from '../../components/smallmodal/SmallModal';
+import SchoolImg from '../../style/image/school.png';
+import MajorImg from '../../style/image/major.png';
+import BoardImg from '../../style/image/board.png';
+import LikeImg from '../../style/image/like.png';
+import InputImage from '../../style/image/inputImage.png';
 
-
-const MyPageWrap = styled.div`
-  width: 1168px;
-  height: 790px;
-
-  margin-left: 172px;
-  margin-top: 25px;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background-color: #f0e9e9;
+const MyBoardsWrapper = styled(Row)`
+  padding: 0 0 13px;
+  & > div {
+    border-top: 1px #d6d6d6 solid;
+  }
 `;
 
-const LeftWrap = styled.div`
-  width: 479px;
-  height: 710px;
-
-  margin-top: 15px;
-
+const ProfileCircle = styled(Box)`
+  width: 155px;
+  height: 155px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background-color: #cfc3c3;
+  border-radius: 50%;
 `;
 
-const RightWrap = styled.div`
-  display: flex;
-  align-items: flex-start;
-  margin-top: 15px;
+const Img = styled.div`
+  width: 27px;
+  height: 25px;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center auto;
+  margin-bottom: 15px;
 `;
 
+const ProfileCol = styled(Col)`
+  & > * {
+    margin-bottom: 5px;
+  }
+  & :last-child {
+    margin-bottom: 0;
+  }
+`;
 
+const SpecsRow = styled(Col)`
+  margin-bottom: 5px;
+`;
 
-const ProfileAndTextWrap = styled.div`
-  width: 200px;
-  height: 212px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: yellow;
+const ProfileImg = styled.div`
+  width: 40px;
+  height: 40px;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center auto;
+  cursor: pointer;
 `;
 
 function MyPagePresenter() {
-  const [myPageNation, setMyPageNation] = useState(0)
+  const [myPageNation, setMyPageNation] = useState(0);
 
   const clickPageNationOne = () => {
-    setMyPageNation(0)
-  }
+    setMyPageNation(0);
+  };
 
   const clickPageNationTwo = () => {
-    setMyPageNation(1)
-  }
-  
+    setMyPageNation(1);
+  };
+
   const clickPageNationThr = () => {
-    setMyPageNation(2)
-  }
+    setMyPageNation(2);
+  };
 
   const clickRight = () => {
-    if(myPageNation < 2) {
-    setMyPageNation(myPageNation+1)
+    if (myPageNation < 2) {
+      setMyPageNation(myPageNation + 1);
     } else {
-    setMyPageNation(0)
+      setMyPageNation(0);
     }
-  }
+  };
 
   const clickLeft = () => {
-    if(myPageNation > 0) {
-      setMyPageNation(myPageNation-1)
-      } else {
-      setMyPageNation(2)
-      }
-  }
+    if (myPageNation > 0) {
+      setMyPageNation(myPageNation - 1);
+    } else {
+      setMyPageNation(2);
+    }
+  };
 
-  const start = myPageNation*14
-  const end = myPageNation*14+14;
+  const start = myPageNation * 14;
+  const end = myPageNation * 14 + 14;
 
-  useEffect(() => {
-    console.log('myPageNation :>> ', myPageNation);
-  }, [myPageNation]);
-
-  const mayPageMap = () =>
+  const showMyBoards = () =>
     dummyBoard.slice(start, end).map((post) => {
       return (
-        <>
-          <Box padding="10px">{post.title}, {post.inDate}</Box>
-        </>
-      )
+        <MyBoardsWrapper>
+          <Row padding={'13px 13px 0'}>
+            <Text size={'size7'} color={'gray2'}>
+              <Link to={'/board'}>{post.title}</Link>
+            </Text>
+            <Text size={'size3'} color={'gray4'}>
+              {post.inDate}
+            </Text>
+          </Row>
+        </MyBoardsWrapper>
+      );
     });
 
+  const specs = [
+    {
+      id: 1,
+      name: 'school',
+      content: 'School',
+      img: SchoolImg,
+    },
+    {
+      id: 2,
+      name: 'major',
+      content: 'Major',
+      img: MajorImg,
+    },
+    {
+      id: 3,
+      name: 'boards',
+      content: 'Boards',
+      img: BoardImg,
+    },
+    {
+      id: 4,
+      name: 'likes',
+      content: 'likes',
+      img: LikeImg,
+    },
+  ];
+
+  const specButtons = () =>
+    specs.map((spec) => (
+      <Col>
+        <Img img={spec.img}></Img>
+        <Text size={'size5'} color={'gray2'}>
+          {spec.content}
+        </Text>
+      </Col>
+    ));
+
+  const editList = [
+    {
+      id: 1,
+      name: 'certification',
+      content: '학교 인증',
+    },
+    {
+      id: 2,
+      name: 'change password',
+      content: '비밀번호 변경',
+    },
+    {
+      id: 3,
+      name: 'change Email',
+      content: '이메일 변경',
+    },
+    {
+      id: 4,
+      name: 'Q and A',
+      content: '문의사항',
+    },
+    {
+      id: 5,
+      name: 'notice',
+      content: '공지사항',
+    },
+    {
+      id: 6,
+      name: 'terms',
+      content: '이용 약관',
+    },
+  ];
+
+  const showEditList = () =>
+    editList.map((list) => (
+      <MyBoardsWrapper key={list.id}>
+        <Row padding={'13px 13px 0'}>
+          <Text size={'size7'} color={'gray2'}>
+            <Link to={'/notice'}>{list.content}</Link>
+          </Text>
+          {/* <Img
+            img={ButtonImg}
+            alt=""
+            onClick={() => {
+              alert(list.content);
+            }}
+          /> */}
+        </Row>
+      </MyBoardsWrapper>
+    ));
+
   return (
-    <MyPageWrap>
+    <Col padding={'25px 172px 32px'}>
       <Box width={'len11'} padding={'16px'}>
         <h2>마이페이지</h2>
       </Box>
-      <LeftWrap>
-        <ProfileAndTextWrap>
-          <Box width={'len14'} padding={'10px'}>
-            프로필
+      <Row padding={'5px 0 0'}>
+        <Col width={'len4'}>
+          <ProfileCol padding={'30px 0 21px'}>
+            <ProfileCircle>
+              <Col>
+                <ProfileImg
+                  img={InputImage}
+                  onClick={() => {
+                    alert('input ur image');
+                  }}
+                />
+              </Col>
+            </ProfileCircle>
+            <Col
+              onClick={() => {
+                alert('프로필 편집');
+              }}
+            >
+              <Text size={'size3'} color={'gray4'}>
+                프로필 편집
+              </Text>
+            </Col>
+            <Text size={'size11'} color={'gray2'}>
+              사용자 이름
+            </Text>
+          </ProfileCol>
+          <SpecsRow padding={''}>
+            <Box padding={'10px'}>
+              <Row>{specButtons()}</Row>
+            </Box>
+          </SpecsRow>
+          <Box>{showEditList()}</Box>
+        </Col>
+        <Col width={'len21'}>
+          <Box>
+            <Text color={'green'} size={'size7'} padding={'len7'}>
+              내가 쓴 게시물
+            </Text>
+            {showMyBoards()}
+            <Row padding={'0 0 20px 250px'}>
+              <PageNation
+                clickPageNationOne={clickPageNationOne}
+                clickPageNationTwo={clickPageNationTwo}
+                clickPageNationThr={clickPageNationThr}
+                clickLeft={clickLeft}
+                clickRight={clickRight}
+              />
+            </Row>
           </Box>
-          <Box width={'len1'} padding={'10px'}>
-            프로필 편집
-          </Box>
-          <Box width={'len15'} padding={'10px'}>
-            사용자 이름(닉네임)
-          </Box>
-        </ProfileAndTextWrap>
-        <Box width='479px' height='90px' margin='30px 0px 0px 0px'>
-          사용자 정보
-        </Box>
-        <Box width='479px' height='362px'>
-          인증 등등
-        </Box>
-      </LeftWrap>
-      <RightWrap>
-        <Box width='673px' height='720px'>
-          <Box width="len7" padding="10px">내가 쓴 게시물</Box>
-          {mayPageMap()}
-          <Box padding="0 0 0 35%">
-            <PageNation 
-            clickPageNationOne={clickPageNationOne}
-            clickPageNationTwo={clickPageNationTwo} 
-            clickPageNationThr={clickPageNationThr}
-            clickLeft={clickLeft} 
-            clickRight={clickRight}/>
-          </Box>
-        </Box>
-      </RightWrap>
-    </MyPageWrap>
+        </Col>
+      </Row>
+    </Col>
   );
 }
 

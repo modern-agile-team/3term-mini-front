@@ -177,8 +177,8 @@ function BoardPagePresenter() {
   const [modalState, setModalState] = useState(false);
   const [smallModalState, setSmallModalState] = useState(false);
   const [idState, setIdState] = useState(null);
-  const [DESCState, setDESCState] =useState(null);
-  const [ASCState, setASCState] =useState(null);
+  const [DESCState, setDESCState] = useState(null);
+  const [ASCState, setASCState] = useState(null);
   const [sortType, setSortType] = useState(0);
 
   const sortTypes = ['최신순', '오래된순'];
@@ -191,28 +191,28 @@ function BoardPagePresenter() {
     ));
 
   useEffect(() => {
-//    sortType -> 1 => 오래된순 받고
-//    sortType -> 0 => 기본, 최신순
-//    최신인 것 : "http://3.36.125.16:8080/moae/board/sort?order=DESC"
+    //    sortType -> 1 => 오래된순 받고
+    //    sortType -> 0 => 기본, 최신순
+    //    최신인 것 : "http://3.36.125.16:8080/moae/board/sort?order=DESC"
     axios
-      .get("http://3.36.125.16:8080/moae/board/sort?order=DESC")
+      .get('http://3.36.125.16:8080/moae/board/sort?order=DESC')
       .then((res) => {
-        setDESCState(res.data.order)
+        setDESCState(res.data.order);
       })
       .catch((err) => {
         console.log('err :>> ', err);
-      })
+      });
 
-//    오래된 것 : "http://3.36.125.16:8080/moae/board/sort?order=ASC"
+    //    오래된 것 : "http://3.36.125.16:8080/moae/board/sort?order=ASC"
     axios
-      .get("http://3.36.125.16:8080/moae/board/sort?order=ASC")
+      .get('http://3.36.125.16:8080/moae/board/sort?order=ASC')
       .then((res) => {
-        setASCState(res.data.order)
+        setASCState(res.data.order);
       })
       .catch((err) => {
         console.log('err :>> ', err);
-      })
-  }, [])
+      });
+  }, []);
   // console.log('sortType :>> ', sortType);
   // console.log('DESC :>> ', DESCState);
   // console.log('ASC :>> ', ASCState);
@@ -251,44 +251,43 @@ function BoardPagePresenter() {
   // const reverseDummy = dummyBoard.postsData.map((post) => {});
 
   const clickEmoji = (e) => {
-    setModalState(true)
-    setIdState(e.target.parentElement.id)
-  }
-  // console.log('sortType', sortType);
-  // console.log('DESCState :>> ', DESCState);
-  // console.log('ASCState :>> ', ASCState);
+    setModalState(true);
+    setIdState(e.target.parentElement.id);
+  };
 
   const selectedSort = (e) => {
     setSortType(e.target.value);
+    console.log('e.target.value :>> ', e.target.value);
   };
 
   const mapToWrite = (way) => {
-    const lists = Number(way) ? DESCState : ASCState;
-    return lists && lists.slice(start, end).map((post) => {
-      return (
-        <WholeWrap key={post.postId}>
-          <TitleDiv>{post.title}</TitleDiv>
-          <br />
-          <WrapToFlex>
-            <ImgWriterDateWrap id={post.nickname}>
-              <WriterImage 
-              onClick={clickEmoji}
-              src={BasicProfile} />
-              <WriterDiv>{post.nickname}</WriterDiv>
-              <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
-            </ImgWriterDateWrap>
-            <CommentsAndViewsWrap>
-              <Text color={'green'} size={'size3'}>
-                댓글 수 {post.comments_length}
-              </Text>
-              <ViewsDiv>조회수 {post.hit}</ViewsDiv>
-            </CommentsAndViewsWrap>
-          </WrapToFlex>
-          <BottomLine />
-        </WholeWrap>
-      );
-    })};
-
+    const lists = way ? ASCState : DESCState;
+    return (
+      lists &&
+      lists.slice(start, end).map((post) => {
+        return (
+          <WholeWrap key={post.postId}>
+            <TitleDiv>{post.title}</TitleDiv>
+            <br />
+            <WrapToFlex>
+              <ImgWriterDateWrap id={post.nickname}>
+                <WriterImage onClick={clickEmoji} src={BasicProfile} />
+                <WriterDiv>{post.nickname}</WriterDiv>
+                <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
+              </ImgWriterDateWrap>
+              <CommentsAndViewsWrap>
+                <Text color={'green'} size={'size3'}>
+                  댓글 수 {post.comments_length}
+                </Text>
+                <ViewsDiv>조회수 {post.hit}</ViewsDiv>
+              </CommentsAndViewsWrap>
+            </WrapToFlex>
+            <BottomLine />
+          </WholeWrap>
+        );
+      })
+    );
+  };
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -308,9 +307,7 @@ function BoardPagePresenter() {
           </Box>
           <Button>사진</Button>
         </Row>
-        <Box>
-          {mapToWrite(sortType)}
-        </Box>
+        <Box>{mapToWrite(sortType)}</Box>
         <PageNation
           clickPageNationOne={clickPageNationOne}
           clickPageNationTwo={clickPageNationTwo}
@@ -337,6 +334,3 @@ function BoardPagePresenter() {
 }
 
 export default BoardPagePresenter;
-
-
-
