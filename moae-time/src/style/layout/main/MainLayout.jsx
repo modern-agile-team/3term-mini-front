@@ -103,6 +103,7 @@ function Layout(props) {
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
+  const [getData, setData] = useState(null);
 
   const handleModalState = (modalVisible) => {
     // loginModal 에 대한 토글
@@ -111,18 +112,23 @@ function Layout(props) {
 
   const clickNext = () => {
     // joinModal1로 전환
+    // 로그인창에서 next
     setModalVisible(false);
+
     setModalVisible1(true);
   };
 
-  const clickNext1 = () => {
+  const clickNext1 = (data) => {
     // joinModal2로 전환
+    setData(data);
     setModalVisible1(false);
     setModalVisible2(true);
   };
 
-  const clickNext2 = () => {
+  const clickNext2 = (data) => {
     // joinModal3로 전환
+    setData(data);
+    // console.log('getData :>> ', getData);
     setModalVisible2(false);
     setModalVisible3(true);
   };
@@ -215,9 +221,10 @@ function Layout(props) {
             width="len7"
             close={closeModal}
             padding={'71px 105px'}
+            data={getData}
             next={clickNext2}
           >
-            {<HomeModal content={'joinModal2'}></HomeModal>}
+            {<HomeModal content={'joinModal2'} data={getData}></HomeModal>}
           </Alert>
         )}
         {modalVisible3 && (
@@ -227,7 +234,7 @@ function Layout(props) {
             close={closeModal}
             padding={'90px 105px'}
           >
-            {<HomeModal content={'joinModal3'}></HomeModal>}
+            {<HomeModal content={'joinModal3'} data={getData}></HomeModal>}
           </Alert>
         )}
         <div>
