@@ -14,6 +14,7 @@ import {
   HotBoard,
 } from '../../components';
 import { Col, Row } from '../../style';
+import { BoardOne } from '..';
 
 const SelectBox = styled.div`
   outline: none;
@@ -159,10 +160,6 @@ const CommentsAndViewsWrap = styled.div`
   font-size: 12px;
 `;
 
-const CommentsNumDiv = styled.div`
-  margin-right: 30px;
-`;
-
 const ViewsDiv = styled.div`
   margin-right: 19px;
 `;
@@ -191,31 +188,24 @@ function BoardPagePresenter() {
     ));
 
   useEffect(() => {
-    //    sortType -> 1 => 오래된순 받고
-    //    sortType -> 0 => 기본, 최신순
-    //    최신인 것 : "http://3.36.125.16:8080/moae/board/sort?order=DESC"
     axios
       .get('http://3.36.125.16:8080/moae/board/sort?order=DESC')
       .then((res) => {
         setDESCState(res.data.order);
       })
       .catch((err) => {
-        console.log('err :>> ', err);
-      });
+        alert('err :>> ', err);
+      })
 
-    //    오래된 것 : "http://3.36.125.16:8080/moae/board/sort?order=ASC"
     axios
       .get('http://3.36.125.16:8080/moae/board/sort?order=ASC')
       .then((res) => {
         setASCState(res.data.order);
       })
       .catch((err) => {
-        console.log('err :>> ', err);
-      });
-  }, []);
-  // console.log('sortType :>> ', sortType);
-  // console.log('DESC :>> ', DESCState);
-  // console.log('ASC :>> ', ASCState);
+        alert(err);
+      })
+  }, [])
 
   const clickPageNationOne = () => {
     setPageNation(0);
@@ -248,12 +238,10 @@ function BoardPagePresenter() {
   const start = pageNation * 6;
   const end = pageNation * 6 + 6;
 
-  // const reverseDummy = dummyBoard.postsData.map((post) => {});
-
   const clickEmoji = (e) => {
-    setModalState(true);
-    setIdState(e.target.parentElement.id);
-  };
+    setModalState(true)
+    setIdState(e.target.parentElement.id)
+  }
 
   const selectedSort = (e) => {
     setSortType(e.target.value);
@@ -261,17 +249,18 @@ function BoardPagePresenter() {
   };
 
   const mapToWrite = (way) => {
-    const lists = way ? ASCState : DESCState;
-    return (
-      lists &&
-      lists.slice(start, end).map((post) => {
-        return (
+    const lists = Number(way) ? DESCState : ASCState;
+    return lists && lists.slice(start, end).map((post) => {
+      return (
+        <Link to={`/board/${post.no}`}>
           <WholeWrap key={post.postId}>
             <TitleDiv>{post.title}</TitleDiv>
             <br />
             <WrapToFlex>
               <ImgWriterDateWrap id={post.nickname}>
-                <WriterImage onClick={clickEmoji} src={BasicProfile} />
+                <WriterImage 
+                onClick={clickEmoji}
+                src={BasicProfile} />
                 <WriterDiv>{post.nickname}</WriterDiv>
                 <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
               </ImgWriterDateWrap>
@@ -284,10 +273,10 @@ function BoardPagePresenter() {
             </WrapToFlex>
             <BottomLine />
           </WholeWrap>
-        );
-      })
-    );
-  };
+        </Link>
+      );
+    })};
+
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
