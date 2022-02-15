@@ -104,6 +104,7 @@ function Layout(props) {
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
   const [getData, setData] = useState(null);
+  const [getCheckResult, setCheckResult] = useState(null);
 
   const handleModalState = (modalVisible) => {
     // loginModal 에 대한 토글
@@ -118,16 +119,18 @@ function Layout(props) {
     setModalVisible1(true);
   };
 
-  const clickNext1 = (data) => {
+  const clickNext1 = (data, checkResult) => {
     // joinModal2로 전환
     setData(data);
+    setCheckResult(checkResult);
     setModalVisible1(false);
     setModalVisible2(true);
   };
 
-  const clickNext2 = (data) => {
+  const clickNext2 = (data, checkResult) => {
     // joinModal3로 전환
     setData(data);
+    setCheckResult(checkResult);
     // console.log('getData :>> ', getData);
     setModalVisible2(false);
     setModalVisible3(true);
@@ -161,8 +164,7 @@ function Layout(props) {
           size={'size8'}
           weight={'medium'}
           color={target[path === menu.url]}
-          underline={path === menu.url}
-        >
+          underline={path === menu.url}>
           {menu.name}
           {path === menu.url && <UnderLine></UnderLine>}
         </Menu>
@@ -199,8 +201,7 @@ function Layout(props) {
             width="len7"
             close={closeModal}
             padding={'144px 133px'}
-            next={clickNext}
-          >
+            next={clickNext}>
             {<HomeModal content={'loginModal'}></HomeModal>}
           </Alert>
         )}
@@ -210,8 +211,7 @@ function Layout(props) {
             width="len7"
             close={closeModal}
             padding={'124px 105px'}
-            next={clickNext1}
-          >
+            next={clickNext1}>
             {<HomeModal content={'joinModal1'}></HomeModal>}
           </Alert>
         )}
@@ -222,8 +222,8 @@ function Layout(props) {
             close={closeModal}
             padding={'71px 105px'}
             data={getData}
-            next={clickNext2}
-          >
+            checkResult={getCheckResult}
+            next={clickNext2}>
             {<HomeModal content={'joinModal2'} data={getData}></HomeModal>}
           </Alert>
         )}
@@ -232,9 +232,13 @@ function Layout(props) {
             visible={modalVisible3}
             width="len7"
             close={closeModal}
-            padding={'90px 105px'}
-          >
-            {<HomeModal content={'joinModal3'} data={getData}></HomeModal>}
+            padding={'90px 105px'}>
+            {
+              <HomeModal
+                content={'joinModal3'}
+                data={getData}
+                checkResult={getCheckResult}></HomeModal>
+            }
           </Alert>
         )}
         <div>
@@ -257,8 +261,7 @@ function Layout(props) {
               width={'len20'}
               borderRadius={'radius2'}
               padding={'len1'}
-              onClick={() => handleModalState(modalVisible)}
-            >
+              onClick={() => handleModalState(modalVisible)}>
               {'로그인'}
             </Button>
           </MenuWrapper>
