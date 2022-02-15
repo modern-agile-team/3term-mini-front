@@ -85,8 +85,11 @@ function SmallModal(props) {
   const drawing = () => {
     return checkBoxNum.map((item, i) => (
       <ReportBoxAndTextWrap key={i}>
-        <Box width="16px" height="16px" margin="0px 0px 12px 0px" />
-        <Box width="224px" height="16px" margin="0px 0px 20px 0px" />
+        <Box width="16px" height="16px" margin="0px 0px 12px 0px">
+          <input type="checkbox" />
+        </Box>
+        <Box width="224px" height="16px" margin="0px 0px 20px 0px">
+        </Box>
       </ReportBoxAndTextWrap>
     ));
   };

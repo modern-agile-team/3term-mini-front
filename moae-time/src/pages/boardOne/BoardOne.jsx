@@ -16,7 +16,8 @@ import { Col, Row } from '../../style';
 const ContentBox = styled(Box)`
   border: none;
   max-height: 173px;
-  overflow: scroll;
+  overflow: auto;
+  overflow-x:hidden
 `;
 
 const Input = styled.input`
@@ -31,22 +32,11 @@ const Input = styled.input`
   vertical-align: top;
 `;
 
-function BoardOne(props) {
+function BoardOne() {
   const boardNo = useParams();
-  // const userNo = useParams();
-  // console.log('userNo :>> ', userNo);
 
   const [boardOneState, setBoardOneState] = useState(null);
   const [commentsState, setCommentsState] = useState(null);
-  
-  const [content, setContent] = useState(
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus laborum consequatur nostrum molestiae evenietnihil, tempore sequi eos nesciunt iusto maiores temporibus doloresquas dolore quis quos! Quae, beatae laboriosam!'
-  );
-  const [isEdit, setIsEdit] = useState(false);
-
-  const clickEdit = () => {
-    setIsEdit(!isEdit);
-  };
 
   useEffect(() => {
     axios
@@ -55,29 +45,62 @@ function BoardOne(props) {
         setBoardOneState(res.data.boardData)
         setCommentsState(res.data.comments)
       })
-      .catch((err) =>{console.log('err', err)})
+      .catch((err) =>{
+        alert(err.response.data.msg)
+      })
   }, [])
-  
-//boardOneState.boardData.nickname == 작성자 이름
-//boardOneState.boardData.boardInDate == 날짜
-//boardOneState.boardData.title == 제목
-//boardOneState.boardData.description == 내용
-//boardOneState.boardData.hit == 조회수
 
-  const deleteComment = () => {
-    console.log('1 :>> ', '삭제 시이이이이이잉이바');
+const deletePost = () => {
+  axios
+    .delete(`http://3.36.125.16:8080/moae/board/deleteBoard/${boardNo.boardId}`)
+    .then((res) => {
+      // alert(res.data.msg)
+      setTimeout(() => {alert(res.data.msg)}, 500)
+    })
+    .catch((err) => {
+      alert(err.response.data.msg)
+    })
+};
+
+  // const creatComment = () => {
+  //   console.log('creatCommet :>> ', commentsState);
+  //   axios
+  //     .post(`http://3.36.125.16:8080/moae/comment**`, {
+  //       // "userNo" : 1,
+  //       // "boardNo" : 1,
+  //       // "description" : "애자일 파이팅."
+  //   })
+  //     .then((res) => {
+  //       console.log('res', res)
+  //     })
+  //     .catch((err) => {
+  //       console.log('에러 : ', err.response.data.msg)
+  //     })
+  // };  
+
+  const deleteComment = (cmtId) => {
+    console.log('commentsState :>> ', commentsState);
+    axios
+      .delete(`http://3.36.125.16:8080/moae/comment/${cmtId}`)
+      .then((res) => {
+        console.log('res :>> ', res);
+      })
+      .catch((err) => {
+        console.log('에러 :>> ', err.response);
+      })
+      setCommentsState([...commentsState].filter((comment) => comment.cmtId !== cmtId));
   };
 
   const showComments = () => {
     return commentsState && commentsState.slice(0, 5).map((comment) => {
     return (
       <Fragment key={comment.cmtId}>
-        <Row padding="5px 0 0" key={comment.nickname}>
+        <Row padding="5px 0 0" >
           <div>
             <Text>icon</Text>
             <Text>{comment.nickname}</Text>
           </div>
-          {<button onClick={deleteComment}>삭제</button>}
+          <button onClick={() => deleteComment(comment.cmtId)}>삭제</button>
         </Row>
         <Row>
           <Text>{comment.description}</Text>
@@ -85,9 +108,6 @@ function BoardOne(props) {
         </Row>
       </Fragment>
       )})};
-
-
-  const { boardId } = useParams();
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -109,18 +129,20 @@ function BoardOne(props) {
                 <Row>
                   <Text color={'gray1'}>{boardOneState && boardOneState.nickname}</Text>
                   <div>
-                    <Link to={`/board/${boardId}/edit`}>수정</Link>
-                    <button>삭제</button>
+                    <Link to={`/board/${boardNo.boardId}/edit`}>수정</Link>
+                    <Link to={"/board"}>
+                      <button onClick={deletePost}>삭제</button>
+                    </Link>
                   </div>
                 </Row>
                 <Col align="flex-start">{boardOneState && boardOneState.boardInDate}</Col>
               </Col>
             </Row>
             <h1>{boardOneState && boardOneState.title}</h1>
-            <ContentBox>{content}</ContentBox>
+            <ContentBox>{boardOneState && boardOneState.description}</ContentBox>
             <Row>
               <div>
-                <span>댓글수:{boardOneState && boardOneState.comments_length}</span>
+                <span>댓글:{boardOneState && boardOneState.comments_length}   </span>
                 <span>조회수:{boardOneState && boardOneState.hit}</span>
               </div>
             </Row>
@@ -136,7 +158,7 @@ function BoardOne(props) {
                 </Row>
               </div>
               <div>
-                <span>버튼</span>
+                {/* <button onClick={creatComment}>버튼</button> */}
               </div>
             </Row>
           </Box>
@@ -147,7 +169,11 @@ function BoardOne(props) {
           </Box>
         </Col>
         <div>
-          <button>글목록</button>
+          <button>
+            <Link to='/board'>
+              글목록
+            </Link>
+          </button>
         </div>
       </Col>
       <Box width="len3">

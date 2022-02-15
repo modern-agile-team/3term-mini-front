@@ -9,8 +9,6 @@ import MajorImg from '../../style/image/major.png';
 import BoardImg from '../../style/image/board.png';
 import LikeImg from '../../style/image/like.png';
 import InputImage from '../../style/image/inputImage.png';
-// import SmallModal from '../../components/smallmodal/SmallModal';
-// import axios from 'axios';
 const MyBoardsWrapper = styled(Row)`
   padding: 0 0 13px;
   & > div {
@@ -109,28 +107,7 @@ function MyPagePresenter() {
         </MyBoardsWrapper>
       );
     });
-    // useEffect(() => {
-    //   axios
-    //     .get("http://3.36.125.16:8080/moae/board/sort?order=ASC")
-    //     .then((res) => {
-    //       setMyPageData(res.data.order);
-    //     })
-    //     .catch((err) => {
-    //       alert(err);
-    //     })
-    // }, []);
-    // console.log('myPageData :>> ', myPageData);
-  
-  
-    // const mayPageMap = () => {
-    //   const myPageLists = myPageData;
-    //   return myPageLists && myPageLists.slice(start, end).map((post) => {
-    //     return (
-    //       <div key={post.no} >
-    //         <Box padding="10px">{post.title}, {post.inDate}, {post.nickname}</Box>
-    //       </div>
-    //     )
-    //   })};
+    
   const specs = [
     {
       id: 1,
@@ -208,13 +185,6 @@ function MyPagePresenter() {
           <Text size={'size7'} color={'gray2'}>
             <Link to={'/notice'}>{list.content}</Link>
           </Text>
-          {/* <Img
-            img={ButtonImg}
-            alt=""
-            onClick={() => {
-              alert(list.content);
-            }}
-          /> */}
         </Row>
       </MyBoardsWrapper>
     ));

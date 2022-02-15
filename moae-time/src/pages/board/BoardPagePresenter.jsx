@@ -245,16 +245,16 @@ function BoardPagePresenter() {
 
   const selectedSort = (e) => {
     setSortType(e.target.value);
-    console.log('e.target.value :>> ', e.target.value);
   };
 
   const mapToWrite = (way) => {
-    const lists = Number(way) ? DESCState : ASCState;
+    const lists = Number(way) ? ASCState : DESCState;
     return lists && lists.slice(start, end).map((post) => {
       return (
-        <Link to={`/board/${post.no}`}>
           <WholeWrap key={post.postId}>
-            <TitleDiv>{post.title}</TitleDiv>
+            <Link to={`/board/${post.no}`}>
+              <TitleDiv>{post.title}</TitleDiv>
+            </Link>
             <br />
             <WrapToFlex>
               <ImgWriterDateWrap id={post.nickname}>
@@ -264,16 +264,17 @@ function BoardPagePresenter() {
                 <WriterDiv>{post.nickname}</WriterDiv>
                 <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
               </ImgWriterDateWrap>
-              <CommentsAndViewsWrap>
-                <Text color={'green'} size={'size3'}>
-                  댓글 수 {post.comments_length}
-                </Text>
-                <ViewsDiv>조회수 {post.hit}</ViewsDiv>
-              </CommentsAndViewsWrap>
+              <Link to={`/board/${post.no}`}>
+                <CommentsAndViewsWrap>
+                  <Text color={'green'} size={'size3'}>
+                    댓글 수 {post.comments_length}
+                  </Text>
+                  <ViewsDiv>조회수 {post.hit}</ViewsDiv>
+                </CommentsAndViewsWrap>
+              </Link>
             </WrapToFlex>
             <BottomLine />
           </WholeWrap>
-        </Link>
       );
     })};
 
