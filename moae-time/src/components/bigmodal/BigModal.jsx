@@ -122,8 +122,10 @@ function BigModal(props) {
     setModalState,
     smallModalState,
     setSmallModalState,
-    idState,
+    nicknameState,
+    userNoState
   } = props;
+
   const handleClickOutside = ({ target }) => {
     if (modalState && !modalEl.current.contains(target)) setModalState(false);
   };
@@ -157,6 +159,7 @@ function BigModal(props) {
               <SmallModal
                 smallModalState={smallModalState}
                 setSmallModalState={setSmallModalState}
+                userNoState={userNoState}
               />
               <BtnWrap>
                 <ReportBtnWrap>
@@ -181,7 +184,7 @@ function BigModal(props) {
               <CenterWrap CenterWrap>
                 <WriterImage src={BasicProfile} />
                 <Box width="200px" height="32px" margin="0px 0px 51px 0px">
-                  {idState}
+                  {nicknameState}
                 </Box>
                 <Box
                   width="232px"

@@ -173,7 +173,8 @@ function BoardPagePresenter() {
   const [pageNation, setPageNation] = useState(0);
   const [modalState, setModalState] = useState(false);
   const [smallModalState, setSmallModalState] = useState(false);
-  const [idState, setIdState] = useState(null);
+  const [nicknameState, setNicknameState] = useState(null);
+  const [userNoState, setUserNoState] = useState(null);
   const [DESCState, setDESCState] = useState(null);
   const [ASCState, setASCState] = useState(null);
   const [sortType, setSortType] = useState(0);
@@ -239,32 +240,33 @@ function BoardPagePresenter() {
   const end = pageNation * 6 + 6;
 
   const clickEmoji = (e) => {
-    setModalState(true)
-    setIdState(e.target.parentElement.id)
+    setModalState(true);
+    setNicknameState(e.target.parentElement.id);
+    setUserNoState(e.target.id);
   }
 
   const selectedSort = (e) => {
     setSortType(e.target.value);
   };
-
   const mapToWrite = (way) => {
     const lists = Number(way) ? ASCState : DESCState;
     return lists && lists.slice(start, end).map((post) => {
       return (
-          <WholeWrap key={post.postId}>
-            <Link to={`/board/${post.no}`}>
+          <WholeWrap key={post.boardNo}>
+            <Link to={`/board/${post.boardNo}`}>
               <TitleDiv>{post.title}</TitleDiv>
             </Link>
             <br />
-            <WrapToFlex>
+            <WrapToFlex >
               <ImgWriterDateWrap id={post.nickname}>
-                <WriterImage 
+                <WriterImage
+                id={post.userNo} 
                 onClick={clickEmoji}
                 src={BasicProfile} />
                 <WriterDiv>{post.nickname}</WriterDiv>
                 <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
               </ImgWriterDateWrap>
-              <Link to={`/board/${post.no}`}>
+              <Link to={`/board/${post.boardNo}`}>
                 <CommentsAndViewsWrap>
                   <Text color={'green'} size={'size3'}>
                     댓글 수 {post.comments_length}
@@ -292,10 +294,12 @@ function BoardPagePresenter() {
           <Box width="len12" padding="14px">
             <Row>
               <Input placeholder="검색어를 입력하세요." />
-              <span>{'사진'}</span>
+              <span>{'돋보기'}</span>
             </Row>
           </Box>
-          <Button>사진</Button>
+          <Link to={`/board/write`}>
+            <Button>작성</Button>
+          </Link>
         </Row>
         <Box>{mapToWrite(sortType)}</Box>
         <PageNation
@@ -317,7 +321,8 @@ function BoardPagePresenter() {
         setModalState={setModalState}
         smallModalState={smallModalState}
         setSmallModalState={setSmallModalState}
-        idState={idState}
+        nicknameState={nicknameState}
+        userNoState={userNoState}
       />
     </Row>
   );

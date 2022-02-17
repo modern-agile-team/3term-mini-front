@@ -1,6 +1,7 @@
 import { React, useRef, useEffect, useState } from 'react';
 import { Box } from '..';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Modal = styled.div.attrs(
   ({ modalState, width, height, topMargin, leftMargin }) => ({
@@ -67,7 +68,7 @@ const Btn = styled.button.attrs(({ height, width, margin }) => ({
 
 function SmallModal(props) {
   const modalEl = useRef();
-  const { smallModalState, setSmallModalState } = props;
+  const { smallModalState, setSmallModalState, userNoState } = props;
 
   const handleClickOutside = ({ target }) => {
     if (smallModalState && !modalEl.current.contains(target))
@@ -81,17 +82,91 @@ function SmallModal(props) {
     };
   }, [smallModalState]);
 
-  const checkBoxNum = [1, 2, 3, 4, 5, 6, 7];
+  const reportTypes = [
+    {
+      no: 1,
+      content: '욕설및비방',
+    },
+    {
+      no: 2,
+      content: '개인정보요구',
+    },
+    {
+      no: 3,
+      content: '사기',
+    },
+    {
+      no: 4,
+      content: '사적인연락',
+    },
+    {
+      no: 5,
+      content: '도배',
+    },
+    {
+      no: 6,
+      content: '선정적인게시물',
+    },
+    {
+      no: 7,
+      content: '폭력적위협',
+    },
+  ];
+
+  const [checkState, setCheckState] = useState([]);
+
+  const checkedHandler = (checked, id) => {
+    if (checkState.length < 3) {
+      if (checked) {
+        setCheckState([...checkState, id]);
+      } else {
+        setCheckState(checkState.filter((el) => el !== id));
+      }
+    } else {
+      setCheckState(checkState.filter((el) => el !== id));
+      alert('3개 이상 안됨');
+    }
+  };
+
+  const [reportDescription, setReportDescription] = useState('');
+  const onChange = (e) => {
+    setReportDescription(e.target.value);
+  };
+
   const drawing = () => {
-    return checkBoxNum.map((item, i) => (
-      <ReportBoxAndTextWrap key={i}>
-        <Box width="16px" height="16px" margin="0px 0px 12px 0px">
-          <input type="checkbox" />
+    return reportTypes.map((item) => (
+      <ReportBoxAndTextWrap key={item.no}>
+        <Box wnoth='16px' height='16px' margin='0px 0px 12px 0px'>
+          <input
+            type='checkbox'
+            onChange={(e) => checkedHandler(e.currentTarget.checked, item.no)}
+            checked={checkState.includes(item.no) ? true : false}
+          />
         </Box>
-        <Box width="224px" height="16px" margin="0px 0px 20px 0px">
+        <Box width='224px' height='16px' margin='0px 0px 20px 0px'>
+          {item.content}
         </Box>
       </ReportBoxAndTextWrap>
     ));
+  };
+
+
+  const sendReport = () => {
+    console.log('`userNoState` :>> ', userNoState);
+    axios
+      .post(`http://3.36.125.16:8080/moae/report/user`, 
+      {
+        "reportedUserNo": userNoState,
+        "reportUserNo": 100,
+        "description": `${reportDescription}`,
+        "reportId": checkState,
+      })
+      .then((res) => {
+        console.log('res', res)
+      })
+      .catch((err) => {
+        console.log('err', err.response)
+      });
   };
 
   return (
@@ -101,22 +176,31 @@ function SmallModal(props) {
           <Modal
             ref={modalEl}
             modalState={smallModalState}
-            width="400px"
-            height="480px"
-            topMargin="121px"
-            leftMargin="556px"
+            width='400px'
+            height='480px'
+            topMargin='121px'
+            leftMargin='556px'
           >
             <Btn
-              width="9.69px"
-              height="9.69px"
-              margin="21.66px 20.66px 0px 369.66px"
+              width='9.69px'
+              height='9.69px'
+              margin='21.66px 20.66px 0px 369.66px'
               onClick={() => setSmallModalState(false)}
-            ></Btn>
-            <Box width="250px" height="23px" margin="27px 0px 5px 75px" />
-            <Box width="250px" height="14px" margin="0px 0px 15px 75px" />
+            >
+              x
+            </Btn>
+            <Box width='250px' height='23px' margin='27px 75px 5px 75px' />
+            <Box width='250px' height='14px' margin='0px 75px 15px 75px' />
             {drawing()}
-            <Box width="250px" height="100px" margin="0px 0px 15px 75px" />
-            <Box width="46px" height="30px" margin="0px 0px 27px 177px" />
+            <input onChange={onChange} placeholder='내용 작성' />
+            <Btn
+              width='46px'
+              height='30px'
+              margin='15px 177px 27px'
+              onClick={() => sendReport()}
+            >
+              전송
+            </Btn>
           </Modal>
         </ModalBackGround>
       )}
