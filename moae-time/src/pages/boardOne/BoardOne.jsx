@@ -34,13 +34,12 @@ const Input = styled.input`
 
 function BoardOne() {
   const boardNo = useParams();
-
   const [boardOneState, setBoardOneState] = useState(null);
   const [commentsState, setCommentsState] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`http://3.36.125.16:8080/moae/board/connect/${boardNo.boardId}/14`)
+      .get(`http://3.36.125.16:8080/moae/board/connect/${boardNo.boardId}/8`)
       .then((res) => {
         setBoardOneState(res.data.boardData)
         setCommentsState(res.data.comments)
@@ -49,12 +48,10 @@ function BoardOne() {
         alert(err.response.data.msg)
       })
   }, [])
-
 const deletePost = () => {
   axios
     .delete(`http://3.36.125.16:8080/moae/board/deleteBoard/${boardNo.boardId}`)
     .then((res) => {
-      // alert(res.data.msg)
       setTimeout(() => {alert(res.data.msg)}, 500)
     })
     .catch((err) => {
@@ -62,24 +59,9 @@ const deletePost = () => {
     })
 };
 
-  // const creatComment = () => {
-  //   console.log('creatCommet :>> ', commentsState);
-  //   axios
-  //     .post(`http://3.36.125.16:8080/moae/comment**`, {
-  //       // "userNo" : 1,
-  //       // "boardNo" : 1,
-  //       // "description" : "애자일 파이팅."
-  //   })
-  //     .then((res) => {
-  //       console.log('res', res)
-  //     })
-  //     .catch((err) => {
-  //       console.log('에러 : ', err.response.data.msg)
-  //     })
-  // };  
+  //     .post(`http://3.36.125.16:8080/moae/comment**`)
 
   const deleteComment = (cmtId) => {
-    console.log('commentsState :>> ', commentsState);
     axios
       .delete(`http://3.36.125.16:8080/moae/comment/${cmtId}`)
       .then((res) => {
@@ -108,6 +90,10 @@ const deletePost = () => {
         </Row>
       </Fragment>
       )})};
+
+    // 콘솔
+    console.log('commentsState :>> ', commentsState);
+    // console.log('boardOneState :>> ', boardOneState);
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
