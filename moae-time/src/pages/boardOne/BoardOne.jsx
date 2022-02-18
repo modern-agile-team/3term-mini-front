@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import BasicProfile from '../../style/image/BasicProfile.png';
 import {
   Box,
   SideBar,
@@ -36,9 +37,10 @@ function BoardOne() {
   const boardNo = useParams();
   const [boardOneState, setBoardOneState] = useState(null);
   const [commentsState, setCommentsState] = useState(null);
+  const [postCommentState, setPostCommentState] = useState();
 
-  useEffect(() => {
-    axios
+    const getBoardOneData = () => {
+      axios
       .get(`http://3.36.125.16:8080/moae/board/connect/${boardNo.boardId}/8`)
       .then((res) => {
         setBoardOneState(res.data.boardData)
@@ -47,20 +49,44 @@ function BoardOne() {
       .catch((err) =>{
         alert(err.response.data.msg)
       })
+    }
+    
+  useEffect(() => {
+    getBoardOneData()
   }, [])
-const deletePost = () => {
-  axios
-    .delete(`http://3.36.125.16:8080/moae/board/deleteBoard/${boardNo.boardId}`)
+  
+  const deletePost = () => {
+    axios
+      .delete(`http://3.36.125.16:8080/moae/board/deleteBoard/${boardNo.boardId}`)
+      .then((res) => {
+        setTimeout(() => {alert(res.data.msg)}, 500)
+      })
+      .catch((err) => {
+        alert(err.response.data.msg)
+      })
+  };
+
+  const commentValue = (e) => {
+    setPostCommentState(e.target.value);
+  }
+
+  const postComment = (e) => {
+    const postData = {
+      "userNo" : 14,
+      "boardNo" : boardOneState.boardNo,
+      "description" : `${postCommentState}`
+    }
+    e.target && axios
+    .post('http://3.36.125.16:8080/moae/comment', postData)
     .then((res) => {
-      setTimeout(() => {alert(res.data.msg)}, 500)
+      console.log('res :>> ', res);
+      getBoardOneData()
     })
     .catch((err) => {
-      alert(err.response.data.msg)
+      console.log('err.response', err.response)
     })
-};
-
-  //     .post(`http://3.36.125.16:8080/moae/comment**`)
-
+  }
+    
   const deleteComment = (cmtId) => {
     axios
       .delete(`http://3.36.125.16:8080/moae/comment/${cmtId}`)
@@ -91,9 +117,6 @@ const deletePost = () => {
       </Fragment>
       )})};
 
-    // 콘솔
-    console.log('commentsState :>> ', commentsState);
-
   return (
     <Row padding="25px 172px 0px" align="flex-start">
       <Col width="len8" align="flex-start">
@@ -109,7 +132,7 @@ const deletePost = () => {
         <Box width="len8" padding="15px">
           <Col align="flex-start">
             <Row>
-              <div>icon</div>
+              <img src={BasicProfile}></img>
               <Col>
                 <Row>
                   <Text color={'gray1'}>{boardOneState && boardOneState.nickname}</Text>
@@ -139,11 +162,14 @@ const deletePost = () => {
               <div>
                 <Row>
                   <div>icon</div>
-                  <input type="text" placeholder="댓글을 입력하세요." />
+                  <input 
+                  type="text" 
+                  placeholder="댓글을 입력하세요."
+                  onChange={commentValue} />
                 </Row>
               </div>
               <div>
-                <button>작성</button>
+              <button onClick={postComment}>작성</button>
               </div>
             </Row>
           </Box>
