@@ -93,7 +93,6 @@ const deletePost = () => {
 
     // 콘솔
     console.log('commentsState :>> ', commentsState);
-    // console.log('boardOneState :>> ', boardOneState);
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -144,7 +143,7 @@ const deletePost = () => {
                 </Row>
               </div>
               <div>
-                {/* <button onClick={creatComment}>버튼</button> */}
+                <button>작성</button>
               </div>
             </Row>
           </Box>

@@ -49,6 +49,8 @@ function App() {
         <Route
           path="/QandA"
           element={<MainLayout main={<h1>{'Q & A니까 나가'}</h1>} />}
+        />
+        <Route
           path="/board/write"
           element={<MainLayout main={<BoardWritePresenter />} />}
         />
