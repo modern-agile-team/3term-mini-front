@@ -34,7 +34,6 @@ const InvisibleText = styled.span.attrs(
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   position: absolute;
   top: 3px;
-  /* display: ${(props) => (props.visible ? 'block' : 'none')}; */
 `;
 
 const LoginInput = styled(Col)`
@@ -135,10 +134,15 @@ const Icon = styled.img`
 `;
 
 function HomeModal(props) {
-  const { content, next, close, data, checkResult } = props;
+  const { content, next, close, data, checkResult, func } = props;
 
+  const [userNo, setUserNo] = useState(0);
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
+
+  const getUserNoInModal = (number) => {
+    setUserNo(number ? func(number) : func(number));
+  };
 
   const handleInputId = (e) => {
     setInputId(e.target.value);
@@ -158,6 +162,7 @@ function HomeModal(props) {
         })
         .then((res) => {
           alert(res.data.msg);
+          getUserNoInModal(res.data.userNo);
           if (res.data.success) {
             close();
           }
@@ -263,10 +268,6 @@ function HomeModal(props) {
     2021: 5,
   };
 
-  // 가입 O ->
-  // 1 >> 게시글 API <user id, no>
-  // 2 >> state -> null, 153
-
   const school = {
     광운대학교: 0,
     인덕대학교: 1,
@@ -368,20 +369,16 @@ function HomeModal(props) {
     setAllChecked(!allChecked);
     if (checked) {
       setCheckedInputs([0, 1, 2, 3, 4, 5]);
-      // console.log('전체 선택 완료');
     } else {
       setCheckedInputs([]);
-      // console.log('전체 해제 완료');
     }
   };
 
   const changeHandler = (checked, id) => {
     if (checked) {
       setCheckedInputs([...checkedInputs, id]);
-      // console.log('체크 반영 완료');
     } else {
       setCheckedInputs(checkedInputs.filter((el) => el !== id));
-      // console.log('체크 해제 반영 완료');
     }
   };
 
@@ -404,7 +401,6 @@ function HomeModal(props) {
   };
 
   const joinModal2 = () => {
-    // console.log('asdlkfjsdal;gnslg :>> ', data);
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 26px'}>
@@ -556,7 +552,6 @@ function HomeModal(props) {
                 checkResult[el] = checkedInputs.includes(el) ? true : false;
               });
               console.log(1234, checkResult);
-              // console.log(`data={getData}`, data);
               clickNext2(data, checkResult);
             }}>
             {'휴대폰 인증'}
@@ -569,7 +564,6 @@ function HomeModal(props) {
           fontColor={'gray3'}
           weight={'bold'}
           onClick={() => {
-            // console.log(checkedInputs);
             const checkResult = {};
             const check = [0, 1, 2, 3, 4, 5];
             check.forEach((el) => {
@@ -596,8 +590,6 @@ function HomeModal(props) {
   const [nicknameVisible, setNicknameVisible] = useState(false);
 
   const joinModal3 = () => {
-    // console.log('123456 :>> ', data);
-    // console.log('7777 :>> ', checkResult);
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 16px'}>
@@ -713,7 +705,6 @@ function HomeModal(props) {
                 console.log('올바른 이메일 형식');
                 setMailVisible2(false);
               } else {
-                // alert('잘못된 이메일 형식');
                 setMailVisible(false);
                 setMailVisible2(true);
                 joinInputMail.current.value = '';
@@ -746,13 +737,11 @@ function HomeModal(props) {
                       )
                       .then((res) => {
                         console.log(res.data.msg);
-                        // 성공하면
                         close();
                       })
                       .catch((error) => {
                         console.log(error.response.data.msg);
                       });
-                    // console.log('checkResult', checkResult);
                   })
                   .catch((error) => {
                     console.log(error.response.data.msg);
@@ -783,7 +772,6 @@ function HomeModal(props) {
     joinModal2: joinModal2(),
     joinModal3: joinModal3(),
     undefined: <div>잘못된 경로입니다</div>,
-    // switch - case => lookup table
   };
 
   const renderMain = () => {

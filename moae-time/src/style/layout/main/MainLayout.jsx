@@ -5,6 +5,7 @@ import { MainStyle } from '../../';
 import { Link, useParams, useLocation, useHistory } from 'react-router-dom';
 import { Row, Col } from '../../';
 import EveryTime from '../../image/everytime.png';
+import { HomePage } from '../../../pages';
 
 const WholeWrapper = styled.div`
   margin: 0;
@@ -105,10 +106,17 @@ function Layout(props) {
   const [modalVisible3, setModalVisible3] = useState(false);
   const [getData, setData] = useState(null);
   const [getCheckResult, setCheckResult] = useState(null);
+  const [getLoginUserData, setLoginUserData] = useState(null);
 
-  const handleModalState = (modalVisible) => {
+  const getUserNo = (userNo) => {
+    console.log('MainLayout--Console :>> ', userNo);
+    setLoginUserData(userNo);
+  };
+
+  const handleModalState = (modalVisible, loginUserData) => {
     // loginModal 에 대한 토글
     setModalVisible(!modalVisible);
+    setLoginUserData(loginUserData);
   };
 
   const clickNext = () => {
@@ -131,7 +139,6 @@ function Layout(props) {
     // joinModal3로 전환
     setData(data);
     setCheckResult(checkResult);
-    // console.log('getData :>> ', getData);
     setModalVisible2(false);
     setModalVisible3(true);
   };
@@ -172,10 +179,6 @@ function Layout(props) {
     ));
   };
 
-  // useEffect(() => {
-  //   console.log('path :>> ', path);
-  // });
-
   const footerMenu = [
     { name: '이용약관', url: '/notice' },
     { name: '개인정보처리방침', url: '/notice' },
@@ -202,7 +205,7 @@ function Layout(props) {
             close={closeModal}
             padding={'144px 133px'}
             next={clickNext}>
-            {<HomeModal content={'loginModal'}></HomeModal>}
+            {<HomeModal func={getUserNo} content={'loginModal'}></HomeModal>}
           </Alert>
         )}
         {modalVisible1 && (
@@ -212,7 +215,7 @@ function Layout(props) {
             close={closeModal}
             padding={'124px 105px'}
             next={clickNext1}>
-            {<HomeModal content={'joinModal1'}></HomeModal>}
+            {<HomeModal func={getUserNo} content={'joinModal1'}></HomeModal>}
           </Alert>
         )}
         {modalVisible2 && (
@@ -224,7 +227,12 @@ function Layout(props) {
             data={getData}
             checkResult={getCheckResult}
             next={clickNext2}>
-            {<HomeModal content={'joinModal2'} data={getData}></HomeModal>}
+            {
+              <HomeModal
+                func={getUserNo}
+                content={'joinModal2'}
+                data={getData}></HomeModal>
+            }
           </Alert>
         )}
         {modalVisible3 && (
@@ -235,6 +243,7 @@ function Layout(props) {
             padding={'90px 105px'}>
             {
               <HomeModal
+                func={getUserNo}
                 content={'joinModal3'}
                 data={getData}
                 checkResult={getCheckResult}></HomeModal>
@@ -267,7 +276,7 @@ function Layout(props) {
           </MenuWrapper>
         </div>
       </HeaderBox>
-      <MainBox>{main}</MainBox>
+      <MainBox id={getLoginUserData}>{main}</MainBox>
       <FooterBox>{footerButtons()}</FooterBox>
     </WholeWrapper>
   );

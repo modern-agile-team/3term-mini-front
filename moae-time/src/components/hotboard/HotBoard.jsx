@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Text } from '../';
 import { Col, Row, MainStyle } from '../../style';
+import axios from 'axios';
 
 const NewRow = styled(Row)`
   & {
@@ -22,39 +23,19 @@ const NewText = styled(Text)`
 `;
 
 function HotBoard() {
-  const hotBoards = [
-    {
-      id: 1,
-      title: '핫 게시물인데 글자가 길어지면 어쩌라는',
-      date: '02/01',
-      time: '08:30',
-    },
-    {
-      id: 2,
-      title: '이렇게?',
-      date: '02/01',
-      time: '08:30',
-    },
-    {
-      id: 3,
-      title: '하라고요?',
-      date: '02/01',
-      time: '08:30',
-    },
-    {
-      id: 4,
-      title: '네네 우리는 따까리니까요',
-      date: '02/01',
-      time: '08:30',
-    },
-  ];
+  let [hotBoards, setHotBoards] = useState([]);
+  useEffect(() => {
+    axios.get('http://3.36.125.16:8080/moae/board/hotBoard').then((res) => {
+      setHotBoards(res.data.hotBoard);
+    });
+  }, []);
 
   const showHotBoard = () =>
     hotBoards.map((board) => (
-      <NewRow key={board.id} padding={'10px'}>
+      <NewRow key={board.no} padding={'10px'}>
         <Row width={'len15'}>
-          <NewText className={'성제'}>
-            <Link to="/board">{board.title}</Link>
+          <NewText>
+            <Link to={`/board/${board.no}`}>{board.title}</Link>
           </NewText>
         </Row>
         <Text size={'size2'}>{board.date}</Text>
