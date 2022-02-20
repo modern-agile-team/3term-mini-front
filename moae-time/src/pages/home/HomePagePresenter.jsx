@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Box, Text, Button } from '../../components';
-import { Col, Row } from '../../style';
+import { Col, Row, MainStyle } from '../../style';
 import { HotBoard } from '../../components';
 import ProfileImg from '../../style/image/BasicProfile.png';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const HomeLayout = styled.div`
   display: flex;
@@ -39,7 +41,6 @@ const SideAdBox = styled.div`
   border: none;
   width: 100%;
   height: 120px;
-  /* background-color: #f9f9f9; */
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   background-size: cover;
@@ -60,11 +61,79 @@ const TopAd = styled(Box)`
   margin: 0 0 17px;
 `;
 
-function HomePage({ showProfile, showBoards }) {
-  // api 만들면 => state
+const NewRow = styled(Row)`
+  & {
+    border-top: 1px solid ${MainStyle.checkColor.gray9};
+  }
+`;
 
+const NewText = styled(Text)`
+  display: block;
+  width: ${MainStyle.checkWidth.len16};
+  font-size: ${MainStyle.checkFontSize.size7};
+  font-weight: ${MainStyle.checkWeight.light} !important;
+  color: ${MainStyle.checkColor.gray2};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+`;
+
+function HomePage() {
+  const [loginUserInfo, setLoginUserInfo] = useState({
+    userNickname: '',
+    userId: '',
+    userMail: '',
+  });
+
+  const homePageCompo = useRef(null);
+  const [userNo, setUserNo] = useState(0);
+
+  useEffect(() => {
+    let loginNo = homePageCompo.current.parentElement.id;
+    setUserNo(Number(loginNo));
+  });
+
+  useEffect(() => {
+    axios.get(`http://3.36.125.16:8080/moae/profile/${userNo}`).then((res) => {
+      setLoginUserInfo({
+        userNickname: res.data.profile.nickname,
+        userId: res.data.profile.id,
+        userMail: res.data.profile.mail,
+      });
+    });
+  }, [userNo]);
+
+  const showProfile = () => (
+    <>
+      <span>{loginUserInfo.userNickname}</span>
+      <span>{loginUserInfo.userId}</span>
+      <span>{loginUserInfo.userMail}</span>
+    </>
+  );
+
+  let [board, setBoard] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://3.36.125.16:8080/moae/board').then((res) => {
+      setBoard(res.data);
+    });
+  }, []);
+
+  const showBoards = () => {
+    return board.slice(0, 5).map((board) => (
+      <NewRow key={board.boardNo} padding={'10px'}>
+        <Row width={'len5'}>
+          <NewText>
+            <Link to={`/board/${board.boardNo}`}>{board.title}</Link>
+          </NewText>
+          <Text size={'size2'}>{board.inDate}</Text>
+        </Row>
+      </NewRow>
+    ));
+  };
   return (
-    <HomeLayout>
+    <HomeLayout ref={homePageCompo}>
       <Side>
         <Box padding={'32px 16px'}>
           <Col>
@@ -80,8 +149,7 @@ function HomePage({ showProfile, showBoards }) {
                 padding={'len6'}
                 backColor={'gray5'}
                 fontColor={'gray3'}
-                border={'1px solid #D6D6D6'}
-              >
+                border={'1px solid #D6D6D6'}>
                 {'내 정보'}
               </Button>
               <Button
@@ -91,8 +159,7 @@ function HomePage({ showProfile, showBoards }) {
                 padding={'len6'}
                 backColor={'gray5'}
                 fontColor={'gray3'}
-                border={'1px solid #D6D6D6'}
-              >
+                border={'1px solid #D6D6D6'}>
                 {'로그아웃'}
               </Button>
             </Row>
