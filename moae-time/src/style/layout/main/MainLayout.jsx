@@ -5,6 +5,7 @@ import { MainStyle } from '../../';
 import { Link, useParams, useLocation, useHistory } from 'react-router-dom';
 import { Row, Col } from '../../';
 import EveryTime from '../../image/everytime.png';
+import MyPage from '../../image/mypage.png';
 import { HomePage } from '../../../pages';
 
 const WholeWrapper = styled.div`
@@ -46,8 +47,11 @@ const MenuWrapper = styled.div`
   }
 
   & :nth-last-child(2) {
-    margin-right: 70px;
+    margin-right: 60px;
   }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MainBox = styled.div`
@@ -95,6 +99,25 @@ const UnderLine = styled.div`
   width: 100%;
   height: 3px;
   background-color: #c62935;
+`;
+
+const MyPageBox = styled(Link)`
+  display: inline-block;
+  padding: 11px 14px;
+  width: 41px;
+  height: 41px;
+  border: 0.5px solid #c4c4c4;
+  border-radius: 14px;
+  cursor: pointer;
+`;
+
+const MyPageIcon = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 `;
 
 function Layout(props) {
@@ -266,13 +289,19 @@ function Layout(props) {
         <div>
           <MenuWrapper>
             {menuButtons()}
-            <Button
-              width={'len20'}
-              borderRadius={'radius2'}
-              padding={'len1'}
-              onClick={() => handleModalState(modalVisible)}>
-              {'로그인'}
-            </Button>
+            {getLoginUserData ? (
+              <MyPageBox img={MyPage} to="/mypage">
+                <MyPageIcon img={MyPage} />
+              </MyPageBox>
+            ) : (
+              <Button
+                width={'len20'}
+                borderRadius={'radius2'}
+                padding={'len1'}
+                onClick={() => handleModalState(modalVisible)}>
+                {'로그인'}
+              </Button>
+            )}
           </MenuWrapper>
         </div>
       </HeaderBox>
