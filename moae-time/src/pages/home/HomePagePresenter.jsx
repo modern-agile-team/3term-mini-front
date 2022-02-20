@@ -136,34 +136,42 @@ function HomePage() {
     <HomeLayout ref={homePageCompo}>
       <Side>
         <Box padding={'32px 16px'}>
-          <Col>
-            <ProfileIcon src={ProfileImg} />
-          </Col>
-          <Col padding={'11px 0 0 0'}>
-            {showProfile()}
-            <Row padding={'16px 0 0 0'}>
-              <Button
-                width={'len19'}
-                fontSize={'size3'}
-                borderRadius={'radius2'}
-                padding={'len6'}
-                backColor={'gray5'}
-                fontColor={'gray3'}
-                border={'1px solid #D6D6D6'}>
-                {'내 정보'}
-              </Button>
-              <Button
-                width={'len20'}
-                fontSize={'size3'}
-                borderRadius={'radius2'}
-                padding={'len6'}
-                backColor={'gray5'}
-                fontColor={'gray3'}
-                border={'1px solid #D6D6D6'}>
-                {'로그아웃'}
-              </Button>
-            </Row>
-          </Col>
+          {userNo ? (
+            <>
+              <Col>
+                <ProfileIcon src={ProfileImg} />
+              </Col>
+              <Col padding={'11px 0 0 0'}>
+                {showProfile()}
+                <Row padding={'16px 0 0 0'}>
+                  <Link to="/mypage">
+                    <Button
+                      width={'len19'}
+                      fontSize={'size3'}
+                      borderRadius={'radius2'}
+                      padding={'len6'}
+                      backColor={'gray5'}
+                      fontColor={'gray3'}
+                      border={'1px solid #D6D6D6'}>
+                      {'내 정보'}
+                    </Button>
+                  </Link>
+                  <Button
+                    width={'len20'}
+                    fontSize={'size3'}
+                    borderRadius={'radius2'}
+                    padding={'len6'}
+                    backColor={'gray5'}
+                    fontColor={'gray3'}
+                    border={'1px solid #D6D6D6'}>
+                    {'로그아웃'}
+                  </Button>
+                </Row>
+              </Col>
+            </>
+          ) : (
+            <Col padding={'11px 0 0 0'}>{'비회원'}</Col>
+          )}
         </Box>
         <Box>list btn</Box>
         <SideAdBox>ad1</SideAdBox>
