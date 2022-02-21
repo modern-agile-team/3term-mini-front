@@ -16,6 +16,7 @@ const ContentBox = styled(Box)`
   }
   & :last-child {
     border: none;
+    /* test */
   }
 `;
 
