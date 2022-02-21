@@ -33,7 +33,7 @@ const MainStyle = {
     len14: '155px',
     len15: '200px',
     len16: '246px',
-    lent17: '20px',
+    len17: '20px',
     len18: '45px',
     len19: '69px',
     len20: '74px',
