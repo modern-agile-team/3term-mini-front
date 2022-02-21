@@ -5,18 +5,15 @@ import {
   MyPage,
   BoardOne,
   BoardEditPresenter,
-  BoardWritePresenter,
 } from './pages';
 import { GlobalStyle, MainLayout } from './style';
 import { Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import { createStore, compose, applyMiddleware } from "redux";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      {/* 같은 레벨에 있는 컴포에 적용 */}
       <Routes>
         <Route path="/" element={<MainLayout path="/" main={<HomePage />} />} />
         <Route
@@ -36,8 +33,14 @@ function App() {
           element={
             <MainLayout
               path="/board/:boardId/edit"
-              main={<BoardEditPresenter />}
+              main={<BoardEditPresenter path="/board/:boardId/edit" />}
             />
+          }
+        />
+        <Route
+          path="/board/write"
+          element={
+            <MainLayout main={<BoardEditPresenter path="/board/write" />} />
           }
         />
         <Route
