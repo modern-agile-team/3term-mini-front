@@ -66,21 +66,6 @@ function BoardOne() {
     getBoardOneData();
   }, []);
 
-  const deletePost = () => {
-    axios
-      .delete(
-        `http://3.36.125.16:8080/moae/board/deleteBoard/${boardNo.boardId}`
-      )
-      .then((res) => {
-        setTimeout(() => {
-          alert(res.data.msg);
-        }, 500);
-      })
-      .catch((err) => {
-        alert(err.response.data.msg);
-      });
-  };
-
   const commentValue = (e) => {
     setPostCommentState(e.target.value);
   };
@@ -117,23 +102,23 @@ function BoardOne() {
     );
   };
 
-  const showComments = () => {
-    return (
-      <Fragment key={comment.cmtId}>
-        <Row padding="5px 0 0">
-          <div>
-            <Text>icon</Text>
-            <Text>{comment.nickname}</Text>
-          </div>
-          <button onClick={() => deleteComment(comment.cmtId)}>삭제</button>
-        </Row>
-        <Row>
-          <Text>{comment.description}</Text>
-          <Text>{comment.inDate}</Text>
-        </Row>
-      </Fragment>
-    );
-  };
+  // const showComments = () => {
+  //   return (
+  //     <Fragment key={comment.cmtId}>
+  //       <Row padding="5px 0 0">
+  //         <div>
+  //           <Text>icon</Text>
+  //           <Text>{comment.nickname}</Text>
+  //         </div>
+  //         <button onClick={() => deleteComment(comment.cmtId)}>삭제</button>
+  //       </Row>
+  //       <Row>
+  //         <Text>{comment.description}</Text>
+  //         <Text>{comment.inDate}</Text>
+  //       </Row>
+  //     </Fragment>
+  //   );
+  // };
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -202,9 +187,7 @@ function BoardOne() {
           </Box>
         </Row>
         <Col padding="5px 0 ">
-          <Box padding="15px">
-            <Col>{showComments()}</Col>
-          </Box>
+          <Box padding="15px">{/* <Col>{showComments()}</Col> */}</Box>
         </Col>
         <div>
           <button>

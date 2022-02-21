@@ -144,7 +144,7 @@ function BoardEditPresenter({ path }) {
       case 'write':
         axios
           .post(`http://3.36.125.16:8080/moae/board/create`, {
-            user_no: 199,
+            user_no: 45,
             title: content.title,
             description: content.description,
           })
@@ -153,7 +153,7 @@ function BoardEditPresenter({ path }) {
             window.location.pathname = `/board`;
           })
           .catch((err) => {
-            console.log('err :>> ', err.response.data.msg);
+            console.log('err :>> ', err);
           });
         break;
     }
