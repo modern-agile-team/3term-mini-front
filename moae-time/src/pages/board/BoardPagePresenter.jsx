@@ -4,17 +4,13 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BasicProfile from '../../style/image/BasicProfile.png';
-import dummyBoard from '../../apis/dummyBoard.json';
 import {
   Box,
-  SideBar,
   PageNation,
   BigModal,
-  PostList,
   HotBoard,
 } from '../../components';
 import { Col, Row } from '../../style';
-import { BoardOne } from '..';
 
 const SelectBox = styled.div`
   outline: none;
@@ -63,14 +59,6 @@ const Select = styled.select`
 
   /* -webkit-appearance: none;
   appearance: none; */
-`;
-
-const Option = styled.option`
-  height: 100px;
-  background-color: blue;
-  color: gray;
-  padding: 3px 0;
-  font-size: 16px;
 `;
 
 const Input = styled.input`
@@ -172,7 +160,7 @@ const BottomLine = styled.div`
 function BoardPagePresenter() {
   const [pageNation, setPageNation] = useState(0);
   const [modalState, setModalState] = useState(false);
-  const [smallModalState, setSmallModalState] = useState(false);
+  const [userReport, setUserReport] = useState(false);
   const [nicknameState, setNicknameState] = useState(null);
   const [userNoState, setUserNoState] = useState(null);
   const [DESCState, setDESCState] = useState(null);
@@ -248,6 +236,7 @@ function BoardPagePresenter() {
   const selectedSort = (e) => {
     setSortType(e.target.value);
   };
+
   const mapToWrite = (way) => {
     const lists = Number(way) ? ASCState : DESCState;
     return lists && lists.slice(start, end).map((post) => {
@@ -319,8 +308,8 @@ function BoardPagePresenter() {
       <BigModal
         modalState={modalState}
         setModalState={setModalState}
-        smallModalState={smallModalState}
-        setSmallModalState={setSmallModalState}
+        userReport={userReport}
+        setUserReport={setUserReport}
         nicknameState={nicknameState}
         userNoState={userNoState}
       />

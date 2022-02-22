@@ -1,9 +1,8 @@
-import { React, useEffect, useState, useRef } from 'react';
+import { React, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Box } from '../';
-import SmallModal from '../smallmodal/SmallModal';
+import UserRportModal from '../userrportmodal/UserRportModal';
 import BasicProfile from '../../style/image/BasicProfile.png';
-import dummyBoard from '../../apis/dummyBoard.json';
 
 const Modal = styled.div.attrs(
   ({ modalState, width, height, topMargin, leftMargin }) => ({
@@ -66,18 +65,6 @@ const CenterWrap = styled.div`
   align-items: center;
 `;
 
-const ReportBoxAndTextWrap = styled.div`
-  width: 250px;
-  height: 20px;
-
-  margin-left: 75px;
-  margin-bottom: 7px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
 const WriterImage = styled.img`
   width: 200px;
   height: 200px;
@@ -120,8 +107,8 @@ function BigModal(props) {
   const {
     modalState,
     setModalState,
-    smallModalState,
-    setSmallModalState,
+    userReport,
+    setUserReport,
     nicknameState,
     userNoState
   } = props;
@@ -156,9 +143,9 @@ function BigModal(props) {
               topMargin="66px"
               leftMargin="303px"
             >
-              <SmallModal
-                smallModalState={smallModalState}
-                setSmallModalState={setSmallModalState}
+              <UserRportModal
+                userReport={userReport}
+                setUserReport={setUserReport}
                 userNoState={userNoState}
               />
               <BtnWrap>
@@ -166,7 +153,7 @@ function BigModal(props) {
                   <Btn
                     width="19.5px"
                     height="20.75px"
-                    onClick={() => setSmallModalState(true)}
+                    onClick={() => setUserReport(true)}
                   >
                     R
                   </Btn>

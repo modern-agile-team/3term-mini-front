@@ -66,13 +66,18 @@ const Btn = styled.button.attrs(({ height, width, margin }) => ({
   margin: ${(props) => props.margin};
 `;
 
-function SmallModal(props) {
+function BoardReportModal(props) {
   const modalEl = useRef();
-  const { smallModalState, setSmallModalState, userNoState } = props;
+  const { 
+    boardReport,
+    setBoardReport,
+    boardOneState
+  } = props;
 
   const handleClickOutside = ({ target }) => {
-    if (smallModalState && !modalEl.current.contains(target))
-      setSmallModalState(false);
+    if (boardReport && !modalEl.current.contains(target)) {
+      setBoardReport(false);
+    }
   };
 
   useEffect(() => {
@@ -80,7 +85,7 @@ function SmallModal(props) {
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
-  }, [smallModalState]);
+  }, [boardReport]);
 
   const reportTypes = [
     {
@@ -131,6 +136,7 @@ function SmallModal(props) {
   const [reportDescription, setReportDescription] = useState('');
   const onChange = (e) => {
     setReportDescription(e.target.value);
+    console.log('reportModal :>> ', boardOneState.boardNo);
   };
 
   const drawing = () => {
@@ -150,13 +156,16 @@ function SmallModal(props) {
     ));
   };
 
+  const onClick = () => {
+    boardReport && setBoardReport(false);
+  }
+
 
   const sendReport = () => {
-    console.log('`userNoState` :>> ', userNoState);
     axios
-      .post(`http://3.36.125.16:8080/moae/report/user`, 
+      .post(`http://3.36.125.16:8080/moae/report/board`, 
       {
-        "reportedUserNo": userNoState,
+        "reportedBoardNo": boardOneState.boardNo,
         "reportUserNo": 100,
         "description": `${reportDescription}`,
         "reportId": checkState,
@@ -168,14 +177,14 @@ function SmallModal(props) {
         console.log('err', err.response)
       });
   };
-
+  // , boardReport
   return (
     <>
-      {smallModalState && (
-        <ModalBackGround modalState={smallModalState}>
+      {boardReport && (
+        <ModalBackGround modalState={boardReport}>
           <Modal
             ref={modalEl}
-            modalState={smallModalState}
+            modalState={boardReport}
             width='400px'
             height='480px'
             topMargin='121px'
@@ -185,7 +194,7 @@ function SmallModal(props) {
               width='9.69px'
               height='9.69px'
               margin='21.66px 20.66px 0px 369.66px'
-              onClick={() => setSmallModalState(false)}
+              onClick={() => onClick}
             >
               x
             </Btn>
@@ -208,4 +217,4 @@ function SmallModal(props) {
   );
 }
 
-export default SmallModal;
+export default BoardReportModal;
