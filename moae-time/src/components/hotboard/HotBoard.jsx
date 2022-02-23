@@ -31,22 +31,21 @@ function HotBoard() {
   }, []);
 
   const showHotBoard = () =>
-    hotBoards.map((board) => (
+    hotBoards.slice(0, 4).map((board) => (
       <NewRow key={board.no} padding={'10px'}>
         <Row width={'len15'}>
           <NewText>
             <Link to={`/board/${board.no}`}>{board.title}</Link>
           </NewText>
         </Row>
-        <Text size={'size2'}>{board.date}</Text>
-        <Text size={'size2'}>{board.time}</Text>
+        <Text size={'size2'}>{board.inDate}</Text>
       </NewRow>
     ));
 
   return (
     <Col>
       <Row padding={'10px'}>
-        <Text size={'size6'} color={'green'} weight={'medium'}>
+        <Text size={'size6'} color={'green'} weight={'bold'}>
           HOT 게시물
         </Text>
         <Link to={'/'}>
