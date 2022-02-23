@@ -4,6 +4,12 @@ import { Box, Text, Button } from '../../components';
 import { Col, Row, MainStyle } from '../../style';
 import { HotBoard } from '../../components';
 import ProfileImg from '../../style/image/BasicProfile.png';
+import WriteImg from '../../style/image/writed.png';
+import CommentImg from '../../style/image/comment.png';
+import MainAdImg from '../../style/image/mainAd.png';
+import SideAdImg1 from '../../style/image/mainSideAd1.png';
+import SideAdImg2 from '../../style/image/mainSideAd2.png';
+import SideAdImg3 from '../../style/image/mainSideAd3.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -22,6 +28,13 @@ const ProfileIcon = styled.img`
   height: 63px;
 `;
 
+const Register = styled.span`
+  width: 100%;
+  text-align: center;
+  padding: 51px 0;
+  margin-top: -11px;
+`;
+
 const Side = styled(Col)`
   width: 180px;
   max-height: 696px;
@@ -35,6 +48,36 @@ const Side = styled(Col)`
   & :last-child {
     margin-bottom: 0;
   }
+`;
+
+const SideBtnBox = styled(Box)`
+  & :hover {
+    background-color: #c62935;
+    color: white;
+  }
+  & > :first-of-type {
+    border-bottom: 1px solid #ededed;
+  }
+
+  & > :first-of-type img {
+    width: 11px;
+    height: 7px;
+    margin-right: 11px;
+  }
+`;
+
+const SideBtn = styled(Link)`
+  padding: 10px 17px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 300;
+`;
+
+const SideBtnIcon = styled.img`
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
 `;
 
 const SideAdBox = styled.div`
@@ -59,6 +102,10 @@ const TopAd = styled(Box)`
   width: 100%;
   height: 165px;
   margin: 0 0 17px;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center auto;
 `;
 
 const NewRow = styled(Row)`
@@ -86,31 +133,24 @@ function HomePage({ id }) {
     userMail: '',
   });
 
-  const homePageCompo = useRef(null);
-  const [userNo, setUserNo] = useState(0);
-
   useEffect(() => {
-    let loginNo = homePageCompo.current.parentElement.id;
-    setUserNo(Number(loginNo));
-  });
-
-  useEffect(() => {
-    axios.get(`http://3.36.125.16:8080/moae/profile/${userNo}`).then((res) => {
+    axios.get(`http://3.36.125.16:8080/moae/profile/${id}`).then((res) => {
       setLoginUserInfo({
         userNickname: res.data.profile.nickname,
         userId: res.data.profile.id,
         userMail: res.data.profile.mail,
       });
     });
-  }, [userNo]);
+  }, [id]);
 
-  const showProfile = () => (
-    <>
-      <span>{loginUserInfo.userNickname}</span>
-      <span>{loginUserInfo.userId}</span>
-      <span>{loginUserInfo.userMail}</span>
-    </>
-  );
+  const showProfile = () =>
+    id && (
+      <>
+        <span>{loginUserInfo.userNickname}</span>
+        <span>{loginUserInfo.userId}</span>
+        <span>{loginUserInfo.userMail}</span>
+      </>
+    );
 
   let [board, setBoard] = useState([]);
 
@@ -121,8 +161,8 @@ function HomePage({ id }) {
   }, []);
 
   const showBoards = () => {
-    return board.slice(0, 5).map((board) => (
-      <NewRow key={board.boardNo} padding={'10px'}>
+    return board.slice(0, 8).map((board) => (
+      <NewRow key={board.boardNo} padding={'14px 33px 14px 22px'}>
         <Row width={'len5'}>
           <NewText>
             <Link to={`/board/${board.boardNo}`}>{board.title}</Link>
@@ -132,11 +172,12 @@ function HomePage({ id }) {
       </NewRow>
     ));
   };
+
   return (
-    <HomeLayout ref={homePageCompo}>
+    <HomeLayout>
       <Side>
-        <Box padding={'32px 16px'}>
-          {userNo ? (
+        <Box padding={'32px 16px 17px'}>
+          {id ? (
             <>
               <Col>
                 <ProfileIcon src={ProfileImg} />
@@ -152,8 +193,7 @@ function HomePage({ id }) {
                       padding={'len6'}
                       backColor={'gray5'}
                       fontColor={'gray3'}
-                      border={'1px solid #D6D6D6'}
-                    >
+                      border={'1px solid #D6D6D6'}>
                       {'내 정보'}
                     </Button>
                   </Link>
@@ -164,29 +204,40 @@ function HomePage({ id }) {
                     padding={'len6'}
                     backColor={'gray5'}
                     fontColor={'gray3'}
-                    border={'1px solid #D6D6D6'}
-                  >
+                    border={'1px solid #D6D6D6'}>
                     {'로그아웃'}
                   </Button>
                 </Row>
               </Col>
             </>
           ) : (
-            <Col padding={'11px 0 0 0'}>{'비회원'}</Col>
+            <Register>{'비회원'}</Register>
           )}
         </Box>
-        <Box>list btn</Box>
-        <SideAdBox>ad1</SideAdBox>
-        <SideAdBox>ad2</SideAdBox>
-        <SideAdBox>ad3</SideAdBox>
+        {id ? (
+          <SideBtnBox>
+            <SideBtn to="/mypage">
+              <SideBtnIcon src={WriteImg} />
+              {'내가 쓴 글'}
+            </SideBtn>
+            <SideBtn to="/mypage">
+              <SideBtnIcon src={CommentImg} />
+              {'댓글 단 글'}
+            </SideBtn>
+          </SideBtnBox>
+        ) : null}
+
+        <SideAdBox img={SideAdImg1} />
+        <SideAdBox img={SideAdImg2} />
+        <SideAdBox img={SideAdImg3} />
       </Side>
       <MainContent>
-        <TopAd></TopAd>
+        <TopAd img={MainAdImg} />
         <Row width="100%" height="100px" align="left">
           <Box width={'len5'} height={'len12'} backColor={'white'}>
             <Col>
-              <Col padding={'10px'} align={'left'}>
-                <Text size={'size6'} color={'red'} weight={'medium'}>
+              <Col padding={'14px 24px'} align={'left'}>
+                <Text size={'size6'} color={'red'} weight={'bold'}>
                   자유게시판
                 </Text>
               </Col>

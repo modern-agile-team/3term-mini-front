@@ -178,7 +178,7 @@ function HomeModal(props) {
       <Col>
         <Row padding={'0 0 15px'} align={'flex-end'}>
           <Icon src={everytime} />
-          <Text size={'size7'} color={'gray2'} weight={'medium'}>
+          <Text size={'size7'} color={'gray2'} weight={'bold'}>
             {'지금 모-애 타임을 시작하세요!'}
           </Text>
         </Row>
@@ -208,8 +208,7 @@ function HomeModal(props) {
           <Button
             onClick={onClickLogin}
             padding={'len2'}
-            borderRadius={'default'}
-          >
+            borderRadius={'default'}>
             {'로그인'}
           </Button>
         </LoginInput>
@@ -234,8 +233,7 @@ function HomeModal(props) {
             fontSize={'size8'}
             fontColor={'red'}
             backColor={'gray5'}
-            weight={'medium'}
-          >
+            weight={'bold'}>
             {'회원가입'}
           </Button>
         </Row>
@@ -288,7 +286,7 @@ function HomeModal(props) {
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 6px'}>
-          <Text size={'default'} color={'gray1'} weight={'medium'}>
+          <Text size={'default'} color={'gray1'} weight={'bold'}>
             {'모-애 타임 회원가입'}
           </Text>
         </Col>
@@ -301,7 +299,7 @@ function HomeModal(props) {
           </Text>
         </Col>
         <Col align={'left'} padding={'0 0 25px'}>
-          <Text size={'default'} color={'gray1'} weight={'medium'}>
+          <Text size={'default'} color={'gray1'} weight={'bold'}>
             {'학교 선택'}
           </Text>
         </Col>
@@ -331,8 +329,7 @@ function HomeModal(props) {
         <Label
           margin={'28px 0 6px 0'}
           display="inline-block"
-          fontSize={'size4'}
-        >
+          fontSize={'size4'}>
           {'학교'}
         </Label>
         <Row>
@@ -405,7 +402,7 @@ function HomeModal(props) {
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 26px'}>
-          <Text size={'default'} color={'gray1'} weight={'medium'}>
+          <Text size={'default'} color={'gray1'} weight={'bold'}>
             {'약관 동의'}
           </Text>
         </Col>
@@ -423,8 +420,7 @@ function HomeModal(props) {
             width="163px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray1'}
-          >
+            fontColor={'gray1'}>
             {'아래 약관에 모두 동의합니다.'}
           </Label>
         </div>
@@ -442,8 +438,7 @@ function HomeModal(props) {
             width="150px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}
-          >
+            fontColor={'gray3'}>
             {'서비스이용약관 동의(필수)'}
           </Label>
         </div>
@@ -461,8 +456,7 @@ function HomeModal(props) {
             width="186px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}
-          >
+            fontColor={'gray3'}>
             {'개인정보 수집 및 이용 동의 (필수)'}
           </Label>
         </div>
@@ -480,8 +474,7 @@ function HomeModal(props) {
             width="165px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}
-          >
+            fontColor={'gray3'}>
             {'커뮤니티이용규칙 확인 (필수)'}
           </Label>
         </div>
@@ -499,8 +492,7 @@ function HomeModal(props) {
             width="158px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray3'}
-          >
+            fontColor={'gray3'}>
             {'광고성 정보 수신 동의 (선택)'}
           </Label>
         </div>
@@ -518,8 +510,7 @@ function HomeModal(props) {
             width="253px"
             margin={'0 0 24px 0'}
             fontSize={'size5'}
-            fontColor={'gray1'}
-          >
+            fontColor={'gray1'}>
             {'본인 명의를 이용하여 가입을 진행하겠습니다. (필수)'}
           </Label>
         </div>
@@ -536,8 +527,7 @@ function HomeModal(props) {
             htmlFor="check7"
             width="112px"
             fontSize={'size5'}
-            fontColor={'gray3'}
-          >
+            fontColor={'gray3'}>
             {'만 14세 이상입니다. (필수)'}
           </Label>
         </div>
@@ -560,8 +550,7 @@ function HomeModal(props) {
                 checkResult[el] = checkedInputs.includes(el) ? true : false;
               });
               clickNext2(data, checkResult);
-            }}
-          >
+            }}>
             {'휴대폰 인증'}
           </Button>
         </Col>
@@ -577,15 +566,15 @@ function HomeModal(props) {
             check.forEach((el) => {
               checkResult[el] = checkedInputs.includes(el) ? true : false;
             });
-          }}
-        >
+          }}>
           {'아이핀 인증'}
         </Button>
       </Col>
     );
   };
 
-  let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  let regEmail =
+    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
   const joinInputId = useRef(null);
   const joinInputPassword = useRef(null);
@@ -600,7 +589,7 @@ function HomeModal(props) {
     return (
       <Col align={'left'}>
         <Col align={'left'} padding={'0 0 16px'}>
-          <Text color={'gray1'} weight={'medium'}>
+          <Text color={'gray1'} weight={'bold'}>
             {'모-애 타임  회원가입'}
           </Text>
         </Col>
@@ -625,8 +614,7 @@ function HomeModal(props) {
             size={'size3'}
             color={'red'}
             padding={'3px 0 12px 10px'}
-            top={'208px'}
-          >
+            top={'208px'}>
             {'중복된 아이디입니다.'}
           </InvisibleText>
         </InvisibleSpan>
@@ -665,8 +653,7 @@ function HomeModal(props) {
             visible={MailVisible}
             size={'size3'}
             color={'red'}
-            padding={'3px 0 12px 10px'}
-          >
+            padding={'3px 0 12px 10px'}>
             {'중복된 메일입니다.'}
           </InvisibleText>
         </InvisibleSpan>
@@ -675,8 +662,7 @@ function HomeModal(props) {
             visible={MailVisible2}
             size={'size3'}
             color={'red'}
-            padding={'3px 0 12px 10px'}
-          >
+            padding={'3px 0 12px 10px'}>
             {'올바르지 않은 형식입니다.'}
           </InvisibleText>
         </InvisibleSpan>
@@ -699,8 +685,7 @@ function HomeModal(props) {
             visible={nicknameVisible}
             size={'size3'}
             color={'red'}
-            padding={'3px 0 0 10px'}
-          >
+            padding={'3px 0 0 10px'}>
             {'중복된 닉네임입니다.'}
           </InvisibleText>
         </InvisibleSpan>
@@ -765,8 +750,7 @@ function HomeModal(props) {
                   });
               }
             }}
-            weight={'bold'}
-          >
+            weight={'bold'}>
             {'회원가입'}
           </Button>
         </Col>
