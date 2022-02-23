@@ -37,7 +37,7 @@ const Input = styled.input`
 function BoardOne() {
   const userNo = 14;
   const boardNo = useParams();
-  const [boardReport, setBoardReport] = useState(false)
+  const [boardReport, setBoardReport] = useState(false);
   const [boardOneState, setBoardOneState] = useState(null);
   const [commentsState, setCommentsState] = useState(null);
   const [postCommentState, setPostCommentState] = useState();
@@ -106,25 +106,33 @@ function BoardOne() {
   };
 
   const showComments = () => {
-    return commentsState && commentsState.slice(0, 5).map((comment, i) => {
     return (
-      <Fragment key={comment.cmtId}>
-        <Row padding="5px 0 0" >
-          <div>
-            <Text>icon</Text>
-            <Text>{comment.nickname}</Text>
-          </div>
-          {commentsState && userNo === commentsState[i].commentUserNo ?
-            <button onClick={() => deleteComment(comment.cmtId)}>삭제</button> 
-            : <></>
-          }
-        </Row>
-        <Row>
-          <Text>{comment.description}</Text>
-          <Text>{comment.inDate}</Text>
-        </Row>
-      </Fragment>
-      )})};
+      commentsState &&
+      commentsState.slice(0, 5).map((comment, i) => {
+        return (
+          <Fragment key={comment.cmtId}>
+            <Row padding="5px 0 0">
+              <div>
+                <Text>icon</Text>
+                <Text>{comment.nickname}</Text>
+              </div>
+              {commentsState && userNo === commentsState[i].commentUserNo ? (
+                <button onClick={() => deleteComment(comment.cmtId)}>
+                  삭제
+                </button>
+              ) : (
+                <></>
+              )}
+            </Row>
+            <Row>
+              <Text>{comment.description}</Text>
+              <Text>{comment.inDate}</Text>
+            </Row>
+          </Fragment>
+        );
+      })
+    );
+  };
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -148,23 +156,26 @@ function BoardOne() {
                     {boardOneState && boardOneState.nickname}
                   </Text>
                   <div>
-                  {
-                  boardOneState && userNo === boardOneState.boardWriteUserNo ? 
-                  <>
-                    <Link to={`/board/${boardNo.boardId}/edit`}>수정</Link>
-                      <Link to={"/board"}>
-                        <button onClick={deletePost}>삭제</button>
-                      </Link>
-                  </> :
-                    <>
-                      <button onClick={() => setBoardReport(true)}>신고</button>
-                      <BoardReportModal
-                        setBoardReport={setBoardReport}
-                        boardReport={boardReport}
-                        boardOneState={boardOneState}
-                      ></BoardReportModal>
-                    </>
-                    }
+                    {boardOneState &&
+                    userNo === boardOneState.boardWriteUserNo ? (
+                      <>
+                        <Link to={`/board/${boardNo.boardId}/edit`}>수정</Link>
+                        <Link to={'/board'}>
+                          <button onClick={deletePost}>삭제</button>
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <button onClick={() => setBoardReport(true)}>
+                          신고
+                        </button>
+                        <BoardReportModal
+                          setBoardReport={setBoardReport}
+                          boardReport={boardReport}
+                          boardOneState={boardOneState}
+                        ></BoardReportModal>
+                      </>
+                    )}
                   </div>
                 </Row>
                 <Col align="flex-start">

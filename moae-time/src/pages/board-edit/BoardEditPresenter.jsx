@@ -144,12 +144,11 @@ function BoardEditPresenter({ path }) {
       case 'write':
         axios
           .post(`http://3.36.125.16:8080/moae/board/create`, {
-            user_no: 45,
+            user_no: 109010,
             title: content.title,
             description: content.description,
           })
           .then((res) => {
-            // console.log('res :>> ', res);
             window.location.pathname = `/board`;
           })
           .catch((err) => {
