@@ -313,7 +313,10 @@ function Layout(props) {
           </MenuWrapper>
         </div>
       </HeaderBox>
-      <MainBox id={getLoginUserData}>{main}</MainBox>
+      <MainBox id={getLoginUserData}>
+        {React.cloneElement(main, { id: getLoginUserData })}
+        {/* // TODO: React.cloneElement 공부 */}
+      </MainBox>
       <FooterBox>{footerButtons()}</FooterBox>
     </WholeWrapper>
   );

@@ -79,7 +79,7 @@ const NewText = styled(Text)`
   text-align: left;
 `;
 
-function HomePage() {
+function HomePage({ id }) {
   const [loginUserInfo, setLoginUserInfo] = useState({
     userNickname: '',
     userId: '',
@@ -152,7 +152,8 @@ function HomePage() {
                       padding={'len6'}
                       backColor={'gray5'}
                       fontColor={'gray3'}
-                      border={'1px solid #D6D6D6'}>
+                      border={'1px solid #D6D6D6'}
+                    >
                       {'내 정보'}
                     </Button>
                   </Link>
@@ -163,7 +164,8 @@ function HomePage() {
                     padding={'len6'}
                     backColor={'gray5'}
                     fontColor={'gray3'}
-                    border={'1px solid #D6D6D6'}>
+                    border={'1px solid #D6D6D6'}
+                  >
                     {'로그아웃'}
                   </Button>
                 </Row>
