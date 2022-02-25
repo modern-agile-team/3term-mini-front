@@ -49,6 +49,7 @@ const Button = (props) => {
     border,
     children,
     onClick,
+    src,
   } = props;
 
   return (
@@ -61,7 +62,8 @@ const Button = (props) => {
       weight={weight}
       borderRadius={borderRadius}
       border={border}
-      onClick={onClick}>
+      onClick={onClick}
+      src={src}>
       {children}
     </ButtonWrap>
   );

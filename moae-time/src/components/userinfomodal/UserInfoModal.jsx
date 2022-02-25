@@ -1,6 +1,6 @@
 import { React, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Box } from '../';
+import { Box } from '..';
 import UserRportModal from '../userrportmodal/UserRportModal';
 import BasicProfile from '../../style/image/BasicProfile.png';
 
@@ -102,7 +102,7 @@ const ReportBtnWrap = styled.div`
   align-items: center;
 `;
 
-function BigModal(props) {
+function UserInfoModal (props) {
   const modalEl = useRef();
   const {
     modalState,
@@ -197,4 +197,4 @@ function BigModal(props) {
   );
 }
 
-export default BigModal;
+export default UserInfoModal;
