@@ -154,6 +154,13 @@ const BottomLine = styled.div`
   border: 0.5px solid #d6d6d6;
 `;
 
+const WriteImgWrap = styled.img`
+  width: 50px;
+  height: 50px;
+  background: #C62935;
+  margin-top: 2px;
+`
+
 function BoardPagePresenter(props) {
   const [pageNation, setPageNation] = useState(0);
   const [modalState, setModalState] = useState(false);
@@ -272,13 +279,12 @@ function BoardPagePresenter(props) {
   };
 
   const showCreateButton = () => {
-    console.log('props.data.id :>> ', props.data.id);
     const path = props.data.id ? '/board/write' : '/board';
     const click = props.data.id ? null : props.data.showLogin;
 
     return (
       <Link to={path}>
-        <Button onClick={click}>작성</Button>
+        <WriteImgWrap src={Writing} onClick={click}></WriteImgWrap>
       </Link>
     );
   };
