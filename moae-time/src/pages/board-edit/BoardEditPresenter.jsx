@@ -149,7 +149,7 @@ function BoardEditPresenter({ path, id }) {
             window.location.pathname = `/board`;
           })
           .catch((err) => {
-            console.log('err :>> ', err);
+            alert(err.response.data.msg);
           });
         break;
     }

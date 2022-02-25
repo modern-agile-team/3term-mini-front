@@ -7,6 +7,7 @@ import BasicProfile from '../../style/image/BasicProfile.png';
 import Writing from '../../style/image/writing.png';
 import { Box, PageNation, UserInfoModal, HotBoard } from '../../components';
 import { Col, Row } from '../../style';
+import SearchIcon from '../../style/image/search.png';
 
 const SelectBox = styled.div`
   outline: none;
@@ -48,7 +49,6 @@ const Select = styled.select`
   outline: 0 none;
   padding: 0 5px;
   position: relative;
-  z-index: 3;
 
   & * {
   }
@@ -69,13 +69,14 @@ const Input = styled.input`
   font-size: 15px;
 `;
 
-const Button = styled.button`
+const WriteImg = styled.img`
   outline: none;
   padding: 15px;
+  margin-top: 3px;
   border: 1px solid #d6d6d6;
-  background-color: #f9f9f9;
-  color: #737373;
-  height: 100%;
+  background: #C62935;
+  height: 50px;
+  width: 50px;
 `;
 
 const WholeWrap = styled.div`
@@ -295,7 +296,7 @@ function BoardPagePresenter(props) {
           <Box width="len12" padding="14px">
             <Row>
               <Input placeholder="검색어를 입력하세요." />
-              <span>{'돋보기'}</span>
+              <img src={SearchIcon}></img>
             </Row>
           </Box>
           <Link to={`/board/write`}>{showCreateButton()}</Link>

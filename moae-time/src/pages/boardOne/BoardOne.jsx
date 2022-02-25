@@ -8,6 +8,8 @@ import { Col, Row } from '../../style';
 import BoardReportModal from '../../components/boardreport/BoardReportModal';
 import Writing from '../../style/image/writing.png';
 
+
+
 const ContentBox = styled(Box)`
   border: none;
   max-height: 173px;
@@ -26,6 +28,33 @@ const Input = styled.textarea`
   background-color: rgba(0, 0, 0, 0);
   vertical-align: top;
   resize: none;
+  overflow: auto;
+`;
+
+const LinkToBoardBtn = styled.button`
+  width: 70px;
+  height: 37px;
+  color: #737373;
+  border-radius: 3px;
+  border: 1px solid #D6D6D6;
+  background-color: white;
+`;
+
+const GrayBtn = styled.button`
+  border: none;
+  background: #F9F9F9;
+  font-size: 14px;
+  color: #A6A6A6;
+  margin-left: 15px;
+`
+const WriteImg = styled.img`
+  outline: none;
+  padding: 15px;
+  margin-top: 3px;
+  border: 1px solid #d6d6d6;
+  background: #C62935;
+  height: 52px;
+  width: 52px;
 `;
 
 const Img = styled.img`
@@ -36,8 +65,9 @@ const Img = styled.img`
 `;
 
 function BoardOne({ id }) {
-  const userNo = 14;
+  const userNo = id;
   const boardNo = useParams();
+  const [rerander, setRerander] = useState(true);
   const [boardReport, setBoardReport] = useState(false);
   const [boardOneState, setBoardOneState] = useState(null);
   const [commentsState, setCommentsState] = useState(null);
@@ -45,7 +75,7 @@ function BoardOne({ id }) {
 
   const getBoardOneData = () => {
     axios
-      .get(`http://3.36.125.16:8080/moae/board/connect/${boardNo.boardId}/8`)
+      .get(`http://3.36.125.16:8080/moae/board/connect/${boardNo.boardId}/${userNo}`)
       .then((res) => {
         setBoardOneState(res.data.boardData);
         setCommentsState(res.data.comments);
@@ -54,6 +84,7 @@ function BoardOne({ id }) {
         alert(err.response.data.msg);
       });
   };
+  
   const deletePost = () => {
     axios
       .delete(
@@ -68,7 +99,7 @@ function BoardOne({ id }) {
 
   useEffect(() => {
     getBoardOneData();
-  }, []);
+  }, [rerander]);
 
   const commentValue = (e) => {
     setPostCommentState(e.target.value);
@@ -76,7 +107,7 @@ function BoardOne({ id }) {
 
   const postComment = (e) => {
     const postData = {
-      userNo: 14,
+      userNo: userNo,
       boardNo: boardOneState.boardNo,
       description: `${postCommentState}`,
     };
@@ -109,7 +140,7 @@ function BoardOne({ id }) {
   const showComments = () => {
     return (
       commentsState &&
-      commentsState.slice(0, 5).map((comment, i) => {
+      commentsState.slice(0, 3).map((comment, i) => {
         return (
           <Fragment key={comment.cmtId}>
             <Row padding="5px 0 0">
@@ -124,9 +155,9 @@ function BoardOne({ id }) {
                   {comment.nickname}
                 </Text>
                 {commentsState && userNo === commentsState[i].commentUserNo ? (
-                  <button onClick={() => deleteComment(comment.cmtId)}>
+                  <GrayBtn onClick={() => deleteComment(comment.cmtId)}>
                     삭제
-                  </button>
+                  </GrayBtn>
                 ) : (
                   <></>
                 )}
@@ -176,16 +207,18 @@ function BoardOne({ id }) {
                     {boardOneState &&
                     userNo === boardOneState.boardWriteUserNo ? (
                       <>
-                        <Link to={`/board/${boardNo.boardId}/edit`}>수정</Link>
+                        <Link to={`/board/${boardNo.boardId}/edit`}>
+                          <GrayBtn>수정</GrayBtn>
+                        </Link>
                         <Link to={'/board'}>
-                          <button onClick={deletePost}>삭제</button>
+                          <GrayBtn onClick={deletePost}>삭제</GrayBtn>
                         </Link>
                       </>
                     ) : (
                       <>
-                        <button onClick={() => setBoardReport(true)}>
+                        <GrayBtn onClick={() => setBoardReport(true)}>
                           {'신고'}
-                        </button>
+                        </GrayBtn>
                         <BoardReportModal
                           setBoardReport={setBoardReport}
                           boardReport={boardReport}
@@ -229,14 +262,15 @@ function BoardOne({ id }) {
                     type="text"
                     placeholder="댓글을 입력하세요."
                     onChange={commentValue}
-                  />
+                  ></Input>
                 </Row>
-              </div>
-              <div>
-                <button onClick={postComment}>작성</button>
               </div>
             </Row>
           </Box>
+          <WriteImg 
+            src={Writing}
+            onClick={postComment}
+          />
         </Row>
         <Col padding="5px 0 ">
           <Box padding="15px">
@@ -244,13 +278,16 @@ function BoardOne({ id }) {
           </Box>
         </Col>
         <div>
-          <button>
+          <LinkToBoardBtn>
             <Link to="/board">글목록</Link>
-          </button>
+          </LinkToBoardBtn>
         </div>
       </Col>
       <Box width="len3">
-        <HotBoard />
+        <HotBoard 
+        rerander={rerander}
+        setRerander={setRerander}
+        />
       </Box>
     </Row>
   );
