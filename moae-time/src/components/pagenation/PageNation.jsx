@@ -44,9 +44,9 @@ function PageNation(props) {
     <Row width={'len2'} padding={'25px 0 0'}>
       <PageNationArrow direction={'left'} onClick={clickLeft}></PageNationArrow>
       <Row width={'len13'}>
-        <PageNationNumber onClick={clickPageNationOne}></PageNationNumber>
-        <PageNationNumber onClick={clickPageNationTwo}></PageNationNumber>
-        <PageNationNumber onClick={clickPageNationThr}></PageNationNumber>
+        <PageNationNumber onClick={clickPageNationOne}>1</PageNationNumber>
+        <PageNationNumber onClick={clickPageNationTwo}>2</PageNationNumber>
+        <PageNationNumber onClick={clickPageNationThr}>3</PageNationNumber>
       </Row>
       <PageNationArrow direction={'right'} onClick={clickRight}></PageNationArrow>
     </Row>

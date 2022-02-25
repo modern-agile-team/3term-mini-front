@@ -10,6 +10,7 @@ import {
 } from '../../components';
 import { Col, Row } from '../../style';
 import BoardReportModal from '../../components/boardreport/BoardReportModal';
+import Writing from '../../style/image/writing.png';
 
 const ContentBox = styled(Box)`
   border: none;
@@ -18,9 +19,9 @@ const ContentBox = styled(Box)`
   overflow-x: hidden;
 `;
 
-const d = styled.div`
-  width: 100%;
-  height: 173px;
+const Input = styled.input`
+  width: 765px;
+  height: 50px;
   max-height: 173px;
   /* overflow: scroll; */
   font-size: 16px;
@@ -199,7 +200,7 @@ function BoardOne({ id}) {
               <div>
                 <Row>
                   <div>icon</div>
-                  <input
+                  <Input
                     type="text"
                     placeholder="댓글을 입력하세요."
                     onChange={commentValue}
