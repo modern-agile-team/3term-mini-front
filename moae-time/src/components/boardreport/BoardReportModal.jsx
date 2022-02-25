@@ -136,7 +136,6 @@ function BoardReportModal(props) {
   const [reportDescription, setReportDescription] = useState('');
   const onChange = (e) => {
     setReportDescription(e.target.value);
-    console.log('reportModal :>> ', boardOneState.boardNo);
   };
 
   const drawing = () => {
@@ -177,7 +176,7 @@ function BoardReportModal(props) {
         console.log('err', err.response)
       });
   };
-  // , boardReport
+
   return (
     <>
       {boardReport && (

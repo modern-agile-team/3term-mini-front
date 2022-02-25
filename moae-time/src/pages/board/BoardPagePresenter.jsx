@@ -4,10 +4,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BasicProfile from '../../style/image/BasicProfile.png';
+import Writing from '../../style/image/writing.png';
 import {
   Box,
   PageNation,
-  BigModal,
+  UserInfoModal,
   HotBoard,
 } from '../../components';
 import { Col, Row } from '../../style';
@@ -305,7 +306,7 @@ function BoardPagePresenter() {
         </Row>
         <Col></Col>
       </Box>
-      <BigModal
+      <UserInfoModal
         modalState={modalState}
         setModalState={setModalState}
         userReport={userReport}

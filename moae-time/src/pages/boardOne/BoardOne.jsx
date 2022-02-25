@@ -5,12 +5,8 @@ import styled from 'styled-components';
 import BasicProfile from '../../style/image/BasicProfile.png';
 import {
   Box,
-  SideBar,
-  PageNation,
-  BigModal,
   Text,
   HotBoard,
-  Button,
 } from '../../components';
 import { Col, Row } from '../../style';
 import BoardReportModal from '../../components/boardreport/BoardReportModal';
@@ -22,7 +18,7 @@ const ContentBox = styled(Box)`
   overflow-x: hidden;
 `;
 
-const Input = styled.input`
+const d = styled.div`
   width: 100%;
   height: 173px;
   max-height: 173px;
@@ -34,8 +30,8 @@ const Input = styled.input`
   vertical-align: top;
 `;
 
-function BoardOne() {
-  const userNo = 14;
+function BoardOne({ id}) {
+  const userNo = id;
   const boardNo = useParams();
   const [boardReport, setBoardReport] = useState(false);
   const [boardOneState, setBoardOneState] = useState(null);
@@ -217,7 +213,7 @@ function BoardOne() {
           </Box>
         </Row>
         <Col padding="5px 0 ">
-          <Box padding="15px">{/* <Col>{showComments()}</Col> */}</Box>
+          <Box padding="15px"><Col>{showComments()}</Col></Box>
         </Col>
         <div>
           <button>
