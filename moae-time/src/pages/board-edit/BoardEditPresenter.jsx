@@ -79,7 +79,6 @@ function BoardEditPresenter({ path, id }) {
     description: '',
     boardWriteUserNo: null,
   });
-  console.log('checkPage[path] :>> ', checkPage[path]);
 
   useEffect(() => {
     switch (checkPage[path]) {
@@ -101,10 +100,8 @@ function BoardEditPresenter({ path, id }) {
           });
         break;
       case 'write':
-        console.log(`write`);
         break;
       default:
-        console.log('잘못된 경로');
         break;
     }
   }, []);

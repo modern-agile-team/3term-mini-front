@@ -132,14 +132,12 @@ function Layout(props) {
   const [getLoginUserData, setLoginUserData] = useState(null);
 
   const getUserNo = (userNo) => {
-    console.log('MainLayout--Console :>> ', userNo);
     setLoginUserData(userNo);
   };
 
-  const handleModalState = (modalVisible, loginUserData) => {
+  const handleModalState = () => {
     // loginModal 에 대한 토글
     setModalVisible(!modalVisible);
-    setLoginUserData(loginUserData);
   };
 
   const clickNext = () => {
@@ -305,7 +303,7 @@ function Layout(props) {
                 width={'len20'}
                 borderRadius={'radius2'}
                 padding={'len1'}
-                onClick={() => handleModalState(modalVisible)}
+                onClick={handleModalState}
               >
                 {'로그인'}
               </Button>
@@ -314,8 +312,10 @@ function Layout(props) {
         </div>
       </HeaderBox>
       <MainBox>
-        {React.cloneElement(main, { id: getLoginUserData })}
-        {/* // TODO: React.cloneElement 공부 */}
+        {React.cloneElement(main, {
+          id: getLoginUserData,
+          showLogin: handleModalState,
+        })}
       </MainBox>
       <FooterBox>{footerButtons()}</FooterBox>
     </WholeWrapper>

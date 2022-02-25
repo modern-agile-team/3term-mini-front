@@ -5,12 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BasicProfile from '../../style/image/BasicProfile.png';
 import Writing from '../../style/image/writing.png';
-import {
-  Box,
-  PageNation,
-  UserInfoModal,
-  HotBoard,
-} from '../../components';
+import { Box, PageNation, UserInfoModal, HotBoard } from '../../components';
 import { Col, Row } from '../../style';
 
 const SelectBox = styled.div`
@@ -158,7 +153,7 @@ const BottomLine = styled.div`
   border: 0.5px solid #d6d6d6;
 `;
 
-function BoardPagePresenter() {
+function BoardPagePresenter(props) {
   const [pageNation, setPageNation] = useState(0);
   const [modalState, setModalState] = useState(false);
   const [userReport, setUserReport] = useState(false);
@@ -185,7 +180,7 @@ function BoardPagePresenter() {
       })
       .catch((err) => {
         alert('err :>> ', err);
-      })
+      });
 
     axios
       .get('http://3.36.125.16:8080/moae/board/sort?order=ASC')
@@ -194,8 +189,8 @@ function BoardPagePresenter() {
       })
       .catch((err) => {
         alert(err);
-      })
-  }, [])
+      });
+  }, []);
 
   const clickPageNationOne = () => {
     setPageNation(0);
@@ -232,7 +227,7 @@ function BoardPagePresenter() {
     setModalState(true);
     setNicknameState(e.target.parentElement.id);
     setUserNoState(e.target.id);
-  }
+  };
 
   const selectedSort = (e) => {
     setSortType(e.target.value);
@@ -240,19 +235,22 @@ function BoardPagePresenter() {
 
   const mapToWrite = (way) => {
     const lists = Number(way) ? ASCState : DESCState;
-    return lists && lists.slice(start, end).map((post) => {
-      return (
+    return (
+      lists &&
+      lists.slice(start, end).map((post) => {
+        return (
           <WholeWrap key={post.boardNo}>
             <Link to={`/board/${post.boardNo}`}>
               <TitleDiv>{post.title}</TitleDiv>
             </Link>
             <br />
-            <WrapToFlex >
+            <WrapToFlex>
               <ImgWriterDateWrap id={post.nickname}>
                 <WriterImage
-                id={post.userNo} 
-                onClick={clickEmoji}
-                src={BasicProfile} />
+                  id={post.userNo}
+                  onClick={clickEmoji}
+                  src={BasicProfile}
+                />
                 <WriterDiv>{post.nickname}</WriterDiv>
                 <DateAndTimeDiv>{post.inDate}</DateAndTimeDiv>
               </ImgWriterDateWrap>
@@ -267,9 +265,22 @@ function BoardPagePresenter() {
             </WrapToFlex>
             <BottomLine />
           </WholeWrap>
-      );
-    })};
+        );
+      })
+    );
+  };
 
+  const showCreateButton = () => {
+    console.log('props.data.id :>> ', props.data.id);
+    const path = props.data.id ? '/board/write' : '/board';
+    const click = props.data.id ? null : props.data.showLogin;
+
+    return (
+      <Link to={path}>
+        <Button onClick={click}>작성</Button>
+      </Link>
+    );
+  };
 
   return (
     <Row padding="25px 172px 0px" align="flex-start">
@@ -287,9 +298,7 @@ function BoardPagePresenter() {
               <span>{'돋보기'}</span>
             </Row>
           </Box>
-          <Link to={`/board/write`}>
-            <Button>작성</Button>
-          </Link>
+          <Link to={`/board/write`}>{showCreateButton()}</Link>
         </Row>
         <Box>{mapToWrite(sortType)}</Box>
         <PageNation
