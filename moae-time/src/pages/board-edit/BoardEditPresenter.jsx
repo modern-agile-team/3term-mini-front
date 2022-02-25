@@ -68,7 +68,7 @@ const EditButton = styled.button`
   background-image: EditImg;
 `;
 
-function BoardEditPresenter({ path }) {
+function BoardEditPresenter({ path, id }) {
   const checkPage = {
     '/board/write': 'write',
     '/board/:boardId/edit': 'edit',
@@ -144,7 +144,7 @@ function BoardEditPresenter({ path }) {
       case 'write':
         axios
           .post(`http://3.36.125.16:8080/moae/board/create`, {
-            user_no: 109010,
+            user_no: id,
             title: content.title,
             description: content.description,
           })
