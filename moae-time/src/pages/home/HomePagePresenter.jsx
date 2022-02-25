@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Box, Text, Button } from '../../components';
 import { Col, Row, MainStyle } from '../../style';
@@ -101,11 +101,12 @@ const MainContent = styled.div`
 const TopAd = styled(Box)`
   width: 100%;
   height: 165px;
-  margin: 0 0 17px;
+  margin: 0 0 20px;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center auto;
+  border: none;
 `;
 
 const NewRow = styled(Row)`
@@ -134,13 +135,14 @@ function HomePage({ id }) {
   });
 
   useEffect(() => {
-    axios.get(`http://3.36.125.16:8080/moae/profile/${id}`).then((res) => {
-      setLoginUserInfo({
-        userNickname: res.data.profile.nickname,
-        userId: res.data.profile.id,
-        userMail: res.data.profile.mail,
+    id &&
+      axios.get(`http://3.36.125.16:8080/moae/profile/${id}`).then((res) => {
+        setLoginUserInfo({
+          userNickname: res.data.profile.nickname,
+          userId: res.data.profile.id,
+          userMail: res.data.profile.mail,
+        });
       });
-    });
   }, [id]);
 
   const showProfile = () =>
@@ -159,6 +161,10 @@ function HomePage({ id }) {
       setBoard(res.data);
     });
   }, []);
+
+  const reload = () => {
+    window.location.reload();
+  };
 
   const showBoards = () => {
     return board.slice(0, 8).map((board) => (
@@ -204,7 +210,8 @@ function HomePage({ id }) {
                     padding={'len6'}
                     backColor={'gray5'}
                     fontColor={'gray3'}
-                    border={'1px solid #D6D6D6'}>
+                    border={'1px solid #D6D6D6'}
+                    onClick={reload}>
                     {'로그아웃'}
                   </Button>
                 </Row>

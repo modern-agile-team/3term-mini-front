@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import selectImg from '../../style/image/button.png';
 import searchImg from '../../style/image/search.png';
 import everytime from '../../style/image/everytimeNoBack.png';
 import { Box, Button, Text } from '../index';
@@ -64,7 +65,6 @@ const InputInfo = styled.input.attrs(
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   padding-left: 10px;
-
   outline: none;
   border-radius: ${(props) => props.borderRadius};
   border: 1px solid #ededed;
@@ -74,15 +74,39 @@ const InputInfo = styled.input.attrs(
   &::-webkit-calendar-picker-indicator {
     opacity: 0;
   }
+  &::placeholder {
+    color: #757575;
+  }
+  &::-webkit-input-placeholder {
+    color: #757575;
+  }
+  &:-ms-input-placeholder {
+    color: #757575;
+  }
+  &:focus {
+    border: 1px solid #c62935;
+  }
+  & option:hover {
+    background: #d6d6d6;
+  }
 `;
 
 const CheckBox = styled.input.attrs(({ marginRight = '9px' }) => ({
   type: 'checkbox',
   marginRight: marginRight,
 }))`
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   margin-right: ${(props) => props.marginRight};
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none !important;
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  background: #fbfbfb;
+  &:checked {
+    background-color: #c62935;
+  }
 `;
 
 const SelectBox = styled.select`
@@ -93,7 +117,27 @@ const SelectBox = styled.select`
   border: 1px solid #ededed;
   outline: none;
   -webkit-appearance: none;
+  color: #757575;
+
   font-size: ${MainStyle.checkFontSize.size8};
+  & option {
+    color: #757575;
+  }
+  & option:hover {
+    background: #d6d6d6;
+  }
+  &:focus {
+    border: 1px solid #c62935;
+  }
+`;
+
+const SelectIcon = styled.img`
+  width: 12px;
+  height: 6px;
+  position: absolute;
+  bottom: 305px;
+  right: 122px;
+  /* cursor: pointer; */
 `;
 
 const Label = styled.label.attrs(
@@ -102,11 +146,13 @@ const Label = styled.label.attrs(
     fontColor = 'default',
     margin,
     display = 'inline-block',
+    fontWeight = 'default',
   }) => ({
     fontSize: MainStyle.checkFontSize[fontSize],
     fontColor: MainStyle.checkColor[fontColor],
     margin: margin,
     display: display,
+    fontWeight: MainStyle.checkWeight[fontWeight],
   })
 )`
   width: fit-content;
@@ -115,11 +161,12 @@ const Label = styled.label.attrs(
   color: ${(props) => props.fontColor};
   margin: ${(props) => props.margin};
   display: ${(props) => props.display};
+  font-weight: ${(props) => props.fontWeight};
 `;
 
 const Search = styled.img`
-  width: 15px;
-  height: 15px;
+  width: 19px;
+  height: 18px;
   position: absolute;
   bottom: 206px;
   right: 122px;
@@ -178,8 +225,10 @@ function HomeModal(props) {
       <Col>
         <Row padding={'0 0 15px'} align={'flex-end'}>
           <Icon src={everytime} />
-          <Text size={'size7'} color={'gray2'} weight={'bold'}>
-            {'지금 모-애 타임을 시작하세요!'}
+          <Text size={'size7'} color={'gray2'} weight={'500'}>
+            {'지금'}
+            <b>{'모-애 타임'}</b>
+            {'을 시작하세요!'}
           </Text>
         </Row>
         <LoginInput>
@@ -216,7 +265,7 @@ function HomeModal(props) {
           <div>
             <CheckBox name="keeping" id="check" />
             <Label htmlFor="check" fontSize={'size5'} fontColor={'gray4'}>
-              {'로그인 유지'}
+              <b>{'로그인 유지'}</b>
             </Label>
           </div>
           <Text size={'size5'} color={'gray2'} weight={'light'}>
@@ -291,10 +340,12 @@ function HomeModal(props) {
           </Text>
         </Col>
         <Col align={'left'} padding={'0 0 48px'}>
-          <Text size={'size7'} color={'gray3'} weight={'default'}>
-            {'모애 타임 계정으로 캠퍼스픽, 모-애 타임 등 '}
+          <Text size={'size7'} color={'gray8'} weight={'default'}>
+            {'모애 타임 계정으로 '}
+            <b>{'캠퍼스픽, 모-애 타임 '}</b>
+            {'등 '}
           </Text>
-          <Text size={'size7'} color={'gray3'} weight={'default'}>
+          <Text size={'size7'} color={'gray8'} weight={'default'}>
             {'다양한 대학생 서비스를 모두 이용하실 수 있습니다.'}
           </Text>
         </Col>
@@ -303,12 +354,12 @@ function HomeModal(props) {
             {'학교 선택'}
           </Text>
         </Col>
-        <Label margin={'0 0 6px 0'} fontSize={'size4'}>
-          {'입학년도'}
+        <Label margin={'0 0 6px 0'} fontSize={'size4'} fontColor={'gray8'}>
+          <b>{'입학년도'}</b>
         </Label>
         <SelectBox onChange={targetYear}>
           <option key={0} value={false}>
-            연도 선택 (학번)
+            {'연도 선택'}
           </option>
           <option key={1} value="2017">
             2017
@@ -326,11 +377,13 @@ function HomeModal(props) {
             2021
           </option>
         </SelectBox>
+        <SelectIcon src={selectImg} />
         <Label
           margin={'28px 0 6px 0'}
           display="inline-block"
-          fontSize={'size4'}>
-          {'학교'}
+          fontSize={'size4'}
+          fontColor={'gray8'}>
+          <b>{'학교'}</b>
         </Label>
         <Row>
           <InputInfo
@@ -339,7 +392,7 @@ function HomeModal(props) {
             margin={'0 0 25px 0'}
             padding={'len2'}
             fontSize={'size8'}
-            fontColor={'gray1'}
+            fontColor={'gray8'}
             borderRadius={'radius4'}
             onChange={targetSchool}
           />
@@ -559,14 +612,7 @@ function HomeModal(props) {
           padding={'len2'}
           fontSize={'size8'}
           fontColor={'gray3'}
-          weight={'bold'}
-          onClick={() => {
-            const checkResult = {};
-            const check = [0, 1, 2, 3, 4, 5];
-            check.forEach((el) => {
-              checkResult[el] = checkedInputs.includes(el) ? true : false;
-            });
-          }}>
+          weight={'bold'}>
           {'아이핀 인증'}
         </Button>
       </Col>
@@ -593,7 +639,11 @@ function HomeModal(props) {
             {'모-애 타임  회원가입'}
           </Text>
         </Col>
-        <Label fontSize={'size4'} fontColor={'gray8'} margin={'0 0 6px 0'}>
+        <Label
+          fontSize={'size4'}
+          fontColor={'gray8'}
+          margin={'0 0 6px 0'}
+          fontWeight={'bold'}>
           {'아이디'}
         </Label>
         <InputInfo
@@ -618,7 +668,11 @@ function HomeModal(props) {
             {'중복된 아이디입니다.'}
           </InvisibleText>
         </InvisibleSpan>
-        <Label fontSize={'size4'} fontColor={'gray8'} margin={'31px 0 6px 0'}>
+        <Label
+          fontSize={'size4'}
+          fontColor={'gray8'}
+          margin={'31px 0 6px 0'}
+          fontWeight={'bold'}>
           {'비밀번호'}
         </Label>
         <InputInfo
@@ -633,7 +687,11 @@ function HomeModal(props) {
           fontSize={'size8'}
           fontColor={'gray1'}
         />
-        <Label fontSize={'size4'} fontColor={'gray8'} margin={'31px 0 6px 0'}>
+        <Label
+          fontSize={'size4'}
+          fontColor={'gray8'}
+          margin={'31px 0 6px 0'}
+          fontWeight={'bold'}>
           {'이메일'}
         </Label>
         <InputInfo
@@ -666,7 +724,11 @@ function HomeModal(props) {
             {'올바르지 않은 형식입니다.'}
           </InvisibleText>
         </InvisibleSpan>
-        <Label fontSize={'size4'} fontColor={'gray8'} margin={'31px 0 6px 0'}>
+        <Label
+          fontSize={'size4'}
+          fontColor={'gray8'}
+          margin={'31px 0 6px 0'}
+          fontWeight={'bold'}>
           {'닉네임'}
         </Label>
         <InputInfo
@@ -702,7 +764,7 @@ function HomeModal(props) {
               } else {
                 setMailVisible(false);
                 setMailVisible2(true);
-                joinInputMail.current.value = '';
+                // joinInputMail.current.value = '';
                 info.mail = '';
               }
               if (info.nickname === '운영자') {
@@ -715,7 +777,7 @@ function HomeModal(props) {
               let joinInfo = { ...info, ...data };
               const agreement = { id: joinInfo.id, ...checkResult };
 
-              if (info.mail !== '' && info.nickname !== '') {
+              if (info.id && info.password && info.mail && info.nickname) {
                 axios
                   .post('http://3.36.125.16:8080/moae/user/register', joinInfo)
                   .then((res) => {
@@ -729,7 +791,7 @@ function HomeModal(props) {
                         agreement
                       )
                       .then((res) => {
-                        console.log(res.data.msg);
+                        // console.log(res.data.msg);
                         close();
                       })
                       .catch((error) => {
