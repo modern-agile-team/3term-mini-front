@@ -22,7 +22,8 @@ const NewText = styled(Text)`
   text-align: left;
 `;
 
-function HotBoard() {
+function HotBoard({rerander, setRerander}) {
+  
   let [hotBoards, setHotBoards] = useState([]);
   useEffect(() => {
     axios.get('http://3.36.125.16:8080/moae/board/hotBoard').then((res) => {
@@ -30,9 +31,13 @@ function HotBoard() {
     });
   }, []);
 
+  const boardOneRefresh = () => {
+    setRerander(!rerander);
+  }
+
   const showHotBoard = () =>
     hotBoards.slice(0, 4).map((board) => (
-      <NewRow key={board.no} padding={'10px'}>
+      <NewRow key={board.no} padding={'10px'} onClick={boardOneRefresh}>
         <Row width={'len15'}>
           <NewText>
             <Link to={`/board/${board.no}`}>{board.title}</Link>

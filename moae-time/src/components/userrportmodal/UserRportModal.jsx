@@ -72,7 +72,6 @@ function UserRportModal (props) {
     userReport, 
     setUserReport, 
     userNoState, 
-     
   } = props;
 
   const handleClickOutside = ({ target }) => {
@@ -190,11 +189,13 @@ function UserRportModal (props) {
               width='9.69px'
               height='9.69px'
               margin='21.66px 20.66px 0px 369.66px'
-              onClick={() => setUserReport(false)}
+              onClick={setUserReport(false)}
             >
               x
             </Btn>
-            <Box width='250px' height='23px' margin='27px 75px 5px 75px' />
+            <Box width='250px' height='23px' margin='27px 75px 5px 75px' >
+              신고 사유 선택
+            </Box>
             <Box width='250px' height='14px' margin='0px 75px 15px 75px' />
             {drawing()}
             <input onChange={onChange} placeholder='내용 작성' />

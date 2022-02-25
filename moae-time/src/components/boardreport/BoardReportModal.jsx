@@ -155,10 +155,6 @@ function BoardReportModal(props) {
     ));
   };
 
-  const onClick = () => {
-    boardReport && setBoardReport(false);
-  }
-
 
   const sendReport = () => {
     axios
@@ -193,7 +189,7 @@ function BoardReportModal(props) {
               width='9.69px'
               height='9.69px'
               margin='21.66px 20.66px 0px 369.66px'
-              onClick={() => onClick}
+              onClick={() => setBoardReport(false)}
             >
               x
             </Btn>
