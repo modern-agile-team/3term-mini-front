@@ -25,6 +25,7 @@ const Input = styled.textarea`
   border: none;
   background-color: rgba(0, 0, 0, 0);
   vertical-align: top;
+  resize: none;
 `;
 
 const Img = styled.img`

@@ -194,7 +194,8 @@ function Layout(props) {
           size={'size8'}
           weight={'bold'}
           color={target[path === menu.url]}
-          underline={path === menu.url}>
+          underline={path === menu.url}
+        >
           {menu.name}
           {path === menu.url && <UnderLine></UnderLine>}
         </Menu>
@@ -227,7 +228,8 @@ function Layout(props) {
             width="len7"
             close={closeModal}
             padding={'144px 133px'}
-            next={clickNext}>
+            next={clickNext}
+          >
             {<HomeModal func={getUserNo} content={'loginModal'}></HomeModal>}
           </Alert>
         )}
@@ -237,7 +239,8 @@ function Layout(props) {
             width="len7"
             close={closeModal}
             padding={'124px 105px'}
-            next={clickNext1}>
+            next={clickNext1}
+          >
             {<HomeModal func={getUserNo} content={'joinModal1'}></HomeModal>}
           </Alert>
         )}
@@ -249,12 +252,14 @@ function Layout(props) {
             padding={'71px 105px'}
             data={getData}
             checkResult={getCheckResult}
-            next={clickNext2}>
+            next={clickNext2}
+          >
             {
               <HomeModal
                 func={getUserNo}
                 content={'joinModal2'}
-                data={getData}></HomeModal>
+                data={getData}
+              ></HomeModal>
             }
           </Alert>
         )}
@@ -263,20 +268,22 @@ function Layout(props) {
             visible={modalVisible3}
             width="len7"
             close={closeModal}
-            padding={'90px 105px'}>
+            padding={'90px 105px'}
+          >
             {
               <HomeModal
                 func={getUserNo}
                 content={'joinModal3'}
                 data={getData}
-                checkResult={getCheckResult}></HomeModal>
+                checkResult={getCheckResult}
+              ></HomeModal>
             }
           </Alert>
         )}
         <div>
           <Row>
             <MainIcon img={EveryTime} to="/"></MainIcon>
-            <Col width={'len19'}>
+            <Col width={'len20'}>
               <Text size={'size4'} color={'red'} weight={'bold'}>
                 모-애 타임
               </Text>
@@ -298,7 +305,8 @@ function Layout(props) {
                 width={'len20'}
                 borderRadius={'radius2'}
                 padding={'len1'}
-                onClick={() => handleModalState(modalVisible)}>
+                onClick={() => handleModalState(modalVisible)}
+              >
                 {'로그인'}
               </Button>
             )}
