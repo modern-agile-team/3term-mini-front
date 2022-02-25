@@ -3,11 +3,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import BasicProfile from '../../style/image/BasicProfile.png';
-import {
-  Box,
-  Text,
-  HotBoard,
-} from '../../components';
+import { Box, Text, HotBoard } from '../../components';
 import { Col, Row } from '../../style';
 import BoardReportModal from '../../components/boardreport/BoardReportModal';
 import Writing from '../../style/image/writing.png';
@@ -19,20 +15,27 @@ const ContentBox = styled(Box)`
   overflow-x: hidden;
 `;
 
-const Input = styled.input`
-  width: 765px;
-  height: 50px;
+const Input = styled.textarea`
+  width: 700px;
+  height: 20px;
   max-height: 173px;
-  /* overflow: scroll; */
+  overflow: scroll;
   font-size: 16px;
   outline: none;
-  border: solid 1px #c62935;
+  border: none;
   background-color: rgba(0, 0, 0, 0);
   vertical-align: top;
 `;
 
-function BoardOne({ id}) {
-  const userNo = id;
+const Img = styled.img`
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
+  border-radius: ${(props) => props.radius};
+  margin: ${(props) => props.margin};
+`;
+
+function BoardOne({ id }) {
+  const userNo = 14;
   const boardNo = useParams();
   const [boardReport, setBoardReport] = useState(false);
   const [boardOneState, setBoardOneState] = useState(null);
@@ -109,21 +112,32 @@ function BoardOne({ id}) {
         return (
           <Fragment key={comment.cmtId}>
             <Row padding="5px 0 0">
-              <div>
-                <Text>icon</Text>
-                <Text>{comment.nickname}</Text>
-              </div>
-              {commentsState && userNo === commentsState[i].commentUserNo ? (
-                <button onClick={() => deleteComment(comment.cmtId)}>
-                  삭제
-                </button>
-              ) : (
-                <></>
-              )}
+              <Img
+                src={BasicProfile}
+                size={'20px'}
+                radiius={'2px'}
+                margin={'0 10px 0 0'}
+              />
+              <Row>
+                <Text size={'size3'} color={'gray1'}>
+                  {comment.nickname}
+                </Text>
+                {commentsState && userNo === commentsState[i].commentUserNo ? (
+                  <button onClick={() => deleteComment(comment.cmtId)}>
+                    삭제
+                  </button>
+                ) : (
+                  <></>
+                )}
+              </Row>
             </Row>
             <Row>
-              <Text>{comment.description}</Text>
-              <Text>{comment.inDate}</Text>
+              <Text size={'size7'} color={'gray2'}>
+                {comment.description}
+              </Text>
+              <Text size={'size3'} color={'gray4'}>
+                {comment.inDate}
+              </Text>
             </Row>
           </Fragment>
         );
@@ -145,8 +159,13 @@ function BoardOne({ id}) {
         </Row>
         <Box width="len8" padding="15px">
           <Col align="flex-start">
-            <Row>
-              <img src={BasicProfile}></img>
+            <Row padding={'0 0 15px 0'}>
+              <Img
+                src={BasicProfile}
+                size={'40px'}
+                radius={'6px'}
+                margin={'0 10px 0 0'}
+              ></Img>
               <Col>
                 <Row>
                   <Text color={'gray1'}>
@@ -164,7 +183,7 @@ function BoardOne({ id}) {
                     ) : (
                       <>
                         <button onClick={() => setBoardReport(true)}>
-                          신고
+                          {'신고'}
                         </button>
                         <BoardReportModal
                           setBoardReport={setBoardReport}
@@ -199,7 +218,12 @@ function BoardOne({ id}) {
             <Row>
               <div>
                 <Row>
-                  <div>icon</div>
+                  <Img
+                    src={BasicProfile}
+                    size={'20px'}
+                    radiius={'2px'}
+                    margin={'0 10px 0 0'}
+                  />
                   <Input
                     type="text"
                     placeholder="댓글을 입력하세요."
@@ -214,7 +238,9 @@ function BoardOne({ id}) {
           </Box>
         </Row>
         <Col padding="5px 0 ">
-          <Box padding="15px"><Col>{showComments()}</Col></Box>
+          <Box padding="15px">
+            <Col>{showComments()}</Col>
+          </Box>
         </Col>
         <div>
           <button>
